@@ -11,6 +11,7 @@ import MatrixIntro from "@/components/MatrixIntro";
 import { ArrowUp } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
+import { InfoStrip, WhyMadmatrix, TimelineSection, OrganizedBySection, ScrollProgress } from "@/components/AdditionalSections";
 
 const Index = () => {
   const [introComplete, setIntroComplete] = useState(false);
@@ -61,10 +62,15 @@ const Index = () => {
 
       <Navbar />
       <HeroSection />
+      <InfoStrip />
+      <WhyMadmatrix />
       <CircularCarousel />
+      <TimelineSection />
       <LocationSection />
       <TeamSection />
+      <OrganizedBySection />
       <FooterSection />
+      <ScrollProgress />
 
       {/* Sticky mobile register button */}
       <div className="fixed bottom-4 left-4 right-4 z-50 sm:hidden">
