@@ -7,7 +7,7 @@ const LocationSection = () => {
     "https://www.google.com/maps?s=web&lqi=ChJzaW1hdHMgZW5naW5lZXJpbmdI7K_lyt6tgIAIWiQQABABGAAYASISc2ltYXRzIGVuZ2luZWVyaW5nKgYIAhAAEAGSAQdjb2xsZWdl&vet=12ahUKEwjrgISrgNaSAxUFX2wGHVbxAQYQ1YkKegQIVRAB..i&cs=1&um=1&ie=UTF-8&fb=1&gl=in&sa=X&geocode=Kbuj5Rqsi1I6Ma9tnoNOe2rh&daddr=22G8%2B9HP,+Kuthambakkam,+Tamil+Nadu+602105";
 
   return (
-    <section className="relative z-10 py-16 px-4 border-t border-matrix-red/20 bg-black/40 backdrop-blur-sm">
+    <section id="location" className="relative z-10 py-16 px-4 border-t border-matrix-red/20 bg-black/40 backdrop-blur-sm">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl sm:text-5xl font-poster text-matrix-red mb-12 text-center uppercase tracking-tighter drop-shadow-[0_0_10px_rgba(255,0,0,0.3)]">
           Event Location
