@@ -136,7 +136,7 @@ const TeamSection = () => {
                 {/* Team Grid - Balanced 4 + 3 Layout */}
                 <div className="space-y-[60px] mb-32">
                     {/* Row 1: 4 Members */}
-                    <div className="flex flex-wrap justify-center gap-[40px] items-center">
+                    <div className="flex flex-wrap justify-center gap-[40px] items-stretch">
                         {teamMembers.slice(0, 4).map((member, index) => (
                             <ProfileCard
                                 key={index}
@@ -151,7 +151,7 @@ const TeamSection = () => {
                     </div>
 
                     {/* Row 2: 3 Members */}
-                    <div className="flex flex-wrap justify-center gap-[40px] items-center">
+                    <div className="flex flex-wrap justify-center gap-[40px] items-stretch">
                         {teamMembers.slice(4, 7).map((member, index) => (
                             <ProfileCard
                                 key={index + 4}
@@ -174,9 +174,16 @@ const TeamSection = () => {
                     <div className="w-20 h-1 bg-matrix-red mx-auto shadow-[0_0_15px_rgba(255,0,0,0.6)]"></div>
 
                     <div className="flex flex-wrap justify-center gap-8 pt-12">
-                        {["Dharmika", "Swathika", "Purusoth", "Melosa", "Nivetha"].map((name, i) => (
-                            <div key={i} className="px-8 py-4 rounded-none border-2 border-matrix-red/30 bg-black/60 hover:bg-matrix-red hover:border-matrix-red transition-all duration-500 group shadow-[0_0_15px_rgba(255,0,0,0.1)]">
-                                <span className="text-matrix-red font-matrix font-black tracking-[0.3em] uppercase group-hover:text-black transition-colors">{name}</span>
+                        {[
+                            { name: "Dharmika", phone: "9486289264" },
+                            { name: "Swathika", phone: "8870700760" },
+                            { name: "Purusoth", phone: "7397520061" },
+                            { name: "Melosa", phone: "8830324704" },
+                            { name: "Nivetha", phone: "9177583915" }
+                        ].map((member, i) => (
+                            <div key={i} className="px-8 py-4 rounded-none border-2 border-matrix-red/30 bg-black/60 hover:bg-matrix-red hover:border-matrix-red transition-all duration-500 group shadow-[0_0_15px_rgba(255,0,0,0.1)] flex flex-col items-center gap-1">
+                                <span className="text-matrix-red font-matrix font-black tracking-[0.3em] uppercase group-hover:text-black transition-colors">{member.name}</span>
+                                <span className="text-zinc-500 text-xs font-mono group-hover:text-black/70 transition-colors tracking-widest">{member.phone}</span>
                             </div>
                         ))}
                     </div>

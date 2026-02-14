@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { type EventData, registrationLinks } from "@/data/events";
-import { ArrowRight, Clock, Users, Shield, Cpu, Zap } from "lucide-react";
+import { ArrowRight, ArrowLeft, Clock, Users, Shield, Cpu, Zap } from "lucide-react";
 import MatrixRain from "@/components/MatrixRain";
 
 interface RadialCategoryLayoutProps {
@@ -8,7 +9,9 @@ interface RadialCategoryLayoutProps {
 }
 
 const RadialCategoryLayout = ({ events }: RadialCategoryLayoutProps) => {
+    const navigate = useNavigate();
     const [selectedEvent, setSelectedEvent] = useState<EventData>(events[0]);
+    const [mobileSelectedEvent, setMobileSelectedEvent] = useState<EventData | null>(null);
     const lastScrollTime = useRef(0);
     const scrollValues = useRef(0); // Accumulate scroll delta for smoother feel
 
@@ -43,6 +46,15 @@ const RadialCategoryLayout = ({ events }: RadialCategoryLayoutProps) => {
         <div className="min-h-screen bg-black text-white font-sans overflow-hidden relative selection:bg-matrix-red selection:text-black">
             <MatrixRain />
 
+            {/* Global Back Button */}
+            <button
+                onClick={() => navigate('/')}
+                className="absolute top-6 left-6 z-50 flex items-center gap-2 px-4 py-2 bg-black/50 border border-zinc-800 rounded-full text-zinc-400 hover:text-white hover:border-matrix-red transition-all backdrop-blur-md group"
+            >
+                <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+                <span className="font-mono text-xs uppercase tracking-widest hidden sm:inline">Back</span>
+            </button>
+
             {/* Cinematic Background Ambience */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,0,0,0.08),transparent_70%)] pointer-events-none" />
             <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-black via-black/80 to-transparent z-0" />
@@ -50,7 +62,8 @@ const RadialCategoryLayout = ({ events }: RadialCategoryLayoutProps) => {
             {/* Grid Overlay for Texture */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-20" />
 
-            <div className="container mx-auto px-4 py-8 h-screen flex flex-col lg:flex-row gap-8 relative z-10">
+            {/* DESKTOP VIEW - Radial Navigation */}
+            <div className="hidden lg:flex container mx-auto px-4 py-8 h-screen flex-col lg:flex-row gap-8 relative z-10">
 
                 {/* LEFT COLUMN - Radial Navigation (Red/Black Tech) */}
                 <div
@@ -268,6 +281,133 @@ const RadialCategoryLayout = ({ events }: RadialCategoryLayoutProps) => {
 
                     </div>
                 </div>
+            </div>
+
+            {/* MOBILE VIEW - Vertical List (No Design Freakiness) */}
+            <div className="lg:hidden container mx-auto px-4 py-20 flex flex-col gap-8 relative z-10">
+                {!mobileSelectedEvent ? (
+                    // LIST VIEW
+                    <>
+                        <div className="flex items-center justify-between mb-2">
+                            <h2 className="text-3xl font-poster text-matrix-red tracking-wider">PROTOCOLS</h2>
+                            <span className="text-xs font-mono text-zinc-500">{events.length} FOUND</span>
+                        </div>
+
+                        {events.map((event) => (
+                            <div
+                                key={event.id}
+                                onClick={() => setMobileSelectedEvent(event)}
+                                className="bg-zinc-900/60 border border-zinc-800/60 p-6 rounded-xl relative overflow-hidden backdrop-blur-md shadow-lg cursor-pointer active:scale-95 transition-all"
+                            >
+                                <div className="flex justify-between items-start mb-4">
+                                    <div className="flex-1">
+                                        <h3 className="text-2xl font-poster text-white uppercase leading-tight mb-2">{event.title}</h3>
+                                        <p className="text-sm text-zinc-400 line-clamp-2">{event.description}</p>
+                                    </div>
+                                    <span className="text-3xl ml-4 bg-black/30 p-2 rounded-lg">{event.emoji}</span>
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-3 mb-6">
+                                    <div className="bg-black/40 p-2 rounded border border-zinc-800/50 flex flex-col">
+                                        <span className="text-[10px] uppercase text-zinc-500 font-bold">Duration</span>
+                                        <span className="text-white font-mono text-sm">{event.duration}</span>
+                                    </div>
+                                    <div className="bg-black/40 p-2 rounded border border-zinc-800/50 flex flex-col">
+                                        <span className="text-[10px] uppercase text-zinc-500 font-bold">Team</span>
+                                        <span className="text-white font-mono text-sm">{event.teamSize}</span>
+                                    </div>
+                                </div>
+
+                                <div className="w-full flex items-center justify-center gap-2 py-3 bg-matrix-red/20 border border-matrix-red text-matrix-red font-bold uppercase tracking-wider rounded-lg pointer-events-none">
+                                    View Details <ArrowRight className="w-4 h-4" />
+                                </div>
+                            </div>
+                        ))}
+                    </>
+                ) : (
+                    // DETAIL VIEW
+                    <div className="animate-in fade-in slide-in-from-right-4 duration-300">
+                        <button
+                            onClick={() => setMobileSelectedEvent(null)}
+                            className="flex items-center gap-2 text-zinc-400 hover:text-white mb-6 bg-black/50 px-4 py-2 rounded-full border border-zinc-800"
+                        >
+                            <ArrowLeft className="w-4 h-4" /> <span className="text-xs font-mono uppercase tracking-widest">Back to List</span>
+                        </button>
+
+                        <div className="space-y-6 pb-24">
+                            <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-zinc-800 shadow-lg group">
+                                {mobileSelectedEvent.imageUrl ? (
+                                    <img
+                                        src={mobileSelectedEvent.imageUrl}
+                                        alt={mobileSelectedEvent.title}
+                                        className="absolute inset-0 w-full h-full object-cover"
+                                    />
+                                ) : (
+                                    <div className="absolute inset-0 bg-gradient-to-br from-matrix-red/20 to-black" />
+                                )}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-90" />
+                                <div className="absolute bottom-0 left-0 p-6 w-full">
+                                    <div className="inline-flex items-center gap-2 px-2 py-1 bg-matrix-red/20 border border-matrix-red/30 text-matrix-red text-[10px] font-mono font-bold tracking-widest mb-2 uppercase rounded">
+                                        <Zap className="w-3 h-3" /> Protocol: Active
+                                    </div>
+                                    <h2 className="text-3xl font-poster text-white uppercase leading-none drop-shadow-md">{mobileSelectedEvent.title}</h2>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-3">
+                                <div className="bg-zinc-900/40 border border-zinc-800 p-4 rounded-xl flex flex-col items-center justify-center text-center">
+                                    <span className="text-matrix-red text-[10px] font-bold uppercase mb-1 tracking-widest">Access Fee</span>
+                                    <span className="text-xl font-poster text-white">₹{mobileSelectedEvent.fee}</span>
+                                </div>
+                                <div className="bg-zinc-900/40 border border-zinc-800 p-4 rounded-xl flex flex-col items-center justify-center text-center">
+                                    <span className="text-matrix-red text-[10px] font-bold uppercase mb-1 tracking-widest">Squad Size</span>
+                                    <span className="text-xl font-poster text-white">{mobileSelectedEvent.teamSize}</span>
+                                </div>
+                            </div>
+
+                            <div className="bg-zinc-900/20 border border-zinc-800/50 p-6 rounded-xl">
+                                <h3 className="text-md font-poster text-matrix-red mb-4 uppercase tracking-wider border-b border-matrix-red/20 pb-2">Description</h3>
+                                <p className="text-zinc-300 text-sm leading-relaxed font-light">{mobileSelectedEvent.description}</p>
+                            </div>
+
+                            <div className="bg-zinc-900/20 border border-zinc-800/50 p-6 rounded-xl">
+                                <h3 className="text-md font-poster text-matrix-red mb-4 uppercase tracking-wider border-b border-matrix-red/20 pb-2">Protocols</h3>
+                                <ul className="space-y-3">
+                                    {mobileSelectedEvent.rules.map((rule, i) => (
+                                        <li key={i} className="flex items-start gap-3 text-sm text-zinc-400">
+                                            <span className="mt-1.5 w-1.5 h-1.5 bg-matrix-red rounded-full shrink-0 shadow-[0_0_5px_red]" />
+                                            <span>{rule}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            <div className="bg-zinc-900/20 border border-zinc-800/50 p-6 rounded-xl">
+                                <h3 className="text-md font-poster text-matrix-red mb-4 uppercase tracking-wider border-b border-matrix-red/20 pb-2">Command</h3>
+                                <div className="flex flex-wrap gap-2 pt-2">
+                                    {mobileSelectedEvent.organizers?.map((org, i) => (
+                                        <div key={i} className="px-3 py-2 bg-black border border-zinc-800 rounded text-xs text-zinc-300 uppercase font-mono flex items-center gap-2">
+                                            <div className="w-1.5 h-1.5 bg-matrix-red rounded-full"></div>
+                                            {org}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Sticky Register Button */}
+                            <div className="fixed bottom-0 left-0 right-0 p-4 bg-black/90 backdrop-blur-xl border-t border-zinc-800 z-50">
+                                <a
+                                    href={registrationLinks[mobileSelectedEvent.category]}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="w-full flex items-center justify-center gap-3 py-4 bg-matrix-red text-black font-poster font-bold text-lg uppercase tracking-[0.2em] rounded max-w-md mx-auto hover:bg-white transition-all shadow-[0_0_20px_rgba(255,0,0,0.3)]"
+                                >
+                                    Initialize <ArrowRight className="w-5 h-5" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

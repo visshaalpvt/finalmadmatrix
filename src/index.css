@@ -60,7 +60,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-body antialiased;
+    @apply bg-background text-foreground font-body antialiased overflow-x-hidden;
     cursor: auto;
   }
 
@@ -212,4 +212,5 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }

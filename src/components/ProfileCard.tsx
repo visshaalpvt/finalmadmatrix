@@ -67,7 +67,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 
     return (
         <div
-            className="relative transition-all duration-300 ease-out"
+            className="relative transition-all duration-300 ease-out h-full"
             style={{
                 perspective: '1000px',
                 transform: `scale(${scale})`,
@@ -92,14 +92,15 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                 onMouseMove={handleMouseMove}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={handleMouseLeave}
-                className="relative overflow-hidden rounded-[2rem] border transition-all duration-300 ease-out shadow-[0_0_30px_rgba(0,0,0,0.5)] group"
+                className="relative overflow-hidden rounded-[2rem] border transition-all duration-300 ease-out shadow-[0_0_30px_rgba(0,0,0,0.5)] group h-full"
                 style={{
                     background: customInnerGradient,
                     backdropFilter: 'blur(20px)',
                     transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
                     width: '100%',
-                    maxWidth: '320px',
-                    minHeight: '450px',
+                    maxWidth: '280px',
+                    minHeight: '380px',
+                    height: '100%',
                     borderColor: isHovered ? 'rgba(255, 26, 26, 0.6)' : 'rgba(255, 26, 26, 0.2)',
                     boxShadow: isHovered ? '0 0 40px rgba(255, 0, 0, 0.25)' : 'none'
                 }}
@@ -108,7 +109,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                 <div className="absolute top-0 left-0 w-full h-[2px] bg-matrix-red/30 shadow-[0_0_10px_rgba(255,0,0,0.5)] animate-[scan_4s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
 
                 {/* Content */}
-                <div className="p-8 flex flex-col items-center justify-between h-full space-y-6">
+                <div className="p-6 flex flex-col items-center justify-between h-full space-y-4">
 
                     <div className="w-full flex justify-between items-start">
                         <div className={`px-4 py-1.5 rounded-none border border-matrix-red/50 bg-black/60 text-[10px] font-matrix tracking-[0.2em] transition-all duration-500 font-bold ${isHovered ? 'text-matrix-red border-matrix-red shadow-[0_0_15px_rgba(255,0,0,0.4)]' : 'text-matrix-red/80'}`}>
@@ -124,7 +125,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                         {/* Circular Glow */}
                         <div className={`absolute inset-0 rounded-full bg-matrix-red/30 blur-3xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`}></div>
 
-                        <div className={`relative w-40 h-40 rounded-full border-2 transition-all duration-500 p-1.5 bg-black/80 ${isHovered ? 'border-matrix-red shadow-[0_0_35px_rgba(255,0,0,0.6)] scale-110' : 'border-matrix-red/40'}`}>
+                        <div className={`relative w-32 h-32 rounded-full border-2 transition-all duration-500 p-1.5 bg-black/80 ${isHovered ? 'border-matrix-red shadow-[0_0_35px_rgba(255,0,0,0.6)] scale-110' : 'border-matrix-red/40'}`}>
                             <img
                                 src={avatarUrl}
                                 alt={name}
@@ -138,7 +139,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 
                     {showUserInfo && (
                         <div className="text-center space-y-3 z-10 p-2 rounded-xl backdrop-blur-sm bg-black/20">
-                            <h3 className="text-3xl font-poster text-white tracking-tight group-hover:text-matrix-red transition-all duration-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] decoration-matrix-red/30 underline-offset-4 decoration-2">
+                            <h3 className="text-2xl font-poster text-white tracking-tight group-hover:text-matrix-red transition-all duration-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] decoration-matrix-red/30 underline-offset-4 decoration-2 min-h-[3.5rem] flex items-center justify-center">
                                 {name}
                             </h3>
                             <p className="text-[11px] text-white/80 font-matrix font-black uppercase tracking-[0.25em] bg-matrix-red/10 px-4 py-1 border-x border-matrix-red/30">

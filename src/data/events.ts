@@ -19,7 +19,7 @@ export const events: EventData[] = [
     id: 1, title: "Dance", category: "on-stage", emoji: "💃",
     description: "Express yourself through movement and rhythm. Group dance performances.",
     duration: "4 mins (+1 min prep)", teamSize: "Max 6 members",
-    organizers: ["Kevin Mathew A", "Reshma D", "Priyanka", "Jamal Kareem"],
+    organizers: ["Kevin Mathew A (8610871590)", "Reshma D (7904912931)", "Priyanka (9345850383)", "Jamal Kareem (9790518463)"],
     rules: [
       "Categories: Solo / Dual / Group",
       "Time: 4 mins (+1 min prep)",
@@ -36,7 +36,7 @@ export const events: EventData[] = [
     id: 2, title: "Fashion Walk", category: "on-stage", emoji: "👠",
     description: "Show off your style and confidence on the ramp.",
     duration: "4 mins", teamSize: "Max 6 members",
-    organizers: ["Vimal", "Sundar", "Mithun"],
+    organizers: ["Vimal (9345518356)", "Sundar (8190868395)"],
     rules: [
       "Theme: Open Theme",
       "Time Limit: 4 mins",
@@ -52,7 +52,7 @@ export const events: EventData[] = [
     id: 3, title: "Battle of Bands", category: "on-stage", emoji: "🎸",
     description: "Rock the stage with your band's musical prowess.",
     duration: "10 mins", teamSize: "3–8 members",
-    organizers: ["Logeshwaran R", "Amrissh P"],
+    organizers: ["Logeshwaran R (8778377586)", "Amrissh P (8072401913)"],
     rules: [
       "Team Size: 3–8 members",
       "Time Limit: 10 mins",
@@ -68,7 +68,7 @@ export const events: EventData[] = [
     id: 4, title: "Singing", category: "on-stage", emoji: "🎤",
     description: "Vocal performance to win the hearts.",
     duration: "3–4 minutes", teamSize: "Solo",
-    organizers: ["Amrissh P (8072401913)", "Logeshwaran R (8778377586)", "Netravathi C (8098080398)", "Melvin (7397683420)"],
+    organizers: ["Netravathi C (8098080398)", "Melvin (7397683420)"],
     rules: [
       "Solo event; open to all colleges",
       "Valid college ID mandatory",
@@ -91,7 +91,7 @@ export const events: EventData[] = [
     id: 5, title: "Mime", category: "on-stage", emoji: "🎭",
     description: "The art of silent storytelling.",
     duration: "5–8 mins", teamSize: "5–10 members",
-    organizers: ["T. Viswa Gnan Deep", "Pavithra R"],
+    organizers: ["T. Viswa Gnan Deep (6302877873)", "Pavithra R (9342614326)"],
     rules: [
       "Team Size: 5–10 members",
       "Time: 5–8 mins",
@@ -106,7 +106,7 @@ export const events: EventData[] = [
     id: 6, title: "Short Film", category: "on-stage", emoji: "🎬",
     description: "Screening of your creative short films.",
     duration: "Max 15 mins", teamSize: "Team",
-    organizers: ["Kishan Babu", "Sanjeev Sivam"],
+    organizers: ["Kishan Babu (8807959322)", "Sanjeev Sivam (8122053986)"],
     rules: [
       "Duration: Max 15 mins",
       "Submission: Google Drive (1 day prior)",
@@ -123,7 +123,7 @@ export const events: EventData[] = [
     id: 7, title: "Project Presentation", category: "off-stage", emoji: "📊",
     description: "Present your innovative ideas and projects.",
     duration: "6–8 mins", teamSize: "1–3 members",
-    organizers: ["Antony Cross Oshani", "Devamitra"],
+    organizers: ["Kareena (9345668033)", "Rishika (7824944507)"],
     rules: [
       "Individual or team (max 3 members)",
       "Hardware-based and/or software-based projects",
@@ -141,7 +141,7 @@ export const events: EventData[] = [
     id: 8, title: "Paper Presentation", category: "off-stage", emoji: "📋",
     description: "Present your innovative research and ideas.",
     duration: "6–8 mins", teamSize: "1–2 members",
-    organizers: ["Antony Cross Oshani", "Devamitra"],
+    organizers: ["Antony Cross Oshani (8807958429)", "Devamitra (9488826993)"],
     rules: [
       "Individual or team (max 2 members)",
       "Original research, review, or innovative ideas",
@@ -158,7 +158,7 @@ export const events: EventData[] = [
     id: 9, title: "Escape The Matrix (Coding)", category: "off-stage", emoji: "💻",
     description: "Solve complex puzzles and escape through code.",
     duration: "3 Rounds", teamSize: "1–3 members",
-    organizers: ["Rufina Laurel", "Swathika", "Purusothaman"],
+    organizers: ["Rufina Laurel (8870415592)", "Swathika (8870700760)", "Purusothaman (7397520061)"],
     rules: [
       "Round 1: 20 technical questions (20 mins)",
       "Round 2: 15 word-guessing questions (60 sec each)",
@@ -174,7 +174,7 @@ export const events: EventData[] = [
     id: 10, title: "Live Edit Battle", category: "off-stage", emoji: "✂️",
     description: "Real-time video/photo editing competition.",
     duration: "2 hours", teamSize: "Individual",
-    organizers: ["Sugantharaj", "Angel Mary Varghese", "Monish"],
+    organizers: ["Sugantharaj (9342614326)", "Angel Mary Varghese (8606685304)", "Monish (8610730654)"],
     rules: [
       "Duration: 2 hours",
       "Any editing software allowed",
@@ -190,7 +190,7 @@ export const events: EventData[] = [
     id: 11, title: "Human Calculator", category: "off-stage", emoji: "🧮",
     description: "Mental math at lightning speed.",
     duration: "Rounds based", teamSize: "Individual",
-    organizers: ["Rahul", "Sirisha", "Sneha"],
+    organizers: ["Rahul (7397437798)", "Sirisha (9790152687)", "Sneha (9863644589)"],
     rules: [
       "Round 1: 40 questions (10–15 sec each) - Top 6-8 qualify",
       "Final: 8 questions per participant",
@@ -205,7 +205,7 @@ export const events: EventData[] = [
     id: 12, title: "Speed X – Typing", category: "off-stage", emoji: "⌨️",
     description: "Race to type with high accuracy and speed.",
     duration: "Qualifier + Final", teamSize: "Individual",
-    organizers: ["Pavithra Sri", "Nithiyapriya", "Jaishanth"],
+    organizers: ["Pavithra Sri (6380257787)", "Nithiyapriya (9150652241)", "Jaishanth (8438193027)"],
     rules: [
       "Participation: Individual",
       "Bring own laptop",
@@ -219,7 +219,7 @@ export const events: EventData[] = [
     id: 13, title: "Reel Creation", category: "off-stage", emoji: "📱",
     description: "Create engaging short-form content.",
     duration: "Max 90 sec", teamSize: "1–3 members",
-    organizers: ["Vivaa", "Dinesh Eswar", "Nithishwaran"],
+    organizers: ["Vivaa (9363315750)", "Dinesh Eswar (7200295986)", "Nithishwaran (8754330333)"],
     rules: [
       "Max 90 seconds duration",
       "Original content only",
@@ -234,7 +234,7 @@ export const events: EventData[] = [
     id: 14, title: "Push-Up Challenge", category: "off-stage", emoji: "💪",
     description: "Strength and endurance test.",
     duration: "1 minute", teamSize: "Individual",
-    organizers: ["Pangaj", "Sharan Sadithya"],
+    organizers: ["Pangaj (9345837731)", "Sharan Sadithya (6374422057)"],
     rules: [
       "Format: 1 minute challenge",
       "Standard push-ups only",
@@ -249,7 +249,7 @@ export const events: EventData[] = [
     id: 15, title: "Quizy One (Tech Quiz)", category: "off-stage", emoji: "🧠",
     description: "Test your knowledge in the tech world.",
     duration: "Multiple Rounds", teamSize: "Exactly 4 members",
-    organizers: ["L.K. Lokesh", "Navadeep R", "Jaisuriya DD", "Priyanka"],
+    organizers: ["L.K. Lokesh (9677726236)", "Navadeep R (8754854471)", "Jaisuriya DD (6381125471)", "Priyanka (9345850383)"],
     rules: [
       "Team Size: Exactly 4 members",
       "Rounds: MCQ, Rapid Fire, Audio/Visual",
@@ -266,7 +266,7 @@ export const events: EventData[] = [
     id: 16, title: "Box Cricket", category: "games", emoji: "🏏",
     description: "Classic table-top cricket game.",
     duration: "4 overs per side", teamSize: "6 members",
-    organizers: ["Rohit G", "Sabari Kannan", "Shrish HS"],
+    organizers: ["Rohit G (7094861575)", "Sabari Kannan (7083047006)", "Shrish HS (9345069270)"],
     rules: [
       "Team Size: 6 members",
       "Format: 4 overs per side",
@@ -281,7 +281,7 @@ export const events: EventData[] = [
     id: 17, title: "Hand Cricket – Inverse", category: "games", emoji: "🖐️",
     description: "The classic game with a twist.",
     duration: "Till out", teamSize: "Individual",
-    organizers: ["Purusothaman K", "Vijay M", "Jamal Kareem"],
+    organizers: ["Purusothaman K (7397520061)", "Vijay M (7092046719)", "Jamal Kareem (9790518463)"],
     rules: [
       "Rule: Lowest score wins",
       "Same number = Out",
@@ -294,7 +294,7 @@ export const events: EventData[] = [
     id: 18, title: "Chess.com", category: "games", emoji: "♟️",
     description: "Digital chess battle.",
     duration: "Continuous", teamSize: "Individual",
-    organizers: ["Ranjith", "Nishanth", "Vetri"],
+    organizers: ["Ranjith (9080410933)", "Nishanth (8428423173)", "Vetri (9080510869)"],
     rules: [
       "Format: Continuous play",
       "Points-based ranking",
@@ -307,7 +307,7 @@ export const events: EventData[] = [
     id: 19, title: "Don't Drop It", category: "games", emoji: "🎈",
     description: "Keep the object in the air at all costs.",
     duration: "One attempt", teamSize: "3 members",
-    organizers: ["Sunandhana Suriya", "Aniruth Shyamjith", "Aravind M"],
+    organizers: ["Sunandhana Suriya (9840214711)", "Aniruth Shyamjith (9037517892)", "Aravind M (6379767504)"],
     rules: [
       "Objective: Keep object airborne",
       "Team Size: 3 members",
@@ -322,7 +322,7 @@ export const events: EventData[] = [
     id: 20, title: "Mad Sports - Free Fire", category: "games", emoji: "🔥",
     description: "Free Fire survival battle (Clash Squad).",
     duration: "Custom Room", teamSize: "Squad",
-    organizers: ["Rajesh", "Divagar", "Murali Dharan", "Vinaykailash", "Rohankumar"],
+    organizers: ["Rajesh (8608290740)", "Divagar (7810013479)", "Murali Dharan (9361039623)", "Vinaykailash (9500202034)", "Rohankumar (9363904347)", "Harihara Prasath (8248223809)"],
     rules: [
       "Mode: Clash Squad",
       "Strict anti-cheat policy",
@@ -336,7 +336,7 @@ export const events: EventData[] = [
     id: 21, title: "Mad Sports - BGMI", category: "games", emoji: "🔫",
     description: "Battlegrounds Mobile India tournament (Battle Royale).",
     duration: "Custom Room", teamSize: "Squad",
-    organizers: ["Rajesh", "Divagar", "Murali Dharan", "Vinaykailash", "Rohankumar"],
+    organizers: ["Rajesh (8608290740)", "Divagar (7810013479)", "Murali Dharan (9361039623)", "Vinaykailash (9500202034)", "Rohankumar (9363904347)", "Harihara Prasath (8248223809)"],
     rules: [
       "Mode: Battle Royale",
       "Strict anti-cheat policy",
@@ -350,7 +350,7 @@ export const events: EventData[] = [
     id: 22, title: "Mad Sports - COD", category: "games", emoji: "🎖️",
     description: "Call of Duty Mobile showdown (TDM).",
     duration: "TDM", teamSize: "5v5",
-    organizers: ["Rajesh", "Divagar", "Murali Dharan", "Vinaykailash", "Rohankumar"],
+    organizers: ["Rajesh (8608290740)", "Divagar (7810013479)", "Murali Dharan (9361039623)", "Vinaykailash (9500202034)", "Rohankumar (9363904347)", "Harihara Prasath (8248223809)"],
     rules: [
       "Mode: Team Deathmatch (TDM)",
       "Strict anti-cheat policy",
@@ -366,6 +366,7 @@ export const events: EventData[] = [
     id: 23, title: "Cricket", category: "sports", emoji: "🏏",
     description: "The ultimate gentleman's game.",
     duration: "6 Overs", teamSize: "Team 8+3",
+    organizers: ["Pugalvaasan (9092447474)", "Prasithi Kumaran (8248372122)"],
     rules: ["Tape ball", "Knockout format"], fee: "₹500/Team",
     imageUrl: "/assets/events/cricket.jpg"
   },
@@ -373,6 +374,7 @@ export const events: EventData[] = [
     id: 24, title: "Football", category: "sports", emoji: "⛹️",
     description: "Fast-paced full field football.",
     duration: "15 min halves", teamSize: "Team 7+3",
+    organizers: ["Shrish HS (9345069270)", "Aravind M (6379767504)"],
     rules: ["Standard FIFA rules", "Referee's decision final"], fee: "₹500/Team",
     imageUrl: "/assets/events/football.jpg"
   },
@@ -380,6 +382,7 @@ export const events: EventData[] = [
     id: 25, title: "Kabaddi", category: "sports", emoji: "🤼",
     description: "Traditional test of strength and strategy.",
     duration: "20 min", teamSize: "Team 7+3",
+    organizers: ["Vetri (9080510869)"],
     rules: ["Mats provided", "Bonus point rules"], fee: "₹500/Team",
     imageUrl: "/assets/events/kabaddi.jpg"
   },
@@ -387,6 +390,7 @@ export const events: EventData[] = [
     id: 26, title: "Volley Ball", category: "sports", emoji: "🏐",
     description: "High-flying volleyball competition.",
     duration: "Best of 3", teamSize: "Team 6+2",
+    organizers: ["Jamal Kareem (9790518463)"],
     rules: ["Rotation mandatory", "Standard court"], fee: "₹500/Team",
     imageUrl: "/assets/events/volley-ball.jpg"
   },
@@ -394,15 +398,18 @@ export const events: EventData[] = [
     id: 27, title: "Kho Kho", category: "sports", emoji: "🏃‍♀️",
     description: "Tag and chase in this traditional sport.",
     duration: "2 Innings", teamSize: "Team 9+3",
+    organizers: ["Rahul (7397437798)"],
     rules: ["Chasing & Running", "Touch rules"], fee: "₹500/Team",
     imageUrl: "/assets/events/kho-kho.jpg"
   },
 
   // TRACK - ATHLETICS EVENTS
+  // Assuming "All track Rohit G" means Rohit organizes all of them
   {
     id: 28, title: "100m Dash", category: "track", emoji: "🏃",
     description: "The sprint for the title of fastest human.",
     duration: "Heats + Finals", teamSize: "Individual",
+    organizers: ["Rohit G (7094861575)"],
     rules: [
       "6-7 runners per heat",
       "Top 2 finishers qualify for Finals",
@@ -416,6 +423,7 @@ export const events: EventData[] = [
     id: 29, title: "400m Dash", category: "track", emoji: "🏃‍♂️",
     description: "A full lap dash of endurance and speed.",
     duration: "Heats + Finals", teamSize: "Individual",
+    organizers: ["Rohit G (7094861575)"],
     rules: [
       "6-7 runners per heat",
       "Top 2 finishers qualify for Finals",
@@ -429,6 +437,7 @@ export const events: EventData[] = [
     id: 30, title: "800m Run", category: "track", emoji: "👟",
     description: "Middle distance endurance race.",
     duration: "Final", teamSize: "Individual",
+    organizers: ["Rohit G (7094861575)"],
     rules: [
       "No heats - straight Final format",
       "Top 3 finishers declared winners",
@@ -441,6 +450,7 @@ export const events: EventData[] = [
     id: 31, title: "4 x 100m Relay", category: "track", emoji: "🤝",
     description: "Team speed and baton passing.",
     duration: "Heats + Finals", teamSize: "Team of 4",
+    organizers: ["Rohit G (7094861575)"],
     rules: [
       "Each team consists of 4 members",
       "Baton exchange zone strictly enforced",
@@ -453,6 +463,7 @@ export const events: EventData[] = [
     id: 32, title: "Long Jump", category: "track", emoji: "🦘",
     description: "Leap into the sand for maximum distance.",
     duration: "3 Attempts", teamSize: "Individual",
+    organizers: ["Rohit G (7094861575)"],
     rules: [
       "Each athlete gets 3 attempts",
       "Best distance recorded",
@@ -465,6 +476,7 @@ export const events: EventData[] = [
     id: 33, title: "Shot Put", category: "track", emoji: "☄️",
     description: "Heavy ball throw for power and technique.",
     duration: "3 Attempts", teamSize: "Individual",
+    organizers: ["Rohit G (7094861575)"],
     rules: [
       "Each athlete gets 3 attempts",
       "Neck release technique required",
