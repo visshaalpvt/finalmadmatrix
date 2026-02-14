@@ -16,11 +16,11 @@
     --popover: 0 15% 7%;
     --popover-foreground: 0 10% 90%;
 
-    --primary: 0 60% 45%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 0 100% 50%;
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 350 50% 35%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 0 0% 0%;
+    --secondary-foreground: 0 100% 50%;
 
     --muted: 0 10% 14%;
     --muted-foreground: 0 8% 55%;
@@ -40,8 +40,8 @@
     --matrix-red: 0 70% 50%;
     --matrix-maroon: 350 60% 35%;
     --matrix-dark-red: 0 50% 25%;
-    --matrix-glow: 0 80% 55%;
-    --matrix-ember: 15 80% 50%;
+    --matrix-glow: 0 100% 60%;
+    --matrix-ember: 0 90% 40%;
 
     --sidebar-background: 0 15% 7%;
     --sidebar-foreground: 0 10% 90%;
@@ -63,6 +63,11 @@
     @apply bg-background text-foreground font-body antialiased;
     cursor: auto;
   }
+
+  .lucide {
+    @apply text-matrix-red;
+  }
+
 
   h1,
   h2,

@@ -4,18 +4,19 @@ import { useEffect, useRef } from "react";
 const TeamSection = () => {
     const teamMembers = [
         {
-            name: "A. Kevin Mathew",
-            title: "Team Member",
-            handle: "kevin_mathew____",
+            name: "Dhanush Ravichandran",
+            title: "Convener",
+            handle: "dhanush_ravichandran_",
             status: "Authorized",
-            avatarUrl: "/team/kevin.jpg",
-            instagram: "https://www.instagram.com/kevin_mathew____?igsh=MTZnd3hyZWoyMjVjYQ==",
-            email: "kmathew20112005@gmail.com",
-            phone: "+91 8610871590"
+            avatarUrl: "/team/dhanush.jpg",
+            instagram: "https://www.instagram.com/dhanush_ravichandran_?igsh=MTFxd2Jidm5udHRwdA==",
+            linkedin: "https://www.linkedin.com/in/dhanush-ravichandran-b98650399?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+            email: "dhanushrofficial@gmail.com",
+            phone: "+91 9025718226"
         },
         {
             name: "Prasithikumaran S",
-            title: "Team Member",
+            title: "Coordinator",
             handle: "prasithi_kumaran",
             status: "Authorized",
             avatarUrl: "/team/prasithi.jpg",
@@ -26,7 +27,7 @@ const TeamSection = () => {
         },
         {
             name: "A Infant",
-            title: "Team Member",
+            title: "Coordinator",
             handle: "infant_402",
             status: "Authorized",
             avatarUrl: "/team/infant.jpg",
@@ -35,8 +36,18 @@ const TeamSection = () => {
             phone: "+91 7548855208"
         },
         {
+            name: "A. Kevin Mathew",
+            title: "Organizer",
+            handle: "kevin_mathew____",
+            status: "Authorized",
+            avatarUrl: "/team/kevin.jpg",
+            instagram: "https://www.instagram.com/kevin_mathew____?igsh=MTZnd3hyZWoyMjVjYQ==",
+            email: "kmathew20112005@gmail.com",
+            phone: "+91 8610871590"
+        },
+        {
             name: "Nithishwaran J C",
-            title: "Team Member",
+            title: "Organizer",
             handle: "nithxs.__",
             status: "Authorized",
             avatarUrl: "/team/nithish.jpg",
@@ -47,7 +58,7 @@ const TeamSection = () => {
         },
         {
             name: "Sugantharaj A",
-            title: "Team Member",
+            title: "Organizer",
             handle: "suganth_raj__",
             status: "Authorized",
             avatarUrl: "/team/suganth.jpg",
@@ -57,24 +68,13 @@ const TeamSection = () => {
         },
         {
             name: "K L Dinesh Eswar",
-            title: "Team Member",
+            title: "Organizer",
             handle: "kl_dinesh_eshwar",
             status: "Authorized",
             avatarUrl: "/team/dinesh.jpg",
             instagram: "https://www.instagram.com/kl_dinesh_eshwar?igsh=d3Jya2hpaTltczcy",
             email: "kldineshloka@gmail.com",
             phone: "+91 7200295986"
-        },
-        {
-            name: "Dhanush Ravichandran",
-            title: "Team Member",
-            handle: "dhanush_ravichandran_",
-            status: "Authorized",
-            avatarUrl: "/team/dhanush.jpg",
-            instagram: "https://www.instagram.com/dhanush_ravichandran_?igsh=MTFxd2Jidm5udHRwdA==",
-            linkedin: "https://www.linkedin.com/in/dhanush-ravichandran-b98650399?utm_source=share_via&utm_content=profile&utm_medium=member_android",
-            email: "dhanushrofficial@gmail.com",
-            phone: "+91 9025718226"
         }
     ];
 
@@ -82,7 +82,7 @@ const TeamSection = () => {
         name: "Dr K Sudar Mozhi",
         title: "Assistant Professor SG",
         handle: "SIMATS Engineering, Chennai",
-        status: "Coordinator",
+        status: "Faculty Coordinator",
         avatarUrl: "/team/faculty.jpg",
         email: "sudarmozhik@gmail.com"
     };
@@ -103,50 +103,9 @@ const TeamSection = () => {
             className="relative z-10 py-[100px] flex flex-col items-center justify-center min-h-[800px] transition-opacity duration-1000"
         >
             <div className="max-w-[1440px] mx-auto px-4 w-full text-center">
-                {/* Section Title */}
-                <div className="mb-24 space-y-4">
-                    <h2 className="text-[40px] font-bold text-matrix-red uppercase tracking-tighter font-poster">
-                        Our Team
-                    </h2>
-                    <div className="w-24 h-1 bg-matrix-red mx-auto shadow-[0_0_15px_rgba(255,0,0,0.6)]"></div>
-                    <p className="text-matrix-red/40 font-matrix text-[10px] tracking-[0.4em] uppercase">Authorized Personnel Only</p>
-                </div>
 
-                {/* Team Grid - Balanced 4 + 3 Layout */}
-                <div className="space-y-[60px] mb-32">
-                    {/* Row 1: 4 Members - High Priority Group */}
-                    <div className="flex flex-wrap justify-center gap-[40px] items-center">
-                        {teamMembers.slice(0, 4).map((member, index) => (
-                            <ProfileCard
-                                key={index}
-                                {...member}
-                                enableTilt={true}
-                                showUserInfo={true}
-                                showBehindGlow={true}
-                                behindGlowColor="rgba(255, 0, 0, 0.45)"
-                                customInnerGradient="linear-gradient(145deg, rgba(20, 0, 0, 0.95) 0%, rgba(40, 0, 0, 0.8) 100%)"
-                            />
-                        ))}
-                    </div>
-
-                    {/* Row 2: 3 Members - Core Execution Group */}
-                    <div className="flex flex-wrap justify-center gap-[40px] items-center">
-                        {teamMembers.slice(4, 7).map((member, index) => (
-                            <ProfileCard
-                                key={index + 4}
-                                {...member}
-                                enableTilt={true}
-                                showUserInfo={true}
-                                showBehindGlow={true}
-                                behindGlowColor="rgba(255, 0, 0, 0.45)"
-                                customInnerGradient="linear-gradient(145deg, rgba(20, 0, 0, 0.95) 0%, rgba(40, 0, 0, 0.8) 100%)"
-                            />
-                        ))}
-                    </div>
-                </div>
-
-                {/* Faculty Coordinator */}
-                <div className="mt-20 flex flex-col items-center">
+                {/* Faculty Coordinator - AT THE TOP */}
+                <div className="mb-20 flex flex-col items-center">
                     <div className="text-center mb-16 space-y-4">
                         <h2 className="text-[32px] font-bold text-matrix-red uppercase tracking-tighter font-poster">
                             Faculty Coordinator
@@ -164,9 +123,69 @@ const TeamSection = () => {
                         scale="1.1"
                     />
                 </div>
+
+                {/* Section Title for Students */}
+                <div className="mb-24 space-y-4">
+                    <h2 className="text-[40px] font-bold text-matrix-red uppercase tracking-tighter font-poster drop-shadow-[0_0_15px_rgba(255,0,0,0.4)]">
+                        Student Core Team
+                    </h2>
+                    <div className="w-24 h-1 bg-matrix-red mx-auto shadow-[0_0_20px_rgba(255,0,0,0.8)]"></div>
+                    <p className="text-white/60 font-matrix text-[11px] tracking-[0.6em] uppercase font-black">Authorized Personnel Only</p>
+                </div>
+
+                {/* Team Grid - Balanced 4 + 3 Layout */}
+                <div className="space-y-[60px] mb-32">
+                    {/* Row 1: 4 Members */}
+                    <div className="flex flex-wrap justify-center gap-[40px] items-center">
+                        {teamMembers.slice(0, 4).map((member, index) => (
+                            <ProfileCard
+                                key={index}
+                                {...member}
+                                enableTilt={true}
+                                showUserInfo={true}
+                                showBehindGlow={true}
+                                behindGlowColor="rgba(255, 0, 0, 0.6)"
+                                customInnerGradient="linear-gradient(145deg, rgba(40, 0, 0, 0.98) 0%, rgba(10, 0, 0, 0.95) 100%)"
+                            />
+                        ))}
+                    </div>
+
+                    {/* Row 2: 3 Members */}
+                    <div className="flex flex-wrap justify-center gap-[40px] items-center">
+                        {teamMembers.slice(4, 7).map((member, index) => (
+                            <ProfileCard
+                                key={index + 4}
+                                {...member}
+                                enableTilt={true}
+                                showUserInfo={true}
+                                showBehindGlow={true}
+                                behindGlowColor="rgba(255, 0, 0, 0.6)"
+                                customInnerGradient="linear-gradient(145deg, rgba(40, 0, 0, 0.98) 0%, rgba(10, 0, 0, 0.95) 100%)"
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                {/* Registration Team Section */}
+                <div className="mb-24 space-y-4">
+                    <h2 className="text-[32px] font-bold text-matrix-red uppercase tracking-tighter font-poster drop-shadow-[0_0_10px_rgba(255,0,0,0.3)]">
+                        Registration Team
+                    </h2>
+                    <div className="w-20 h-1 bg-matrix-red mx-auto shadow-[0_0_15px_rgba(255,0,0,0.6)]"></div>
+
+                    <div className="flex flex-wrap justify-center gap-8 pt-12">
+                        {["Dharmika", "Swathika", "Purusoth", "Melosa", "Nivetha"].map((name, i) => (
+                            <div key={i} className="px-8 py-4 rounded-none border-2 border-matrix-red/30 bg-black/60 hover:bg-matrix-red hover:border-matrix-red transition-all duration-500 group shadow-[0_0_15px_rgba(255,0,0,0.1)]">
+                                <span className="text-matrix-red font-matrix font-black tracking-[0.3em] uppercase group-hover:text-black transition-colors">{name}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
             </div>
         </section>
     );
 };
+
 
 export default TeamSection;

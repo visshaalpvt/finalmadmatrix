@@ -1,6 +1,7 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import HeroSection from "@/components/HeroSection";
 import EventsSection from "@/components/EventsSection";
+import CircularCarousel from "@/components/CircularCarousel";
 import LocationSection from "@/components/LocationSection";
 import TeamSection from "@/components/TeamSection";
 import FooterSection from "@/components/FooterSection";
@@ -13,19 +14,33 @@ const Index = () => {
   const [introComplete, setIntroComplete] = useState(() => {
     return sessionStorage.getItem("introComplete") === "true";
   });
+  const [scrollOpacity, setScrollOpacity] = useState(0.7);
 
   const handleIntroComplete = useCallback(() => {
     setIntroComplete(true);
     sessionStorage.setItem("introComplete", "true");
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY;
+      // Fade in MatrixRain: 0 at top, 0.7 after scrolling 600px
+      const newOpacity = Math.min(0.7, (scrollPos / 600) * 0.7);
+      setScrollOpacity(newOpacity);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background relative">
       {!introComplete && <MatrixIntro onComplete={handleIntroComplete} />}
-      <MatrixRain />
+      <MatrixRain opacity={scrollOpacity} />
+
       <Navbar />
       <HeroSection />
-      <EventsSection />
+      <CircularCarousel />
       <LocationSection />
       <TeamSection />
       <FooterSection />

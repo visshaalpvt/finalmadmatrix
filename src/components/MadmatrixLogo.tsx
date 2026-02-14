@@ -1,9 +1,10 @@
 const MadmatrixLogo = ({ size = "medium" }: { size?: "small" | "medium" | "large" }) => {
   const sizeMap = {
-    small: { width: 200, height: 100 },
-    medium: { width: 400, height: 200 },
-    large: { width: 600, height: 300 },
+    small: { width: 350, height: 160 },
+    medium: { width: 600, height: 280 },
+    large: { width: 850, height: 400 },
   };
+
 
   const dimensions = sizeMap[size];
 
@@ -99,12 +100,12 @@ const MadmatrixLogo = ({ size = "medium" }: { size?: "small" | "medium" | "large
 
         {/* Red banner at bottom */}
         <rect x="120" y="220" width="660" height="55" fill="#cc0000" rx="10" />
-        <rect x="120" y="220" width="660" height="55" fill="none" stroke="#ff6b35" strokeWidth="3" rx="10" />
+        <rect x="120" y="220" width="660" height="55" fill="none" stroke="#ff1a1a" strokeWidth="3" rx="10" />
 
         {/* Corner accents - left */}
-        <polygon points="100,170 140,145 115,225" fill="#ff6b35" />
+        <polygon points="100,170 140,145 115,225" fill="#ff1a1a" />
         {/* Corner accents - right */}
-        <polygon points="800,170 760,145 785,225" fill="#ff6b35" />
+        <polygon points="800,170 760,145 785,225" fill="#ff1a1a" />
       </svg>
 
       {/* Subtitle */}

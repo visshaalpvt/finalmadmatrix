@@ -111,24 +111,24 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                 <div className="p-8 flex flex-col items-center justify-between h-full space-y-6">
 
                     <div className="w-full flex justify-between items-start">
-                        <div className={`px-3 py-1 rounded-sm border border-matrix-red/30 bg-matrix-red/5 text-[9px] font-matrix tracking-[0.2em] transition-all duration-500 ${isHovered ? 'text-matrix-red border-matrix-red shadow-[0_0_10px_rgba(255,0,0,0.3)]' : 'text-matrix-red/60'}`}>
+                        <div className={`px-4 py-1.5 rounded-none border border-matrix-red/50 bg-black/60 text-[10px] font-matrix tracking-[0.2em] transition-all duration-500 font-bold ${isHovered ? 'text-matrix-red border-matrix-red shadow-[0_0_15px_rgba(255,0,0,0.4)]' : 'text-matrix-red/80'}`}>
                             SEC_ID: {handle.toUpperCase()}
                         </div>
-                        <div className="flex items-center gap-1.5">
-                            <div className="w-1.5 h-1.5 rounded-full bg-matrix-red animate-pulse shadow-[0_0_5px_rgba(255,0,0,0.8)]"></div>
-                            <span className="text-[10px] font-matrix text-matrix-red/80 uppercase tracking-widest">{status}</span>
+                        <div className="flex items-center gap-1.5 bg-black/40 px-3 py-1.5 rounded-full border border-matrix-red/20 shadow-inner">
+                            <div className="w-1.5 h-1.5 rounded-full bg-matrix-red animate-pulse shadow-[0_0_8px_rgba(255,0,0,1)]"></div>
+                            <span className="text-[10px] font-matrix text-white font-bold uppercase tracking-widest">{status}</span>
                         </div>
                     </div>
 
                     <div className="relative">
                         {/* Circular Glow */}
-                        <div className={`absolute inset-0 rounded-full bg-matrix-red/20 blur-2xl transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}></div>
+                        <div className={`absolute inset-0 rounded-full bg-matrix-red/30 blur-3xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`}></div>
 
-                        <div className={`relative w-36 h-36 rounded-full border-2 transition-all duration-500 p-1 bg-background/50 ${isHovered ? 'border-matrix-red shadow-[0_0_25px_rgba(255,0,0,0.4)] scale-105' : 'border-matrix-red/30'}`}>
+                        <div className={`relative w-40 h-40 rounded-full border-2 transition-all duration-500 p-1.5 bg-black/80 ${isHovered ? 'border-matrix-red shadow-[0_0_35px_rgba(255,0,0,0.6)] scale-110' : 'border-matrix-red/40'}`}>
                             <img
                                 src={avatarUrl}
                                 alt={name}
-                                className="w-full h-full object-cover rounded-full filter grayscale-[0.3] group-hover:grayscale-0 transition-all duration-500"
+                                className="w-full h-full object-cover rounded-full filter grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700 brightness-110"
                                 onError={(e) => {
                                     (e.target as HTMLImageElement).src = `https://api.dicebear.com/7.x/bottts/svg?seed=${name}&backgroundColor=000000`;
                                 }}
@@ -137,9 +137,13 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                     </div>
 
                     {showUserInfo && (
-                        <div className="text-center space-y-2 z-10">
-                            <h3 className="text-2xl font-poster text-foreground tracking-tight group-hover:text-matrix-red transition-colors duration-300">{name}</h3>
-                            <p className="text-xs text-muted-foreground font-matrix uppercase tracking-[0.15em]">{title}</p>
+                        <div className="text-center space-y-3 z-10 p-2 rounded-xl backdrop-blur-sm bg-black/20">
+                            <h3 className="text-3xl font-poster text-white tracking-tight group-hover:text-matrix-red transition-all duration-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] decoration-matrix-red/30 underline-offset-4 decoration-2">
+                                {name}
+                            </h3>
+                            <p className="text-[11px] text-white/80 font-matrix font-black uppercase tracking-[0.25em] bg-matrix-red/10 px-4 py-1 border-x border-matrix-red/30">
+                                {title}
+                            </p>
                         </div>
                     )}
 
@@ -147,25 +151,26 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                     <div className="w-full border-t border-white/5 pt-6 mt-2 flex justify-center items-center gap-5">
                         {instagram && (
                             <a href={instagram} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-matrix-red transition-all duration-300 hover:scale-125">
-                                <Instagram className="w-5 h-5" />
+                                <Instagram className="w-6 h-6" />
                             </a>
                         )}
                         {linkedin && (
                             <a href={linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-matrix-red transition-all duration-300 hover:scale-125">
-                                <Linkedin className="w-5 h-5" />
+                                <Linkedin className="w-6 h-6" />
                             </a>
                         )}
                         {email && (
                             <a href={`mailto:${email}`} className="text-muted-foreground hover:text-matrix-red transition-all duration-300 hover:scale-125">
-                                <Mail className="w-5 h-5" />
+                                <Mail className="w-6 h-6" />
                             </a>
                         )}
                         {phone && (
                             <a href={`tel:${phone}`} className="text-muted-foreground hover:text-matrix-red transition-all duration-300 hover:scale-125">
-                                <Phone className="w-5 h-5" />
+                                <Phone className="w-6 h-6" />
                             </a>
                         )}
                     </div>
+
 
 
                 </div>

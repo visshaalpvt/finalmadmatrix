@@ -4,29 +4,33 @@ const FooterSection = () => (
   <footer className="relative z-10 border-t border-matrix-red/10 py-12 px-4 bg-black/60 backdrop-blur-md">
     <div className="max-w-3xl mx-auto text-center space-y-8">
       <div className="space-y-2">
-        <h2 className="text-2xl font-poster text-matrix-red uppercase tracking-widest">MADMATRIX 2026</h2>
-        <p className="text-[10px] font-matrix text-matrix-red/40 uppercase tracking-[0.4em]">Where Talent Meets Opportunity</p>
+        <h2 className="text-3xl font-poster text-matrix-red uppercase tracking-widest drop-shadow-[0_0_10px_rgba(255,0,0,0.4)]">MADMATRIX 2026</h2>
+        <p className="text-[11px] font-matrix text-matrix-red/80 uppercase tracking-[0.5em] font-bold">Where Talent Meets Opportunity</p>
       </div>
 
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm font-matrix uppercase tracking-widest text-muted-foreground">
-        <a href="mailto:contact@madmatrix.org" className="flex items-center gap-2 hover:text-matrix-red transition-all">
-          <Mail className="w-4 h-4" /> contact@madmatrix.org
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-12 text-sm font-matrix uppercase tracking-widest text-white/70">
+        <a href="mailto:contact@madmatrix.org" className="flex items-center gap-3 hover:text-matrix-red transition-all border-b border-matrix-red/10 pb-1 px-4 hover:border-matrix-red">
+          <Mail className="w-5 h-5" /> contact@madmatrix.org
         </a>
-        <a href="tel:+918248372122" className="flex items-center gap-2 hover:text-matrix-red transition-all">
-          <Phone className="w-4 h-4" /> +91 82483 72122
+        <a href="tel:+918248372122" className="flex items-center gap-3 hover:text-matrix-red transition-all border-b border-matrix-red/10 pb-1 px-4 hover:border-matrix-red">
+          <Phone className="w-5 h-5" /> +91 82483 72122
         </a>
       </div>
 
-      <div className="flex justify-center gap-6">
-        {[Instagram, Twitter, Youtube].map((Icon, i) => (
-          <a key={i} href="#" className="w-10 h-10 rounded-full border border-matrix-red/20 flex items-center justify-center hover:bg-matrix-red/10 hover:border-matrix-red transition-all text-muted-foreground hover:text-matrix-red shadow-[0_0_15px_rgba(255,0,0,0.1)]">
-            <Icon className="w-4 h-4" />
+      <div className="flex justify-center gap-8 pt-4">
+        {[
+          { Icon: Instagram, link: "https://www.instagram.com/madmatrix2026?utm_source=qr&igsh=MTZ6aTlwYWpoYWp3bg==" },
+          { Icon: Twitter, link: "#" },
+          { Icon: Youtube, link: "#" }
+        ].map(({ Icon, link }, i) => (
+          <a key={i} href={link} target={link !== "#" ? "_blank" : "_self"} rel={link !== "#" ? "noopener noreferrer" : ""} className="w-16 h-16 rounded-full border-2 border-matrix-red/40 flex items-center justify-center hover:bg-matrix-red hover:text-black hover:border-matrix-red transition-all text-matrix-red shadow-[0_0_20px_rgba(255,0,0,0.15)] hover:shadow-[0_0_40px_rgba(255,0,0,0.5)] group bg-black/40">
+            <Icon className="w-7 h-7 group-hover:scale-110 transition-transform" />
           </a>
         ))}
       </div>
 
-      <p className="text-[9px] text-muted-foreground/40 font-matrix uppercase tracking-[0.2em] pt-4">
-        © 2026 MADMATRIX — SIMATS Engineering. All rights reserved.
+      <p className="text-[10px] text-white/40 font-matrix uppercase tracking-[0.3em] pt-8 font-medium">
+        © 2026 <span className="text-matrix-red">MADMATRIX</span> — SIMATS Engineering. All Rights Reserved.
       </p>
     </div>
   </footer>

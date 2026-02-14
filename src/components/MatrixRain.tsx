@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-const MatrixRain = () => {
+const MatrixRain = ({ opacity = 0.7 }: { opacity?: number }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -58,7 +58,8 @@ const MatrixRain = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-0 pointer-events-none opacity-70"
+      className="fixed inset-0 z-0 pointer-events-none transition-opacity duration-1000"
+      style={{ opacity }}
     />
   );
 };

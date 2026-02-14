@@ -18,12 +18,12 @@ const EventsSection = () => {
     <section id="events" className="py-20 sm:py-32 px-4 relative z-10">
       <div className="max-w-6xl mx-auto">
         <div className="mb-16 text-center space-y-4">
-          <h2 className="text-5xl sm:text-7xl lg:text-8xl font-poster tracking-tighter">
-            <span className="metallic-text">30 EVENTS</span>
+          <h2 className="text-5xl sm:text-7xl lg:text-8xl font-poster tracking-tighter drop-shadow-[0_0_20px_rgba(255,0,0,0.2)]">
+            <span className="metallic-text">30+ EVENTS</span>
           </h2>
           <div className="h-1 w-24 bg-matrix-red mx-auto rounded-full matrix-glow" />
-          <p className="text-muted-foreground text-lg sm:text-xl font-matrix uppercase tracking-[0.3em] max-w-2xl mx-auto">
-            Something for everyone — compete, create, and conquer.
+          <p className="text-white text-lg sm:text-xl font-matrix uppercase tracking-[0.3em] max-w-2xl mx-auto drop-shadow-lg">
+            Something for everyone — <span className="text-matrix-red font-bold">compete, create, and conquer.</span>
           </p>
         </div>
 
@@ -54,23 +54,23 @@ const EventsSection = () => {
                     {g.label.split(" ").slice(1).join(" ")}
                   </h3>
                   <div className="flex items-center gap-3 mt-3">
-                    <span className="h-[1px] w-6 bg-matrix-red/50 group-hover:w-12 transition-all" />
-                    <span className="text-xs text-matrix-red font-matrix uppercase tracking-widest">
-                      {g.items.length} Events
+                    <span className="h-[1px] w-6 bg-matrix-red group-hover:w-12 transition-all" />
+                    <span className="text-xs text-white font-matrix uppercase tracking-[0.2em] font-bold">
+                      {g.items.length} Protocols Loaded
                     </span>
                   </div>
                 </div>
 
                 {/* Fee info */}
-                <div className="flex items-center justify-between pt-4 border-t border-border/20">
-                  <span className="text-xs font-matrix text-muted-foreground uppercase tracking-widest">
-                    Fee: <span className="text-matrix-red">{g.items[0]?.fee || "—"}</span>
+                <div className="flex items-center justify-between pt-4 border-t border-matrix-red/20">
+                  <span className="text-xs font-matrix text-white/80 uppercase tracking-widest">
+                    Access Fee: <span className="text-matrix-red font-black">{g.items[0]?.fee || "—"}</span>
                   </span>
                   <button
                     onClick={() => handleExplore(g.category)}
-                    className="text-matrix-red font-heading font-bold text-sm group-hover:translate-x-2 transition-transform uppercase tracking-wider hover:text-matrix-glow cursor-pointer"
+                    className="text-white bg-matrix-red/20 px-4 py-2 rounded-sm border border-matrix-red/40 font-heading font-black text-[10px] group-hover:bg-matrix-red group-hover:text-black transition-all uppercase tracking-widest cursor-pointer"
                   >
-                    Explore →
+                    Initialize →
                   </button>
                 </div>
               </div>
