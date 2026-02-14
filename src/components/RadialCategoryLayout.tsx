@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { type EventData, registrationLinks } from "@/data/events";
 import { ArrowRight, ArrowLeft, Clock, Users, Shield, Cpu, Zap } from "lucide-react";
 import MatrixRain from "@/components/MatrixRain";
+import { useAuth } from "@/hooks/useAuth";
 
 interface RadialCategoryLayoutProps {
     events: EventData[];
@@ -10,6 +11,7 @@ interface RadialCategoryLayoutProps {
 
 const RadialCategoryLayout = ({ events }: RadialCategoryLayoutProps) => {
     const navigate = useNavigate();
+    const { user } = useAuth();
     const [selectedEvent, setSelectedEvent] = useState<EventData>(events[0]);
     const [mobileSelectedEvent, setMobileSelectedEvent] = useState<EventData | null>(null);
     const lastScrollTime = useRef(0);
@@ -40,6 +42,15 @@ const RadialCategoryLayout = ({ events }: RadialCategoryLayoutProps) => {
         if (nextIndex >= events.length) nextIndex = 0;
 
         setSelectedEvent(events[nextIndex]);
+    };
+
+    const handleRegister = (e: React.MouseEvent<HTMLAnchorElement>, url: string) => {
+        e.preventDefault();
+        if (user) {
+            window.open(url, '_blank');
+        } else {
+            window.dispatchEvent(new Event('open-login-modal'));
+        }
     };
 
     return (
@@ -268,9 +279,8 @@ const RadialCategoryLayout = ({ events }: RadialCategoryLayoutProps) => {
                         {/* CTA Section */}
                         <div className="flex justify-end pt-6 border-t border-zinc-800">
                             <a
-                                href={registrationLinks[selectedEvent.category]}
-                                target="_blank"
-                                rel="noreferrer"
+                                href="#"
+                                onClick={(e) => handleRegister(e, registrationLinks[selectedEvent.category])}
                                 className="group relative inline-flex items-center gap-4 px-10 py-4 bg-matrix-red text-black font-poster font-bold text-xl uppercase tracking-widest hover:bg-white transition-colors cursor-pointer clip-path-slant"
                                 style={{ clipPath: "polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)" }}
                             >
@@ -397,9 +407,8 @@ const RadialCategoryLayout = ({ events }: RadialCategoryLayoutProps) => {
                             {/* Sticky Register Button */}
                             <div className="fixed bottom-0 left-0 right-0 p-4 bg-black/90 backdrop-blur-xl border-t border-zinc-800 z-50">
                                 <a
-                                    href={registrationLinks[mobileSelectedEvent.category]}
-                                    target="_blank"
-                                    rel="noreferrer"
+                                    href="#"
+                                    onClick={(e) => handleRegister(e, registrationLinks[mobileSelectedEvent.category])}
                                     className="w-full flex items-center justify-center gap-3 py-4 bg-matrix-red text-black font-poster font-bold text-lg uppercase tracking-[0.2em] rounded max-w-md mx-auto hover:bg-white transition-all shadow-[0_0_20px_rgba(255,0,0,0.3)]"
                                 >
                                     Initialize <ArrowRight className="w-5 h-5" />

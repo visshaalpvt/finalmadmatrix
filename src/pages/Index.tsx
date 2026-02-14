@@ -9,17 +9,25 @@ import Navbar from "@/components/Navbar";
 import MatrixRain from "@/components/MatrixRain";
 import MatrixIntro from "@/components/MatrixIntro";
 import { ArrowUp } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 const Index = () => {
-  const [introComplete, setIntroComplete] = useState(() => {
-    return sessionStorage.getItem("introComplete") === "true";
-  });
+  const [introComplete, setIntroComplete] = useState(false);
   const [scrollOpacity, setScrollOpacity] = useState(0.7);
+  const { user } = useAuth();
 
   const handleIntroComplete = useCallback(() => {
     setIntroComplete(true);
-    sessionStorage.setItem("introComplete", "true");
   }, []);
+
+  const handleRegister = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (user) {
+      window.open("https://docs.google.com/forms/d/e/1FAIpQLSfSbTjg48TX8vmotgzKKtcDmHC52ptb6h2SQFS8NmHo4_Z_1w/viewform?usp=header", "_blank");
+    } else {
+      window.dispatchEvent(new Event('open-login-modal'));
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,9 +56,8 @@ const Index = () => {
       {/* Sticky mobile register button */}
       <div className="fixed bottom-4 left-4 right-4 z-50 sm:hidden">
         <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSfSbTjg48TX8vmotgzKKtcDmHC52ptb6h2SQFS8NmHo4_Z_1w/viewform?usp=header"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#"
+          onClick={handleRegister}
           className="block w-full py-3 text-center font-semibold text-primary-foreground rounded-full bg-gradient-to-r from-matrix-red to-matrix-maroon matrix-glow text-sm"
         >
           Register Now

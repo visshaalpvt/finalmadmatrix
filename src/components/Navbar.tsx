@@ -25,8 +25,15 @@ const Navbar = () => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
         };
+        const handleOpenLoginModal = () => setIsLoginModalOpen(true);
+
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        window.addEventListener('open-login-modal', handleOpenLoginModal);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('open-login-modal', handleOpenLoginModal);
+        };
     }, []);
 
     const navLinks = [
