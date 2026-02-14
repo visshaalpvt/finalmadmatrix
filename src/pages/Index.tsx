@@ -10,11 +10,13 @@ import MatrixRain from "@/components/MatrixRain";
 import MatrixIntro from "@/components/MatrixIntro";
 import { ArrowUp } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 const Index = () => {
   const [introComplete, setIntroComplete] = useState(false);
   const [scrollOpacity, setScrollOpacity] = useState(0.7);
   const { user } = useAuth();
+  const [pendingLink, setPendingLink] = useState<string | null>(null);
 
   const handleIntroComplete = useCallback(() => {
     setIntroComplete(true);
@@ -25,6 +27,10 @@ const Index = () => {
     if (user) {
       window.open("https://docs.google.com/forms/d/e/1FAIpQLSfSbTjg48TX8vmotgzKKtcDmHC52ptb6h2SQFS8NmHo4_Z_1w/viewform?usp=header", "_blank");
     } else {
+      setPendingLink("https://docs.google.com/forms/d/e/1FAIpQLSfSbTjg48TX8vmotgzKKtcDmHC52ptb6h2SQFS8NmHo4_Z_1w/viewform?usp=header");
+      toast.error("Authentication Required", {
+        description: "Please login to register."
+      });
       window.dispatchEvent(new Event('open-login-modal'));
     }
   };
@@ -40,6 +46,13 @@ const Index = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (user && pendingLink) {
+      window.open(pendingLink, "_blank", "noopener,noreferrer");
+      setPendingLink(null);
+    }
+  }, [user, pendingLink]);
 
   return (
     <div className="min-h-screen bg-background relative">

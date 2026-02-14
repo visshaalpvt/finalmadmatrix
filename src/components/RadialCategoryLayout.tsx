@@ -4,6 +4,7 @@ import { type EventData, registrationLinks } from "@/data/events";
 import { ArrowRight, ArrowLeft, Clock, Users, Shield, Cpu, Zap } from "lucide-react";
 import MatrixRain from "@/components/MatrixRain";
 import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 interface RadialCategoryLayoutProps {
     events: EventData[];
@@ -14,6 +15,7 @@ const RadialCategoryLayout = ({ events }: RadialCategoryLayoutProps) => {
     const { user } = useAuth();
     const [selectedEvent, setSelectedEvent] = useState<EventData>(events[0]);
     const [mobileSelectedEvent, setMobileSelectedEvent] = useState<EventData | null>(null);
+    const [pendingLink, setPendingLink] = useState<string | null>(null);
     const lastScrollTime = useRef(0);
     const scrollValues = useRef(0); // Accumulate scroll delta for smoother feel
 
@@ -44,11 +46,22 @@ const RadialCategoryLayout = ({ events }: RadialCategoryLayoutProps) => {
         setSelectedEvent(events[nextIndex]);
     };
 
+    useEffect(() => {
+        if (user && pendingLink) {
+            window.open(pendingLink, "_blank", "noopener,noreferrer");
+            setPendingLink(null);
+        }
+    }, [user, pendingLink]);
+
     const handleRegister = (e: React.MouseEvent<HTMLAnchorElement>, url: string) => {
         e.preventDefault();
         if (user) {
             window.open(url, '_blank');
         } else {
+            setPendingLink(url);
+            toast.error("Authentication Required", {
+                description: "Please login to register for this event Protocol."
+            });
             window.dispatchEvent(new Event('open-login-modal'));
         }
     };
@@ -76,70 +89,89 @@ const RadialCategoryLayout = ({ events }: RadialCategoryLayoutProps) => {
             {/* DESKTOP VIEW - Radial Navigation */}
             <div className="hidden lg:flex container mx-auto px-4 py-8 h-screen flex-col lg:flex-row gap-8 relative z-10">
 
-                {/* LEFT COLUMN - Radial Navigation (Red/Black Tech) */}
+                {/* LEFT COLUMN - Cyberpunk Radar Control Panel */}
                 <div
-                    className="lg:w-1/3 flex flex-col justify-center relative min-h-[600px] overflow-hidden"
+                    className="lg:w-1/3 flex flex-col justify-center relative min-h-[600px] overflow-visible perspective-1000"
                     onWheel={handleWheel}
                 >
-
-                    {/* The Rotating Wheel Container */}
-                    <div className="absolute top-1/2 left-[-400px] w-[800px] h-[800px] rounded-full transition-transform duration-700 cubic-bezier(0.2, 0.8, 0.2, 1)"
+                    {/* Radar Container - Rotates based on selection */}
+                    <div className="absolute top-1/2 left-[-400px] w-[800px] h-[800px] rounded-full transition-transform duration-700 cubic-bezier(0.2, 0.8, 0.2, 1) border border-matrix-red/10 bg-black shadow-[0_0_100px_rgba(20,0,0,0.8)]"
                         style={{
                             transform: `translate(0, -50%) rotate(${-events.findIndex(e => e.id === selectedEvent.id) * 30}deg)`
                         }}
                     >
-                        {/* Wheel Background - Tech Track */}
-                        <div className="absolute inset-0 rounded-full border border-matrix-red/20 bg-black/90 backdrop-blur-md shadow-[0_0_50px_rgba(255,0,0,0.1)]" />
-                        <div className="absolute inset-[40%] rounded-full bg-black border border-matrix-red/10" /> {/* Center Hub */}
-                        <div className="absolute inset-[42%] rounded-full border border-dashed border-matrix-red/30 animate-spin-slow opacity-30" />
+                        {/* 1. Radar Background & Texture */}
+                        <div className="absolute inset-0 rounded-full bg-black overflow-hidden opacity-90">
+                            {/* Inner Grid Texture */}
+                            <div className="absolute inset-0 bg-[linear-gradient(rgba(50,0,0,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(50,0,0,0.1)_1px,transparent_1px)] bg-[size:20px_20px] opacity-20" />
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(50,0,0,0.2),transparent_70%)]" />
+                        </div>
 
-                        {/* Items */}
+                        {/* 2. Rotating Scanning Rings */}
+                        {/* Outer Ring - Static with Glow */}
+                        <div className="absolute inset-[2%] rounded-full border border-matrix-red/20 shadow-[0_0_20px_rgba(255,0,0,0.1)]" />
+
+                        {/* Ring 2 - Slow rotate clockwise */}
+                        <div className="absolute inset-[12%] rounded-full border border-dashed border-matrix-red/20 opacity-40 animate-[spin_60s_linear_infinite]" />
+
+                        {/* Ring 3 - Counter rotate */}
+                        <div className="absolute inset-[24%] rounded-full border border-double border-matrix-red/10 opacity-60 animate-[spin_40s_linear_infinite_reverse]" />
+
+                        {/* 3. The Radar Sweep Beam (Fixed relative to wheel, but visually sweeping) */}
+                        <div className="absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,transparent_280deg,rgba(255,0,0,0.1)_360deg)] animate-[spin_4s_linear_infinite] pointer-events-none mix-blend-screen" />
+
+                        {/* 4. Center Hub (Visual Anchor) */}
+                        <div className="absolute inset-[40%] rounded-full bg-black border border-matrix-red/20 flex items-center justify-center shadow-[inset_0_0_30px_rgba(20,0,0,1)]">
+                            <div className="w-1/2 h-1/2 rounded-full border border-matrix-red/30 bg-matrix-red/5 animate-pulse" />
+                        </div>
+
+                        {/* 5. Items (Holographic Buttons) */}
                         {events.map((event, index) => {
                             const selectedIndex = events.findIndex(e => e.id === selectedEvent.id);
                             const isActive = index === selectedIndex;
-                            const angle = index * 30; // Wider spacing (30 degrees)
+                            const angle = index * 30;
 
-                            // Calculate distance from active for opacity
+                            // Calculate proximity for opacity/scale
                             const diff = Math.abs(index - selectedIndex);
-                            const opacity = isActive ? 1 : Math.max(0.2, 1 - (diff * 0.3));
+                            const opacity = isActive ? 1 : Math.max(0.3, 1 - (diff * 0.2));
+                            const scale = isActive ? 1 : Math.max(0.8, 1 - (diff * 0.05));
 
                             return (
                                 <button
                                     key={event.id}
                                     onClick={() => setSelectedEvent(event)}
-                                    className="absolute top-1/2 left-1/2 w-[400px] h-[80px] origin-left flex items-center group z-10 focus:outline-none"
+                                    className="absolute top-1/2 left-1/2 w-[420px] h-[60px] origin-left flex items-center group z-20 focus:outline-none transition-all duration-500"
                                     style={{
-                                        transform: `translateY(-50%) rotate(${angle}deg)`,
+                                        transform: `translateY(-50%) rotate(${angle}deg) scale(${scale})`,
+                                        opacity: opacity
                                     }}
                                 >
-                                    {/* Item Wrapper */}
+                                    {/* Connection Line */}
+                                    <div className={`absolute left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-matrix-red/20 to-transparent transition-all duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`} />
+
+                                    {/* The Button Content */}
                                     <div
-                                        className={`relative flex items-center justify-end w-full pr-10 transition-all duration-500 ease-out ${isActive ? 'scale-100 translate-x-4' : 'scale-90 hover:scale-95'}`}
-                                        style={{ opacity: opacity }}
+                                        className={`relative flex items-center justify-between w-full pl-[50%] pr-4 transition-all duration-300`}
                                     >
-
-                                        {/* Activity Pill Background - Only for active */}
-                                        {isActive && (
-                                            <div className="absolute right-2 top-1/2 -translate-y-1/2 w-[320px] h-[70px] bg-matrix-red/10 border-r-4 border-matrix-red -z-10 animate-fade-in skew-x-[-12deg] shadow-[0_0_20px_rgba(255,0,0,0.2)]" />
-                                        )}
-
-                                        {/* Text Label - Improved Splitting */}
-                                        <div className={`mr-6 font-poster text-xl uppercase tracking-wider transition-colors duration-300 flex flex-col items-end leading-none text-right ${isActive ? 'text-white drop-shadow-[0_0_8px_rgba(255,0,0,0.8)]' : 'text-zinc-500'}`}>
-                                            {event.title.length > 18 ? (
-                                                <>
-                                                    <span className="whitespace-nowrap text-lg">{event.title.split(' ').slice(0, Math.ceil(event.title.split(' ').length / 2)).join(' ')}</span>
-                                                    <span className="text-lg opacity-80">{event.title.split(' ').slice(Math.ceil(event.title.split(' ').length / 2)).join(' ')}</span>
-                                                </>
-                                            ) : (
-                                                <span className="whitespace-nowrap">{event.title}</span>
-                                            )}
+                                        {/* Label Text */}
+                                        <div className={`text-right flex-1 mr-4 font-matrix uppercase tracking-[0.2em] transition-all duration-300 ${isActive ? 'text-matrix-red drop-shadow-[0_0_5px_rgba(255,0,0,0.8)] translate-x-2' : 'text-zinc-600 group-hover:text-zinc-400'}`}>
+                                            <span className="text-sm font-bold block">{event.title}</span>
+                                            {isActive && <span className="text-[10px] opacity-70 tracking-widest block">SEC_0{index + 1}</span>}
                                         </div>
 
-                                        {/* Icon Bubble */}
-                                        <div className={`w-14 h-14 flex items-center justify-center transition-all duration-500 border-2 rounded-xl rotate-45
-                                            ${isActive ? 'bg-matrix-red border-white text-black scale-110 shadow-[0_0_20px_rgba(255,0,0,0.6)]' : 'bg-black border-zinc-800 text-zinc-700 group-hover:border-matrix-red/50 group-hover:text-white'}`}
+                                        {/* Hexagon/Icon Button */}
+                                        <div className={`relative w-12 h-12 flex items-center justify-center transition-all duration-500
+                                            ${isActive
+                                                ? 'bg-black border border-matrix-red shadow-[0_0_20px_rgba(255,0,0,0.4)] scale-110'
+                                                : 'bg-black/80 border border-zinc-800 group-hover:border-matrix-red/40 opacity-70'}`}
+                                            style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' }}
                                         >
-                                            <span className="text-2xl -rotate-45 block">{event.emoji}</span>
+                                            <span className={`text-xl transition-all duration-300 ${isActive ? 'grayscale-0 opacity-100' : 'grayscale opacity-50'}`} style={{ transform: `rotate(${-angle + (events.findIndex(e => e.id === selectedEvent.id) * 30)}deg)` }}>
+                                                {event.emoji}
+                                            </span>
+
+                                            {/* Glitch Overlay on Active */}
+                                            {isActive && <div className="absolute inset-0 bg-matrix-red/10 animate-pulse pointer-events-none" />}
                                         </div>
                                     </div>
                                 </button>
@@ -147,10 +179,17 @@ const RadialCategoryLayout = ({ events }: RadialCategoryLayoutProps) => {
                         })}
                     </div>
 
-                    {/* Active Indicator Pointer */}
-                    <div className="absolute top-1/2 left-[410px] -translate-y-1/2 flex items-center pointer-events-none z-50">
-                        <div className="w-0 h-0 border-y-[8px] border-y-transparent border-l-[12px] border-l-matrix-red drop-shadow-[0_0_10px_rgba(255,0,0,1)]" />
-                        <div className="w-24 h-[1px] bg-gradient-to-l from-matrix-red to-transparent opacity-60" />
+                    {/* Static HUD Overlay (Fixed Markers) */}
+                    <div className="absolute top-1/2 left-[420px] -translate-y-1/2 pointer-events-none z-50 flex items-center">
+                        <div className="w-3 h-3 bg-matrix-red rounded-full shadow-[0_0_10px_#ff0000] animate-ping absolute" />
+                        <div className="w-3 h-3 bg-matrix-red rounded-full shadow-[0_0_10px_#ff0000] relative z-10" />
+                        <div className="h-[2px] w-16 bg-gradient-to-r from-matrix-red to-transparent ml-2" />
+                        <div className="absolute -left-4 -top-12 h-24 w-[1px] bg-gradient-to-b from-transparent via-matrix-red/50 to-transparent" />
+                    </div>
+
+                    {/* HUD Decorative Elements */}
+                    <div className="absolute top-[10%] right-0 w-[1px] h-[80%] bg-zinc-900 overflow-hidden">
+                        <div className="w-full h-20 bg-gradient-to-b from-transparent via-matrix-red/50 to-transparent animate-[scan_5s_linear_infinite]" />
                     </div>
 
                 </div>

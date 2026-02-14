@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import LoginModal from './LoginModal';
 import { Button } from './ui/button';
 import SimatsLogo from './SimatsLogo';
 import {
@@ -16,8 +15,6 @@ import { LogOut, User, Shield, Menu, X, LogIn } from "lucide-react";
 
 const Navbar = () => {
     const { user, logout } = useAuth();
-    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -25,15 +22,9 @@ const Navbar = () => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
         };
-        const handleOpenLoginModal = () => setIsLoginModalOpen(true);
 
         window.addEventListener('scroll', handleScroll);
-        window.addEventListener('open-login-modal', handleOpenLoginModal);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('open-login-modal', handleOpenLoginModal);
-        };
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const navLinks = [
@@ -106,7 +97,7 @@ const Navbar = () => {
                         </DropdownMenu>
                     ) : (
                         <Button
-                            onClick={() => setIsLoginModalOpen(true)}
+                            onClick={() => window.dispatchEvent(new Event('open-login-modal'))}
                             className="bg-matrix-red text-black hover:bg-white hover:text-black transition-all duration-500 font-matrix font-black text-[10px] tracking-[0.2em] px-8 h-12 rounded-none shadow-[0_0_20px_rgba(255,0,0,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
                         >
                             <LogIn className="w-4 h-4 mr-2" />
@@ -141,11 +132,6 @@ const Navbar = () => {
                     </div>
                 </div>
             )}
-
-            <LoginModal
-                isOpen={isLoginModalOpen}
-                onClose={() => setIsLoginModalOpen(false)}
-            />
         </nav>
     );
 };
