@@ -43,7 +43,7 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
                 {/* Logo Area */}
                 <a href="#" className="flex items-center gap-2 group">
-                    <SimatsLogo className="transition-all duration-500" />
+                    {/* SimatsLogo removed as requested */}
                 </a>
 
                 {/* Desktop Nav Links */}
@@ -61,14 +61,14 @@ const Navbar = () => {
                 </div>
 
                 {/* Auth Area */}
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3 md:gap-4">
                     {user ? (
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" className="relative h-12 w-12 rounded-full p-0 border-2 border-matrix-red/30 hover:border-matrix-red transition-all bg-black/40">
-                                    <Avatar className="h-10 w-10 border border-matrix-red/20">
+                                <Button variant="ghost" className="relative h-10 w-10 md:h-12 md:w-12 rounded-full p-0 border-2 border-matrix-red/30 hover:border-matrix-red transition-all bg-black/40">
+                                    <Avatar className="h-8 w-8 md:h-10 md:w-10 border border-matrix-red/20">
                                         <AvatarImage src={user.photoURL || ''} alt={user.displayName || 'User'} />
-                                        <AvatarFallback className="bg-matrix-red/10 text-matrix-red font-matrix font-bold text-lg">
+                                        <AvatarFallback className="bg-matrix-red/10 text-matrix-red font-matrix font-bold text-base md:text-lg">
                                             {user.displayName?.charAt(0) || user.email?.charAt(0) || 'U'}
                                         </AvatarFallback>
                                     </Avatar>
@@ -98,10 +98,10 @@ const Navbar = () => {
                     ) : (
                         <Button
                             onClick={() => window.dispatchEvent(new Event('open-login-modal'))}
-                            className="bg-matrix-red text-black hover:bg-white hover:text-black transition-all duration-500 font-matrix font-black text-[10px] tracking-[0.2em] px-8 h-12 rounded-none shadow-[0_0_20px_rgba(255,0,0,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
+                            className="bg-matrix-red text-black hover:bg-white hover:text-black transition-all duration-500 font-matrix font-black text-[9px] md:text-[10px] tracking-[0.1em] md:tracking-[0.2em] px-4 md:px-8 h-10 md:h-12 rounded-none shadow-[0_0_20px_rgba(255,0,0,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
                         >
-                            <LogIn className="w-4 h-4 mr-2" />
-                            ACCESS SYSTEM
+                            <LogIn className="w-3.5 h-3.5 md:w-4 md:h-4 mr-1.5 md:mr-2" />
+                            ACCESS
                         </Button>
                     )}
 

@@ -202,8 +202,8 @@ const EventDetail = () => {
                         <p className="text-muted-foreground font-light max-w-xs">
                             Having trouble with the registration protocol? Contact the main server administrators.
                         </p>
-                        <div className="text-matrix-red font-matrix tracking-widest text-sm">
-                            SYS.ADMIN@COLLEGE.EDU
+                        <div className="text-matrix-red font-matrix tracking-widest text-sm uppercase">
+                            madmatrix2026@gmail.com
                         </div>
                     </div>
                 </div>

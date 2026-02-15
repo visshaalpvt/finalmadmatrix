@@ -77,13 +77,15 @@ const EventsSection = () => {
         {/* Cinematic Carousel */}
         <motion.div
           ref={carouselRef}
-          className="cursor-grab active:cursor-grabbing overflow-hidden"
+          className="cursor-grab active:cursor-grabbing overflow-hidden touch-pan-y"
           whileTap={{ cursor: "grabbing" }}
         >
           <motion.div
             drag="x"
             dragConstraints={{ right: 0, left: -width }}
-            className="flex gap-8 py-10 pl-2"
+            dragElastic={0.15}
+            dragTransition={{ power: 0.2, timeConstant: 200 }}
+            className="flex gap-4 md:gap-8 py-10 pl-2 lg:pl-0"
           >
             {grouped.map((g, index) => {
               const Icon = g.icon;
@@ -91,7 +93,7 @@ const EventsSection = () => {
               return (
                 <motion.div
                   key={g.category}
-                  className="group relative h-[450px] min-w-[320px] md:min-w-[380px] rounded-none bg-black/40 backdrop-blur-md border border-matrix-red/20 hover:border-matrix-red/60 transition-colors duration-500 overflow-hidden flex flex-col"
+                  className="group relative h-[400px] md:h-[450px] min-w-[280px] sm:min-w-[320px] md:min-w-[380px] rounded-none bg-black/40 backdrop-blur-md border border-matrix-red/20 hover:border-matrix-red/60 transition-colors duration-500 overflow-hidden flex flex-col"
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
@@ -102,24 +104,24 @@ const EventsSection = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-matrix-red/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                   {/* Card Header: Icon & Tech Decorative Lines */}
-                  <div className="p-8 pb-0 relative z-10 flex justify-between items-start">
-                    <div className="w-14 h-14 border border-matrix-red/30 bg-black/50 flex items-center justify-center relative group-hover:border-matrix-red transition-colors duration-500">
+                  <div className="p-6 md:p-8 pb-0 relative z-10 flex justify-between items-start">
+                    <div className="w-12 h-12 md:w-14 md:h-14 border border-matrix-red/30 bg-black/50 flex items-center justify-center relative group-hover:border-matrix-red transition-colors duration-500">
                       {/* Decorative corners */}
                       <div className="absolute top-0 left-0 w-1 h-1 bg-matrix-red" />
                       <div className="absolute bottom-0 right-0 w-1 h-1 bg-matrix-red" />
 
-                      <Icon className="w-6 h-6 text-matrix-red/80 group-hover:text-matrix-red transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(255,0,0,0.8)]" strokeWidth={1.5} />
+                      <Icon className="w-5 h-5 md:w-6 md:h-6 text-matrix-red/80 group-hover:text-matrix-red transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(255,0,0,0.8)]" strokeWidth={1.5} />
                     </div>
-                    <div className="text-[10px] font-mono text-zinc-600 group-hover:text-matrix-red/60 flex flex-col items-end gap-1">
+                    <div className="text-[9px] md:text-[10px] font-mono text-zinc-600 group-hover:text-matrix-red/60 flex flex-col items-end gap-1">
                       <span>SEC_0{index + 1}</span>
-                      <span className="w-8 h-[1px] bg-current" />
+                      <span className="w-6 md:w-8 h-[1px] bg-current" />
                     </div>
                   </div>
 
                   {/* Card Body: Title & Info */}
-                  <div className="p-8 flex-grow flex flex-col justify-end relative z-10 space-y-6">
+                  <div className="p-6 md:p-8 flex-grow flex flex-col justify-end relative z-10 space-y-4 md:space-y-6">
                     <div>
-                      <h3 className="text-3xl font-poster uppercase text-white tracking-wide mb-2 group-hover:text-matrix-red transition-colors duration-300 leading-none">
+                      <h3 className="text-2xl md:text-3xl font-poster uppercase text-white tracking-wide mb-2 group-hover:text-matrix-red transition-colors duration-300 leading-none">
                         {g.label}
                       </h3>
                       <div className="w-full h-[1px] bg-zinc-800 group-hover:bg-matrix-red/40 transition-colors duration-500 relative overflow-hidden">
@@ -127,7 +129,7 @@ const EventsSection = () => {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4 text-xs font-mono uppercase tracking-wider text-zinc-500">
+                    <div className="grid grid-cols-2 gap-4 text-[10px] md:text-xs font-mono uppercase tracking-wider text-zinc-500">
                       <div className="flex flex-col gap-1">
                         <span className="text-zinc-700 group-hover:text-matrix-red/50">Count</span>
                         <span className="text-white">{g.items.length} Modules</span>
@@ -140,7 +142,7 @@ const EventsSection = () => {
 
                     <button
                       onClick={() => handleExplore(g.category)}
-                      className="mt-4 w-full py-4 border border-zinc-800 group-hover:border-matrix-red/50 bg-transparent text-white/50 group-hover:text-white uppercase font-mono text-xs tracking-[0.3em] flex items-center justify-center gap-3 transition-all duration-300 hover:bg-matrix-red/10"
+                      className="mt-2 md:mt-4 w-full py-3 md:py-4 border border-zinc-800 group-hover:border-matrix-red/50 bg-transparent text-white/50 group-hover:text-white uppercase font-mono text-[10px] md:text-xs tracking-[0.2em] md:tracking-[0.3em] flex items-center justify-center gap-2 md:gap-3 transition-all duration-300 hover:bg-matrix-red/10"
                     >
                       <span>Initialize</span>
                       <ChevronRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />

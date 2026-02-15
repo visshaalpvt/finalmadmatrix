@@ -9,17 +9,17 @@ const FooterSection = () => (
       </div>
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-12 text-sm font-matrix uppercase tracking-widest text-white/70">
-        <a href="mailto:contact@madmatrix.org" className="flex items-center gap-3 hover:text-matrix-red transition-all border-b border-matrix-red/10 pb-1 px-4 hover:border-matrix-red">
-          <Mail className="w-5 h-5" /> contact@madmatrix.org
+        <a href="mailto:madmatrix2026@gmail.com" className="flex items-center gap-3 hover:text-matrix-red transition-all border-b border-matrix-red/10 pb-1 px-4 hover:border-matrix-red">
+          <Mail className="w-5 h-5" /> madmatrix2026@gmail.com
         </a>
-        <a href="tel:+918248372122" className="flex items-center gap-3 hover:text-matrix-red transition-all border-b border-matrix-red/10 pb-1 px-4 hover:border-matrix-red">
-          <Phone className="w-5 h-5" /> +91 82483 72122
+        <a href="tel:+919025718226" className="flex items-center gap-3 hover:text-matrix-red transition-all border-b border-matrix-red/10 pb-1 px-4 hover:border-matrix-red">
+          <Phone className="w-5 h-5" /> +91 90257 18226
         </a>
       </div>
 
       <div className="flex justify-center gap-8 pt-4">
         {[
-          { Icon: Instagram, link: "https://www.instagram.com/madmatrix2026?utm_source=qr&igsh=MTZ6aTlwYWpoYWp3bg==" },
+          { Icon: Instagram, link: "https://instagram.com/madmatrix2026" },
           { Icon: Twitter, link: "#" },
           { Icon: Youtube, link: "#" }
         ].map(({ Icon, link }, i) => (

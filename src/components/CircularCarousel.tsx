@@ -52,15 +52,24 @@ const CircularCarousel = () => {
                 </div>
 
                 {/* Carousel Container */}
-                <div
-                    className="relative h-[450px] sm:h-[550px] flex items-center justify-center perspective-1000"
+                <motion.div
+                    className="relative h-[450px] sm:h-[550px] flex items-center justify-center perspective-1000 cursor-grab active:cursor-grabbing touch-pan-y"
                     onMouseEnter={() => {
                         setIsHovered(true);
-                        document.body.classList.add('cursor-drag');
                     }}
                     onMouseLeave={() => {
                         setIsHovered(false);
-                        document.body.classList.remove('cursor-drag');
+                    }}
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.1}
+                    onDragEnd={(_, info) => {
+                        const threshold = 50;
+                        if (info.offset.x < -threshold) {
+                            next();
+                        } else if (info.offset.x > threshold) {
+                            prev();
+                        }
                     }}
                 >
                     <AnimatePresence initial={false}>
@@ -87,8 +96,8 @@ const CircularCarousel = () => {
                                         rotateY: position * -30,
                                         zIndex: 50 - Math.abs(position) * 10,
                                     }}
-                                    transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-                                    className="absolute w-[280px] sm:w-[420px] aspect-[4/5] rounded-[2.5rem] p-8 sm:p-12 glass border-2 border-matrix-red/10 group hover:border-matrix-red/60 transition-all duration-700 overflow-hidden flex flex-col justify-between"
+                                    transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+                                    className="absolute w-[280px] sm:w-[420px] h-[420px] sm:aspect-[4/5] rounded-[2.5rem] pt-8 px-8 pb-10 sm:p-12 glass border-2 border-matrix-red/10 group hover:border-matrix-red/60 transition-all duration-700 overflow-hidden flex flex-col justify-between"
                                     style={{ backfaceVisibility: 'hidden', background: 'rgba(10, 0, 0, 0.8)' }}
                                 >
                                     {/* Background Aura */}
@@ -150,9 +159,9 @@ const CircularCarousel = () => {
                             <ChevronRight className="w-6 h-6" />
                         </button>
                     </div>
-                </div>
+                </motion.div>
             </div>
-        </section>
+        </section >
     );
 };
 

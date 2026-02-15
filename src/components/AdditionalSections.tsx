@@ -8,7 +8,7 @@ const InfoStrip = () => {
             <motion.div
                 className="flex whitespace-nowrap"
                 animate={{ x: ["0%", "-50%"] }}
-                transition={{ repeat: Infinity, ease: "linear", duration: 40 }}
+                transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
             >
                 {[...Array(2)].map((_, i) => (
                     <div key={i} className="flex items-center gap-8 px-4">

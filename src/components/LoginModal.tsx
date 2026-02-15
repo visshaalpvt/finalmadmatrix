@@ -59,7 +59,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="sm:max-w-[400px] bg-background/80 backdrop-blur-xl border-matrix-red/20 shadow-[0_0_50px_rgba(255,0,0,0.15)] rounded-2xl">
+            <DialogContent className="sm:max-w-[400px] w-[95%] max-h-[90vh] overflow-y-auto bg-background/80 backdrop-blur-xl border-matrix-red/20 shadow-[0_0_50px_rgba(255,0,0,0.15)] rounded-2xl scale-95 sm:scale-100 transition-transform">
                 <DialogHeader>
                     <div className="flex justify-center mb-4">
                         <div className="w-12 h-12 rounded-full bg-matrix-red/10 border border-matrix-red/30 flex items-center justify-center">
