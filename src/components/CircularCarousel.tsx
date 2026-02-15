@@ -30,6 +30,9 @@ const CircularCarousel = () => {
         setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
     }, [items.length]);
 
+    // Track active drag for visual feedback
+    const [dragOffset, setDragOffset] = useState(0);
+
     useEffect(() => {
         if (!isHovered) {
             const interval = setInterval(next, 5000);
@@ -53,7 +56,7 @@ const CircularCarousel = () => {
 
                 {/* Carousel Container */}
                 <motion.div
-                    className="relative h-[450px] sm:h-[550px] flex items-center justify-center perspective-1000 cursor-grab active:cursor-grabbing touch-pan-y"
+                    className="relative h-[480px] sm:h-[550px] flex items-center justify-center perspective-1000 cursor-grab active:cursor-grabbing touch-pan-y"
                     onMouseEnter={() => {
                         setIsHovered(true);
                     }}
@@ -62,14 +65,18 @@ const CircularCarousel = () => {
                     }}
                     drag="x"
                     dragConstraints={{ left: 0, right: 0 }}
-                    dragElastic={0.1}
+                    dragElastic={0.4} // Increase elasticity for better hand-feel
+                    onDrag={(_, info) => {
+                        setDragOffset(info.offset.x);
+                    }}
                     onDragEnd={(_, info) => {
-                        const threshold = 50;
+                        const threshold = 60;
                         if (info.offset.x < -threshold) {
                             next();
                         } else if (info.offset.x > threshold) {
                             prev();
                         }
+                        setDragOffset(0);
                     }}
                 >
                     <AnimatePresence initial={false}>
@@ -91,13 +98,13 @@ const CircularCarousel = () => {
                                     animate={{
                                         opacity: Math.abs(position) === 0 ? 1 : Math.abs(position) === 1 ? 0.6 : 0.2,
                                         scale: Math.abs(position) === 0 ? 1.1 : Math.abs(position) === 1 ? 0.85 : 0.6,
-                                        x: position * (window.innerWidth < 640 ? 180 : 380),
+                                        x: position * (window.innerWidth < 640 ? 180 : 380) + dragOffset,
                                         z: Math.abs(position) === 0 ? 100 : Math.abs(position) === 1 ? -150 : -400,
-                                        rotateY: position * -30,
+                                        rotateY: position * -30 + (dragOffset * 0.05),
                                         zIndex: 50 - Math.abs(position) * 10,
                                     }}
                                     transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-                                    className="absolute w-[280px] sm:w-[420px] h-[420px] sm:aspect-[4/5] rounded-[2.5rem] pt-8 px-8 pb-10 sm:p-12 glass border-2 border-matrix-red/10 group hover:border-matrix-red/60 transition-all duration-700 overflow-hidden flex flex-col justify-between"
+                                    className="absolute w-[290px] sm:w-[420px] h-[440px] sm:aspect-[4/5] rounded-[2.5rem] pt-6 px-6 pb-8 sm:p-12 glass border-2 border-matrix-red/10 group hover:border-matrix-red/60 transition-all duration-700 overflow-hidden flex flex-col justify-between"
                                     style={{ backfaceVisibility: 'hidden', background: 'rgba(10, 0, 0, 0.8)' }}
                                 >
                                     {/* Background Aura */}
@@ -105,27 +112,30 @@ const CircularCarousel = () => {
 
                                     {/* Category Data Content */}
                                     <div className="relative z-10">
-                                        <span className="text-7xl sm:text-9xl block mb-6 animate-float drop-shadow-[0_0_30px_rgba(255,0,0,0.4)]">
+                                        <span className="text-6xl sm:text-9xl block mb-4 sm:mb-6 animate-float drop-shadow-[0_0_30px_rgba(255,0,0,0.4)] text-center">
                                             {item.emoji}
                                         </span>
-                                        <h3 className="text-3xl sm:text-5xl font-poster text-white group-hover:text-matrix-red transition-all duration-500 uppercase leading-none drop-shadow-md">
+                                        <h3 className="text-2xl sm:text-5xl font-poster text-white group-hover:text-matrix-red transition-all duration-500 uppercase leading-none drop-shadow-md text-center">
                                             {item.title}
                                         </h3>
-                                        <div className="flex items-center gap-4 mt-6 text-xs font-matrix text-matrix-red uppercase tracking-[0.3em] font-black">
-                                            <span className="bg-matrix-red/20 px-5 py-2 rounded-none border-x-2 border-matrix-red">
+                                        <div className="flex items-center justify-center gap-4 mt-4 sm:mt-6 text-[10px] font-matrix text-matrix-red uppercase tracking-[0.3em] font-black">
+                                            <span className="bg-matrix-red/20 px-4 py-1.5 rounded-none border-x-2 border-matrix-red">
                                                 {item.count} PROTOCOLS
                                             </span>
                                         </div>
                                     </div>
 
-                                    <div className="relative z-10 space-y-6 pt-8 border-t border-matrix-red/20">
-                                        <div className="text-[10px] font-matrix text-white/50 uppercase tracking-[0.4em] font-bold">
-                                            Entry Credentials: <span className="text-matrix-red font-black text-xl ml-2 drop-shadow-[0_0_10px_rgba(255,0,0,0.3)]">{item.fee}</span>
+                                    <div className="relative z-10 space-y-4 sm:space-y-6 pt-6 sm:pt-8 border-t border-matrix-red/20">
+                                        <div className="text-[9px] sm:text-[10px] font-matrix text-white/50 uppercase tracking-[0.4em] font-bold text-center">
+                                            Entry Credentials: <span className="text-matrix-red font-black text-lg sm:text-xl ml-2 drop-shadow-[0_0_10px_rgba(255,0,0,0.3)]">{item.fee}</span>
                                         </div>
 
                                         <button
-                                            onClick={() => navigate(`/category/${item.category}`)}
-                                            className="w-full py-5 rounded-none bg-matrix-red/10 border-2 border-matrix-red text-xs font-matrix text-white font-black uppercase tracking-[0.4em] group/btn hover:bg-matrix-red hover:text-black transition-all duration-500 flex items-center justify-center gap-4 shadow-[0_0_20px_rgba(255,0,0,0.2)]"
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                navigate(`/category/${item.category}`);
+                                            }}
+                                            className="w-full py-4 sm:py-5 rounded-none bg-matrix-red/10 border-2 border-matrix-red text-[10px] sm:text-xs font-matrix text-white font-black uppercase tracking-[0.4em] group/btn hover:bg-matrix-red hover:text-black transition-all duration-500 flex items-center justify-center gap-4 shadow-[0_0_20px_rgba(255,0,0,0.2)]"
                                         >
                                             Initialize →
                                         </button>
