@@ -30,15 +30,17 @@ const CircularCarousel = () => {
         setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
     }, [items.length]);
 
-    // Track active drag for visual feedback
+    // Track active drag for visual feedback and auto-play suspension
     const [dragOffset, setDragOffset] = useState(0);
+    const [isDragging, setIsDragging] = useState(false);
 
     useEffect(() => {
-        if (!isHovered) {
+        // Pause auto-play if hovered or dragging
+        if (!isHovered && !isDragging) {
             const interval = setInterval(next, 5000);
             return () => clearInterval(interval);
         }
-    }, [isHovered, next]);
+    }, [isHovered, isDragging, next]);
 
     return (
         <section id="events" className="relative py-24 sm:py-32 overflow-hidden bg-black/20">
@@ -56,27 +58,26 @@ const CircularCarousel = () => {
 
                 {/* Carousel Container */}
                 <motion.div
-                    className="relative h-[480px] sm:h-[550px] flex items-center justify-center perspective-1000 cursor-grab active:cursor-grabbing touch-pan-y"
-                    onMouseEnter={() => {
-                        setIsHovered(true);
-                    }}
-                    onMouseLeave={() => {
-                        setIsHovered(false);
-                    }}
+                    className="relative h-[500px] sm:h-[550px] flex items-center justify-center perspective-1000 cursor-grab active:cursor-grabbing touch-pan-y"
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
                     drag="x"
                     dragConstraints={{ left: 0, right: 0 }}
-                    dragElastic={0.4} // Increase elasticity for better hand-feel
+                    dragElastic={0.4}
+                    onDragStart={() => setIsDragging(true)}
                     onDrag={(_, info) => {
                         setDragOffset(info.offset.x);
                     }}
                     onDragEnd={(_, info) => {
-                        const threshold = 60;
+                        const threshold = 70;
                         if (info.offset.x < -threshold) {
                             next();
                         } else if (info.offset.x > threshold) {
                             prev();
                         }
                         setDragOffset(0);
+                        // Delay resetting isDragging to prevent instant auto-move
+                        setTimeout(() => setIsDragging(false), 500);
                     }}
                 >
                     <AnimatePresence initial={false}>
@@ -103,29 +104,29 @@ const CircularCarousel = () => {
                                         rotateY: position * -30 + (dragOffset * 0.05),
                                         zIndex: 50 - Math.abs(position) * 10,
                                     }}
-                                    transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-                                    className="absolute w-[290px] sm:w-[420px] h-[440px] sm:aspect-[4/5] rounded-[2.5rem] pt-6 px-6 pb-8 sm:p-12 glass border-2 border-matrix-red/10 group hover:border-matrix-red/60 transition-all duration-700 overflow-hidden flex flex-col justify-between"
+                                    transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
+                                    className="absolute w-[290px] sm:w-[420px] h-[450px] sm:aspect-[4/5] rounded-[2.5rem] pt-6 px-6 pb-6 sm:p-12 glass border-2 border-matrix-red/10 group hover:border-matrix-red/60 transition-all duration-700 overflow-hidden flex flex-col justify-between"
                                     style={{ backfaceVisibility: 'hidden', background: 'rgba(10, 0, 0, 0.8)' }}
                                 >
                                     {/* Background Aura */}
                                     <div className={`absolute inset-0 bg-gradient-to-br from-matrix-red/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
 
                                     {/* Category Data Content */}
-                                    <div className="relative z-10">
-                                        <span className="text-6xl sm:text-9xl block mb-4 sm:mb-6 animate-float drop-shadow-[0_0_30px_rgba(255,0,0,0.4)] text-center">
+                                    <div className="relative z-10 flex flex-col items-center">
+                                        <span className="text-6xl sm:text-9xl block mb-2 sm:mb-6 animate-float drop-shadow-[0_0_30px_rgba(255,0,0,0.4)]">
                                             {item.emoji}
                                         </span>
                                         <h3 className="text-2xl sm:text-5xl font-poster text-white group-hover:text-matrix-red transition-all duration-500 uppercase leading-none drop-shadow-md text-center">
                                             {item.title}
                                         </h3>
-                                        <div className="flex items-center justify-center gap-4 mt-4 sm:mt-6 text-[10px] font-matrix text-matrix-red uppercase tracking-[0.3em] font-black">
+                                        <div className="flex items-center gap-4 mt-3 sm:mt-6 text-[10px] font-matrix text-matrix-red uppercase tracking-[0.3em] font-black">
                                             <span className="bg-matrix-red/20 px-4 py-1.5 rounded-none border-x-2 border-matrix-red">
                                                 {item.count} PROTOCOLS
                                             </span>
                                         </div>
                                     </div>
 
-                                    <div className="relative z-10 space-y-4 sm:space-y-6 pt-6 sm:pt-8 border-t border-matrix-red/20">
+                                    <div className="relative z-10 space-y-3 sm:space-y-6 pt-4 sm:pt-8 border-t border-matrix-red/20">
                                         <div className="text-[9px] sm:text-[10px] font-matrix text-white/50 uppercase tracking-[0.4em] font-bold text-center">
                                             Entry Credentials: <span className="text-matrix-red font-black text-lg sm:text-xl ml-2 drop-shadow-[0_0_10px_rgba(255,0,0,0.3)]">{item.fee}</span>
                                         </div>
