@@ -49,8 +49,8 @@ const WhyMadmatrix = () => {
             icon: "📜"
         },
         {
-            title: "Competitive Platform",
-            desc: "Structured environment to test technical and creative abilities.",
+            title: "Executive Prizes",
+            desc: "Win Metal Medals, Trophies, and exciting Prizes for top rankers.",
             icon: "🏆"
         },
         {
@@ -59,8 +59,8 @@ const WhyMadmatrix = () => {
             icon: "🌐"
         },
         {
-            title: "Academic & Professional Networking",
-            desc: "Interaction with peers and faculty experts.",
+            title: "Networking Hub",
+            desc: "Interaction with peers and faculty experts in the tech circuit.",
             icon: "🤝"
         }
     ];

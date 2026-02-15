@@ -1,11 +1,26 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { events, registrationLinks } from "@/data/events";
-import { ArrowLeft, Clock, Users, Trophy, BookOpen, Users2 } from "lucide-react";
+import {
+    ArrowLeft, Clock, Users, Trophy, BookOpen, Users2,
+    Music, Theater, Zap, Music2, Mic2, Video,
+    Cpu, FileText, Terminal, Camera, Calculator, Keyboard, Smartphone, Activity, Brain,
+    Target, Hand, Table, Circle, Flame, Sword, Shield, Timer, FastForward, ArrowUpRight
+} from "lucide-react";
 import MatrixRain from "@/components/MatrixRain";
 import MadmatrixLogo from "@/components/MadmatrixLogo";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
+
+const IconRenderer = ({ iconName, className }: { iconName: string, className?: string }) => {
+    const icons: Record<string, any> = {
+        Music, Users, Zap, Music2, Mic2, Theater, Video,
+        Cpu, FileText, Terminal, Camera, Calculator, Keyboard, Smartphone, Activity, Brain,
+        Target, Hand, Table, Circle, Flame, Sword, Shield, Trophy, Timer, FastForward, Users2, ArrowUpRight
+    };
+    const IconComponent = icons[iconName] || Trophy;
+    return <IconComponent className={className} />;
+};
 
 const EventDetail = () => {
     const { id } = useParams<{ id: string }>();
@@ -60,9 +75,9 @@ const EventDetail = () => {
 
                 <div className="max-w-6xl mx-auto">
                     {/* Main Content Card */}
-                    <div className="glass-strong p-8 sm:p-16 rounded-[3rem] mb-12 relative overflow-hidden border-matrix-red/20 shadow-2xl">
-                        <div className="absolute -top-20 -right-20 opacity-5 pointer-events-none">
-                            <span className="text-[25rem]">{event.emoji}</span>
+                    <div className="glass-strong p-6 sm:p-16 rounded-2xl sm:rounded-[3rem] mb-12 relative overflow-hidden border-matrix-red/20 shadow-2xl">
+                        <div className="absolute -top-20 -right-20 opacity-5 pointer-events-none text-matrix-red">
+                            <IconRenderer iconName={event.iconName} className="w-[300px] h-[300px] opacity-10" />
                         </div>
 
                         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -71,11 +86,11 @@ const EventDetail = () => {
                                     {event.category.replace('-', ' ')}
                                 </div>
 
-                                <h1 className="text-5xl sm:text-7xl lg:text-8xl font-poster leading-tight metallic-text uppercase tracking-tighter break-words">
+                                <h1 className="text-4xl sm:text-7xl lg:text-8xl font-poster leading-tight metallic-text uppercase tracking-tighter break-words">
                                     {event.title}
                                 </h1>
 
-                                <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed italic border-l-4 border-matrix-red/30 pl-8 font-light">
+                                <p className="text-lg sm:text-2xl text-muted-foreground leading-relaxed italic border-l-4 border-matrix-red/30 pl-6 sm:pl-8 font-light">
                                     "{event.description}"
                                 </p>
 

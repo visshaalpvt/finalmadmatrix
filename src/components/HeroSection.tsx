@@ -100,13 +100,13 @@ const HeroSection = () => {
               }
             `}</style>
 
-            <h1 className="text-4xl sm:text-7xl md:text-8xl font-poster font-black tracking-[8px] md:tracking-[15px] uppercase flex items-center justify-center glitch-flicker light-sweep-container relative">
+            <h1 className="text-5xl sm:text-7xl md:text-8xl font-poster font-black tracking-[4px] sm:tracking-[8px] md:tracking-[15px] uppercase flex items-center justify-center glitch-flicker light-sweep-container relative">
               <span className="special-letter">M</span>
               <span className="text-foreground relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">ADMATRI</span>
               <span className="special-letter">X</span>
             </h1>
 
-            <div className="text-lg sm:text-2xl md:text-3xl text-matrix-red font-matrix tracking-[0.8em] mt-4 opacity-0 animate-[fade-in_1s_forwards_1.2s] uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]">
+            <div className="text-xl sm:text-2xl md:text-3xl text-matrix-red font-matrix tracking-[0.4em] sm:tracking-[0.8em] mt-4 opacity-0 animate-[fade-in_1s_forwards_1.2s] uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]">
               2026
             </div>
           </div>

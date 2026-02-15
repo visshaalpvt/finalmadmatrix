@@ -1,8 +1,26 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import {
+    ChevronLeft, ChevronRight, ArrowRight,
+    Music, Users, Zap, Music2, Mic2, Theater, Video,
+    Cpu, FileText, Terminal, Camera, Calculator, Keyboard, Smartphone, Activity, Brain,
+    Target, Hand, Table, Circle, Flame, Sword, Shield, Trophy, Timer, FastForward, Users2, ArrowUpRight,
+    Gamepad
+} from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { events, categoryLabels, categoryOrder } from '@/data/events';
+
+// Icon mapping helper
+const IconRenderer = ({ iconName, className }: { iconName: string, className?: string }) => {
+    const icons: Record<string, any> = {
+        Music, Users, Zap, Music2, Mic2, Theater, Video,
+        Cpu, FileText, Terminal, Camera, Calculator, Keyboard, Smartphone, Activity, Brain,
+        Target, Hand, Table, Circle, Flame, Sword, Shield, Trophy, Timer, FastForward, Users2, ArrowUpRight,
+        Gamepad
+    };
+    const IconComponent = icons[iconName] || Trophy;
+    return <IconComponent className={className} />;
+};
 
 const CircularCarousel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -12,12 +30,13 @@ const CircularCarousel = () => {
     // Map category data to carousel items
     const items = categoryOrder.map((cat) => {
         const categoryEvents = events.filter((e) => e.category === cat);
+        const representativeEvent = categoryEvents[0];
         return {
             id: cat,
-            title: categoryLabels[cat].split(' ').slice(1).join(' '),
-            emoji: categoryLabels[cat].split(' ')[0],
+            title: categoryLabels[cat],
+            iconName: representativeEvent?.iconName || 'Trophy', // Changed from emoji to iconName
             count: categoryEvents.length,
-            fee: categoryEvents[0]?.fee || '—',
+            fee: representativeEvent?.fee || '—',
             category: cat,
         };
     });
@@ -113,9 +132,9 @@ const CircularCarousel = () => {
 
                                     {/* Category Data Content */}
                                     <div className="relative z-10 flex flex-col items-center">
-                                        <span className="text-6xl sm:text-9xl block mb-2 sm:mb-6 animate-float drop-shadow-[0_0_30px_rgba(255,0,0,0.4)]">
-                                            {item.emoji}
-                                        </span>
+                                        <div className="mb-2 sm:mb-6 animate-float drop-shadow-[0_0_30px_rgba(255,0,0,0.4)]">
+                                            <IconRenderer iconName={item.iconName} className="w-16 h-16 sm:w-24 sm:h-24 text-matrix-red" />
+                                        </div>
                                         <h3 className="text-2xl sm:text-5xl font-poster text-white group-hover:text-matrix-red transition-all duration-500 uppercase leading-none drop-shadow-md text-center">
                                             {item.title}
                                         </h3>

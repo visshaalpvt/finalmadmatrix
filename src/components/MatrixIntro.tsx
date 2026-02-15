@@ -89,7 +89,7 @@ const MatrixIntro = ({ onComplete }: { onComplete: () => void }) => {
           <div className="w-1 h-1 rounded-full bg-matrix-red animate-bounce" style={{ animationDelay: '0s' }} />
           <div className="w-1 h-1 rounded-full bg-matrix-red animate-bounce" style={{ animationDelay: '0.2s' }} />
           <div className="w-1 h-1 rounded-full bg-matrix-red animate-bounce" style={{ animationDelay: '0.4s' }} />
-          <span className="text-[8px] font-matrix text-matrix-red/50 uppercase tracking-widest ml-2">Establishing Link</span>
+          <span className="text-[8px] font-matrix text-matrix-red/50 uppercase tracking-widest ml-2">developed by DexLora</span>
         </div>
       </div>
     </div>

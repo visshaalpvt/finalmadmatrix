@@ -1,6 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import { Clock, Users, ArrowRight } from "lucide-react";
+import {
+  Clock, Users, ArrowRight, Music, Theater, Zap, Music2, Mic2, Video,
+  Cpu, FileText, Terminal, Camera, Calculator, Keyboard, Smartphone, Activity, Brain,
+  Target, Hand, Table, Circle, Flame, Sword, Shield, Trophy, Timer, FastForward, Users2, ArrowUpRight
+} from "lucide-react";
 import type { EventData } from "@/data/events";
+
+const IconRenderer = ({ iconName, className }: { iconName: string, className?: string }) => {
+  const icons: Record<string, any> = {
+    Music, Users, Zap, Music2, Mic2, Theater, Video,
+    Cpu, FileText, Terminal, Camera, Calculator, Keyboard, Smartphone, Activity, Brain,
+    Target, Hand, Table, Circle, Flame, Sword, Shield, Trophy, Timer, FastForward, Users2, ArrowUpRight
+  };
+  const IconComponent = icons[iconName] || Trophy;
+  return <IconComponent className={className} />;
+};
 
 const EventCard = ({ event }: { event: EventData }) => {
   const navigate = useNavigate();
@@ -12,7 +26,9 @@ const EventCard = ({ event }: { event: EventData }) => {
     >
       {/* 1. Header: Icon & Fee */}
       <div className="p-6 pb-4 flex items-center justify-between relative z-10 bg-gradient-to-b from-black/80 to-transparent">
-        <span className="text-4xl group-hover:scale-110 transition-transform duration-500">{event.emoji}</span>
+        <div className="group-hover:scale-110 transition-transform duration-500 text-matrix-red">
+          <IconRenderer iconName={event.iconName} className="w-8 h-8" />
+        </div>
         {event.fee && (
           <div className="bg-matrix-red text-black px-4 py-1.5 font-matrix font-black text-[10px] tracking-widest shadow-[0_0_15px_rgba(255,0,0,0.3)]">
             {event.fee}

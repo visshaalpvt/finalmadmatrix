@@ -11,6 +11,7 @@ import CategoryPage from "./pages/CategoryPage";
 import NotFound from "./pages/NotFound";
 
 import { AuthProvider } from "./hooks/useAuth";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <ScrollToTop />
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/event/:id" element={<EventDetail />} />

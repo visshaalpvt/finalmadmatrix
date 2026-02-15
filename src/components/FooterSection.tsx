@@ -8,7 +8,7 @@ const FooterSection = () => (
         <p className="text-[11px] font-matrix text-matrix-red/80 uppercase tracking-[0.5em] font-bold">Where Talent Meets Opportunity</p>
       </div>
 
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-12 text-sm font-matrix uppercase tracking-widest text-white/70">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-sm font-matrix uppercase tracking-widest text-white/70">
         <a href="mailto:madmatrix2026@gmail.com" className="flex items-center gap-3 hover:text-matrix-red transition-all border-b border-matrix-red/10 pb-1 px-4 hover:border-matrix-red">
           <Mail className="w-5 h-5" /> madmatrix2026@gmail.com
         </a>

@@ -1,10 +1,24 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { type EventData, registrationLinks } from "@/data/events";
-import { ArrowRight, ArrowLeft, Clock, Users, Shield, Cpu, Zap } from "lucide-react";
+import {
+    ArrowRight, ArrowLeft, Clock, Users, Shield, Cpu, Zap, Trophy,
+    Music, Theater, Zap as ZapIcon, Music2, Mic2, Video, FileText, Terminal, Camera, Calculator, Keyboard,
+    Smartphone, Activity, Brain, Target, Hand, Table, Circle, Flame, Sword, FastForward, Users2, ArrowUpRight
+} from "lucide-react";
 import MatrixRain from "@/components/MatrixRain";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
+
+const IconRenderer = ({ iconName, className }: { iconName: string, className?: string }) => {
+    const icons: Record<string, any> = {
+        Music, Users, Zap: ZapIcon, Music2, Mic2, Theater, Video,
+        Cpu, FileText, Terminal, Camera, Calculator, Keyboard, Smartphone, Activity, Brain,
+        Target, Hand, Table, Circle, Flame, Sword, Shield, Trophy, Timer: Clock, FastForward, Users2, ArrowUpRight
+    };
+    const IconComponent = icons[iconName] || Trophy;
+    return <IconComponent className={className} />;
+};
 
 interface RadialCategoryLayoutProps {
     events: EventData[];
@@ -166,9 +180,9 @@ const RadialCategoryLayout = ({ events }: RadialCategoryLayoutProps) => {
                                                 : 'bg-black/80 border border-zinc-800 group-hover:border-matrix-red/40 opacity-70'}`}
                                             style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' }}
                                         >
-                                            <span className={`text-xl transition-all duration-300 ${isActive ? 'grayscale-0 opacity-100' : 'grayscale opacity-50'}`} style={{ transform: `rotate(${-angle + (events.findIndex(e => e.id === selectedEvent.id) * 30)}deg)` }}>
-                                                {event.emoji}
-                                            </span>
+                                            <div className={`transition-all duration-300 ${isActive ? 'grayscale-0 opacity-100' : 'grayscale opacity-50'}`} style={{ transform: `rotate(${-angle + (events.findIndex(e => e.id === selectedEvent.id) * 30)}deg)` }}>
+                                                <IconRenderer iconName={event.iconName} className="w-5 h-5" />
+                                            </div>
 
                                             {/* Glitch Overlay on Active */}
                                             {isActive && <div className="absolute inset-0 bg-matrix-red/10 animate-pulse pointer-events-none" />}
@@ -353,7 +367,9 @@ const RadialCategoryLayout = ({ events }: RadialCategoryLayoutProps) => {
                                         <h3 className="text-2xl font-poster text-white uppercase leading-tight mb-2">{event.title}</h3>
                                         <p className="text-sm text-zinc-400 line-clamp-2">{event.description}</p>
                                     </div>
-                                    <span className="text-3xl ml-4 bg-black/30 p-2 rounded-lg">{event.emoji}</span>
+                                    <div className="text-3xl ml-4 bg-black/30 p-2 rounded-lg text-matrix-red">
+                                        <IconRenderer iconName={event.iconName} className="w-8 h-8" />
+                                    </div>
                                 </div>
 
                                 <div className="grid grid-cols-2 gap-3 mb-6">
