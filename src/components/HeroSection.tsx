@@ -168,7 +168,7 @@ const HeroSection = () => {
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-matrix-red blur-xl transition-all duration-500 -z-10 scale-50 group-hover:scale-150" />
 
             <span className="relative z-10 flex items-center gap-3 uppercase tracking-[0.3em] group-hover:text-black">
-              Initialize Matrix <Zap className="w-5 h-5 group-hover:animate-pulse group-hover:text-black" />
+              Register Now <Zap className="w-5 h-5 group-hover:animate-pulse group-hover:text-black" />
             </span>
 
             {/* Corner Accents */}

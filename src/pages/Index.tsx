@@ -75,8 +75,7 @@ const Index = () => {
       {/* Sticky mobile register button */}
       <div className="fixed bottom-4 left-4 right-4 z-50 sm:hidden">
         <a
-          href="#"
-          onClick={handleRegister}
+          href="#events"
           className="block w-full py-3 text-center font-semibold text-primary-foreground rounded-full bg-gradient-to-r from-matrix-red to-matrix-maroon matrix-glow text-sm"
         >
           Register Now
