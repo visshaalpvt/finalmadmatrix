@@ -46,6 +46,10 @@ const EventDetail = () => {
     }
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [id]);
+
+    useEffect(() => {
         if (user && pendingLink) {
             window.open(pendingLink, "_blank", "noopener,noreferrer");
             setPendingLink(null);

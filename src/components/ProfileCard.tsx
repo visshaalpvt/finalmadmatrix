@@ -106,13 +106,13 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                 }}
             >
                 {/* Animated Scanning Line */}
-                <div className="absolute top-0 left-0 w-full h-[2px] bg-matrix-red/30 shadow-[0_0_10px_rgba(255,0,0,0.5)] animate-[scan_4s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                <div className="absolute top-0 left-0 w-full h-[2px] bg-matrix-red/30 shadow-[0_0_10px_rgba(255,0,0,0.5)] animate-[scan_2.5s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
 
                 {/* Content */}
                 <div className="p-6 flex flex-col items-center justify-between h-full space-y-4">
 
                     <div className="w-full flex justify-between items-start">
-                        <div className={`px-4 py-1.5 rounded-none border border-matrix-red/50 bg-black/60 text-[10px] font-matrix tracking-[0.2em] transition-all duration-500 font-bold ${isHovered ? 'text-matrix-red border-matrix-red shadow-[0_0_15px_rgba(255,0,0,0.4)]' : 'text-matrix-red/80'}`}>
+                        <div className={`px-4 py-1.5 min-w-[140px] flex items-center justify-center rounded-none border border-matrix-red/50 bg-black/60 text-[9px] font-matrix tracking-[0.2em] transition-all duration-500 font-bold ${isHovered ? 'text-matrix-red border-matrix-red shadow-[0_0_15px_rgba(255,0,0,0.4)]' : 'text-matrix-red/80'}`}>
                             SEC_ID: {handle.toUpperCase()}
                         </div>
                         <div className="flex items-center gap-1.5 bg-black/40 px-3 py-1.5 rounded-full border border-matrix-red/20 shadow-inner">
@@ -180,7 +180,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
             <style>{`
         @keyframes scan {
           0% { transform: translateY(0); }
-          50% { transform: translateY(450px); }
+          50% { transform: translateY(400px); }
           100% { transform: translateY(0); }
         }
         @keyframes shimmer {

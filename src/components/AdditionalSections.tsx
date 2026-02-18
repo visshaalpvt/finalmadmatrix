@@ -1,14 +1,22 @@
-import { useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 
 const InfoStrip = () => {
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 640);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return (
         <div className="w-full bg-black border-y border-matrix-red/20 overflow-hidden py-3 relative z-20">
             <div className="absolute inset-0 bg-matrix-red/5 pointer-events-none" />
             <motion.div
                 className="flex whitespace-nowrap"
                 animate={{ x: ["0%", "-50%"] }}
-                transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
+                transition={{ repeat: Infinity, ease: "linear", duration: isMobile ? 8 : 15 }}
             >
                 {[...Array(2)].map((_, i) => (
                     <div key={i} className="flex items-center gap-8 px-4">
@@ -50,7 +58,7 @@ const WhyMadmatrix = () => {
         },
         {
             title: "Executive Prizes",
-            desc: "Win Metal Medals, Trophies, and exciting Prizes for top rankers.",
+            desc: "Win Medals, Trophies, and exciting Prizes for top rankers.",
             icon: "🏆"
         },
         {
@@ -115,31 +123,59 @@ const TimelineSection = () => {
 
     const schedule = [
         {
-            day: "Day 1",
-            date: "March 13, 2026",
-            events: ["Registration & Inauguration", "Preliminary Rounds", "On-Stage & Technical Events"]
+            title: "Grand Opening",
+            desc: "Participant welcome, registrations, and a powerful inauguration to launch the symposium.",
+            icon: "🚀"
         },
         {
-            day: "Day 2",
-            date: "March 14, 2026",
-            events: ["Final Rounds", "Sports & Track Events", "Valedictory Ceremony & Prize Distribution"]
+            title: "On-Stage Technical Events",
+            desc: "Paper presentations, project showcases, and competitive events held live on the main stage.",
+            icon: "🎭"
+        },
+        {
+            title: "Off-Stage Experiences",
+            desc: "Workshops, gaming zones, fun activities, and interactive events across multiple venues.",
+            icon: "🕹️"
+        },
+        {
+            title: "Final Rounds & Spotlight Moments",
+            desc: "Top participants compete in high-stakes finals with live audience excitement.",
+            icon: "⭐"
+        },
+        {
+            title: "Entertainment & Celebration",
+            desc: "DJ experience, dance performances, singing, and vibrant cultural energy.",
+            icon: "🎹"
+        },
+        {
+            title: "Celebrity Guests & Special Highlights",
+            desc: "Guest appearances, interactive moments, and unforgettable stage highlights.",
+            icon: "🎬"
+        },
+        {
+            title: "Mega Sports Day (Day 2)",
+            desc: "Inter-college sports fest featuring cricket, football, volleyball, kabaddi, kho-kho, and more.",
+            icon: "🏆"
+        },
+        {
+            title: "Prize Distribution & Grand Finale",
+            desc: "Winners from both technical and sports events are honored, closing Mad Matrix with pride.",
+            icon: "🏁"
         }
     ];
 
     return (
         <section ref={sectionRef} className="py-24 bg-black relative overflow-hidden">
-            {/* Background Grid */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(20,0,0,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(20,0,0,0.2)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-20" />
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,0,0,0.05)_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none opacity-20" />
 
-            <div className="max-w-4xl mx-auto px-6 relative z-10">
+            <div className="max-w-5xl mx-auto px-6 relative z-10">
                 <div className="text-center mb-20">
                     <h2 className="text-3xl md:text-5xl font-poster text-white uppercase tracking-tighter">
-                        Event Schedule <span className="text-matrix-red">Overview</span>
+                        Event <span className="text-matrix-red">Timeline</span>
                     </h2>
                 </div>
 
                 <div className="relative">
-                    {/* Vertical Line */}
                     <div className="absolute left-1/2 transform -translate-x-1/2 w-[2px] h-full bg-zinc-800">
                         <motion.div
                             style={{ scaleY, transformOrigin: "top" }}
@@ -148,7 +184,7 @@ const TimelineSection = () => {
                     </div>
 
                     <div className="space-y-24">
-                        {schedule.map((day, index) => (
+                        {schedule.map((item, index) => (
                             <motion.div
                                 key={index}
                                 initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
@@ -157,29 +193,24 @@ const TimelineSection = () => {
                                 transition={{ duration: 0.6, ease: "easeOut" }}
                                 className={`flex items-center justify-between ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
                             >
-                                {/* Content Box */}
                                 <div className={`w-[45%] ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
-                                    <div className="inline-block p-6 bg-zinc-900/80 border border-matrix-red/20 rounded-lg backdrop-blur-md hover:border-matrix-red/50 transition-all duration-300 shadow-[0_0_20px_rgba(255,0,0,0.05)]">
-                                        <h3 className="text-2xl font-poster text-white mb-1 tracking-wider">{day.day}</h3>
-                                        <div className="text-matrix-red font-mono text-sm uppercase tracking-[0.2em] font-bold mb-4">{day.date}</div>
-                                        <ul className="space-y-3">
-                                            {day.events.map((event, i) => (
-                                                <li key={i} className={`text-zinc-300 text-sm font-medium flex items-center gap-2 ${index % 2 === 0 ? 'justify-end text-right' : 'justify-start text-left'}`}>
-                                                    {index % 2 === 0 && <span>{event}</span>}
-                                                    <span className="w-1.5 h-1.5 bg-matrix-red/40 rounded-full" />
-                                                    {index % 2 !== 0 && <span>{event}</span>}
-                                                </li>
-                                            ))}
-                                        </ul>
+                                    <div className="group relative p-8 bg-zinc-900/80 border border-matrix-red/20 rounded-none backdrop-blur-md hover:border-matrix-red/50 transition-all duration-300 shadow-[0_0_20px_rgba(255,0,0,0.05)] overflow-hidden">
+                                        <div className="absolute inset-0 bg-gradient-to-br from-matrix-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        <div className="flex items-center gap-4 mb-3 justify-end flex-row-reverse">
+                                            <span className="text-2xl">{item.icon}</span>
+                                            <h3 className="text-xl font-poster text-white tracking-wider uppercase">{item.title}</h3>
+                                        </div>
+                                        <p className="text-zinc-400 text-sm leading-relaxed font-light">
+                                            {item.desc}
+                                        </p>
+                                        <div className="absolute top-0 left-0 w-full h-[2px] bg-matrix-red/30 -translate-y-full group-hover:translate-y-[200px] transition-transform duration-[1.5s] ease-linear" />
                                     </div>
                                 </div>
 
-                                {/* Center Dot */}
-                                <div className="relative z-10 w-5 h-5 bg-black border-2 border-matrix-red rounded-full shadow-[0_0_10px_#ff0000]">
-                                    <div className="absolute inset-0 bg-matrix-red/50 rounded-full animate-ping" />
+                                <div className="relative z-10 w-5 h-5 bg-black border-2 border-matrix-red rounded-none shadow-[0_0_10px_#ff0000]">
+                                    <div className="absolute inset-0 bg-matrix-red/50 rounded-none animate-ping" />
                                 </div>
 
-                                {/* Empty Spacer to balance flex */}
                                 <div className="w-[45%]" />
                             </motion.div>
                         ))}

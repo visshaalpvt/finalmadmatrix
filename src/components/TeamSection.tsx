@@ -175,11 +175,11 @@ const TeamSection = () => {
 
                     <div className="flex flex-wrap justify-center gap-8 pt-12">
                         {[
-                            { name: "Dharmika", phone: "9486289264" },
-                            { name: "Swathika", phone: "8870700760" },
                             { name: "Purusoth", phone: "7397520061" },
-                            { name: "Melosa", phone: "8830324704" },
-                            { name: "Nivetha", phone: "9177583915" }
+                            { name: "Swathika", phone: "8870700760" },
+                            { name: "Dharmika", phone: "9486289264" },
+                            { name: "Nivetha", phone: "9177583915" },
+                            { name: "Melosa", phone: "8830324704" }
                         ].map((member, i) => (
                             <div key={i} className="px-8 py-4 rounded-none border-2 border-matrix-red/30 bg-black/60 hover:bg-matrix-red hover:border-matrix-red transition-all duration-500 group shadow-[0_0_15px_rgba(255,0,0,0.1)] flex flex-col items-center gap-1">
                                 <span className="text-matrix-red font-matrix font-black tracking-[0.3em] uppercase group-hover:text-black transition-colors">{member.name}</span>

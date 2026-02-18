@@ -68,7 +68,7 @@ const EventCard = ({ event }: { event: EventData }) => {
           </div>
         )}
         {/* Cinematic Scanline on Image */}
-        <div className="absolute top-0 left-0 w-full h-[2px] bg-matrix-red/40 shadow-[0_0_10px_rgba(255,0,0,0.5)] animate-[scan_3s_linear_infinite] opacity-0 group-hover:opacity-100 pointer-events-none z-20" />
+        <div className="absolute top-0 left-0 w-full h-[2px] bg-matrix-red/40 shadow-[0_0_10px_rgba(255,0,0,0.5)] animate-[scan_1.5s_linear_infinite] opacity-0 group-hover:opacity-100 pointer-events-none z-20" />
       </div>
 
       {/* 3. Content: Title & Meta */}

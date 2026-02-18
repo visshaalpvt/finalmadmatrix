@@ -36,7 +36,7 @@ const LocationSection = () => {
                   <MapPin className="w-8 h-8 text-matrix-red animate-pulse" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-2 font-poster uppercase tracking-tight">SIMATS Engineering College</h3>
+                  <h3 className="text-2xl font-bold text-white mb-2 font-poster uppercase tracking-tight text-matrix-red">SIMATS ENGINEERING</h3>
                   <p className="text-matrix-red font-matrix text-sm leading-relaxed tracking-widest uppercase">
                     22G8+9HP, Kuthambakkam, Tamil Nadu 602105, India
                   </p>
@@ -60,9 +60,9 @@ const LocationSection = () => {
             </div>
 
             <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" className="w-full pt-4">
-              <Button className="w-full bg-[#ff1a1a] hover:bg-[#cc0000] text-black font-black uppercase tracking-[0.2em] py-8 text-lg transition-all rounded-none shadow-[0_0_20px_rgba(255,0,0,0.3)]">
-                <MapPin className="w-6 h-6 mr-3" />
-                Initialize Navigation
+              <Button className="w-full bg-[#ff1a1a] hover:bg-[#cc0000] text-black font-black uppercase tracking-[0.2em] py-6 text-base sm:text-lg transition-all rounded-none shadow-[0_0_20px_rgba(255,0,0,0.3)] min-h-[60px] flex items-center justify-center">
+                <MapPin className="w-5 h-5 sm:w-6 sm:h-6 mr-3 flex-shrink-0" />
+                <span className="whitespace-nowrap">Initialize Navigation</span>
               </Button>
             </a>
           </div>

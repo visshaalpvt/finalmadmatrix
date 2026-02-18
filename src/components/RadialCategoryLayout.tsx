@@ -61,6 +61,12 @@ const RadialCategoryLayout = ({ events }: RadialCategoryLayoutProps) => {
     };
 
     useEffect(() => {
+        if (mobileSelectedEvent) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, [mobileSelectedEvent]);
+
+    useEffect(() => {
         if (user && pendingLink) {
             window.open(pendingLink, "_blank", "noopener,noreferrer");
             setPendingLink(null);
@@ -422,7 +428,7 @@ const RadialCategoryLayout = ({ events }: RadialCategoryLayoutProps) => {
                             <div className="grid grid-cols-2 gap-3">
                                 <div className="bg-zinc-900/40 border border-zinc-800 p-4 rounded-xl flex flex-col items-center justify-center text-center">
                                     <span className="text-matrix-red text-[10px] font-bold uppercase mb-1 tracking-widest">Access Fee</span>
-                                    <span className="text-xl font-poster text-white">₹{mobileSelectedEvent.fee}</span>
+                                    <span className="text-xl font-poster text-white">{mobileSelectedEvent.fee}</span>
                                 </div>
                                 <div className="bg-zinc-900/40 border border-zinc-800 p-4 rounded-xl flex flex-col items-center justify-center text-center">
                                     <span className="text-matrix-red text-[10px] font-bold uppercase mb-1 tracking-widest">Squad Size</span>

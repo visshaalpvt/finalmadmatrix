@@ -82,13 +82,13 @@ const CircularCarousel = () => {
                     onMouseLeave={() => setIsHovered(false)}
                     drag="x"
                     dragConstraints={{ left: 0, right: 0 }}
-                    dragElastic={0.4}
+                    dragElastic={0.1}
                     onDragStart={() => setIsDragging(true)}
                     onDrag={(_, info) => {
                         setDragOffset(info.offset.x);
                     }}
                     onDragEnd={(_, info) => {
-                        const threshold = 70;
+                        const threshold = 40;
                         if (info.offset.x < -threshold) {
                             next();
                         } else if (info.offset.x > threshold) {
@@ -96,7 +96,7 @@ const CircularCarousel = () => {
                         }
                         setDragOffset(0);
                         // Delay resetting isDragging to prevent instant auto-move
-                        setTimeout(() => setIsDragging(false), 500);
+                        setTimeout(() => setIsDragging(false), 200);
                     }}
                 >
                     <AnimatePresence initial={false}>
@@ -118,12 +118,12 @@ const CircularCarousel = () => {
                                     animate={{
                                         opacity: Math.abs(position) === 0 ? 1 : Math.abs(position) === 1 ? 0.6 : 0.2,
                                         scale: Math.abs(position) === 0 ? 1.1 : Math.abs(position) === 1 ? 0.85 : 0.6,
-                                        x: position * (window.innerWidth < 640 ? 180 : 380) + dragOffset,
+                                        x: position * (window.innerWidth < 640 ? 150 : 350) + dragOffset,
                                         z: Math.abs(position) === 0 ? 100 : Math.abs(position) === 1 ? -150 : -400,
                                         rotateY: position * -30 + (dragOffset * 0.05),
                                         zIndex: 50 - Math.abs(position) * 10,
                                     }}
-                                    transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
+                                    transition={{ duration: 0.2, ease: "easeOut" }}
                                     className="absolute w-[290px] sm:w-[420px] h-[450px] sm:aspect-[4/5] rounded-[2.5rem] pt-6 px-6 pb-6 sm:p-12 glass border-2 border-matrix-red/10 group hover:border-matrix-red/60 transition-all duration-700 overflow-hidden flex flex-col justify-between"
                                     style={{ backfaceVisibility: 'hidden', background: 'rgba(10, 0, 0, 0.8)' }}
                                 >

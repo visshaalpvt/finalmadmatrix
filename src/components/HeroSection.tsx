@@ -1,9 +1,16 @@
 import { ArrowRight, Zap } from "lucide-react";
 import CountdownTimer from "./CountdownTimer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const HeroSection = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.5;
+    }
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -21,6 +28,7 @@ const HeroSection = () => {
       {/* 0. Cinematic Background Video & Image */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-black">
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
@@ -33,7 +41,7 @@ const HeroSection = () => {
 
       {/* 1. Cinematic Vertical Scan Line */}
       <div className="absolute inset-0 z-20 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-[15vh] bg-gradient-to-b from-transparent via-matrix-red/5 to-transparent animate-[scan-line_8s_linear_infinite]" />
+        <div className="absolute top-0 left-0 w-full h-[15vh] bg-gradient-to-b from-transparent via-matrix-red/5 to-transparent animate-[scan-line_4s_linear_infinite]" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.4)_50%),linear-gradient(90deg,rgba(0,0,0,1),rgba(0,0,0,0),rgba(0,0,0,1))] bg-[length:100%_4px,3px_100%] pointer-events-none opacity-60" />
       </div>
 
@@ -46,16 +54,20 @@ const HeroSection = () => {
         style={{ transform: `translate3d(${mousePos.x}px, ${mousePos.y}px, 0)` }}
       >
         <div className="space-y-4 animate-fade-in-up">
-          <div className="inline-flex items-center gap-3 glass rounded-full px-6 py-2 text-xs sm:text-sm text-matrix-red font-matrix border border-matrix-red/50 uppercase tracking-[0.5em] backdrop-blur-xl bg-black/40">
-            <span className="animate-pulse">▶</span>
-            NATIONAL LEVEL SYMPOSIUM
-          </div>
 
           <div className="flex flex-col items-center relative py-10 group">
             <style>{`
               @keyframes scan-line {
-                from { transform: translateY(-100%); }
-                to { transform: translateY(1000%); }
+                from {transform: translateY(-100%); }
+              to {transform: translateY(1000%); }
+              }
+              @keyframes fade-in {
+                from {opacity: 0; }
+              to {opacity: 1; }
+              }
+              @keyframes fade-in-up {
+                from {opacity: 0; transform: translateY(20px); }
+              to {opacity: 1; transform: translateY(0); }
               }
               @keyframes glitch-text {
                 0% { transform: translate(0); }
@@ -77,38 +89,57 @@ const HeroSection = () => {
                 0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8)); transform: scale(1.4); }
                 50% { filter: drop-shadow(0 0 25px rgba(255, 0, 0, 1)); transform: scale(1.45); }
               }
+              .animate-fade-in-up {
+                animation: fade-in-up 1s forwards;
+              }
               .glitch-flicker {
                 animation: flicker 4s infinite step-end;
               }
               .light-sweep-container {
                 position: relative;
-                overflow: hidden;
+              overflow: hidden;
               }
               .light-sweep-container::after {
                 content: '';
-                position: absolute;
-                top: 0; left: 0; width: 30%; height: 100%;
-                background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
-                animation: light-sweep 3s infinite ease-in-out;
-                pointer-events: none;
+              position: absolute;
+              top: 0; left: 0; width: 30%; height: 100%;
+              background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+              animation: light-sweep 1.5s infinite ease-in-out;
+              pointer-events: none;
               }
               .special-letter {
                 color: #ff1a1a;
-                display: inline-block;
-                animation: cyber-pulse 2s ease-in-out infinite;
-                margin: 0 4px;
+              display: inline-block;
+              animation: cyber-pulse 2s ease-in-out infinite;
+              margin: 0 4px;
               }
             `}</style>
 
-            <h1 className="text-5xl sm:text-7xl md:text-8xl font-poster font-black tracking-[4px] sm:tracking-[8px] md:tracking-[15px] uppercase flex items-center justify-center glitch-flicker light-sweep-container relative">
-              <span className="special-letter">M</span>
-              <span className="text-foreground relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">ADMATRI</span>
-              <span className="special-letter">X</span>
+            <h1 className="text-3xl sm:text-7xl md:text-8xl font-poster font-black tracking-[1px] sm:tracking-[8px] md:tracking-[15px] uppercase flex flex-col sm:flex-row items-center justify-center glitch-flicker light-sweep-container relative">
+              <div className="flex items-center">
+                <span className="special-letter">M</span>
+                <span className="text-foreground relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">ADMATRI</span>
+                <span className="special-letter">X</span>
+              </div>
+              <span className="text-matrix-red sm:ml-4 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]">2026</span>
             </h1>
 
-            <div className="text-xl sm:text-2xl md:text-3xl text-matrix-red font-matrix tracking-[0.4em] sm:tracking-[0.8em] mt-4 opacity-0 animate-[fade-in_1s_forwards_1.2s] uppercase drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]">
-              2026
+            <div className="mt-6 animate-[fade-in_1s_forwards_1.2s] opacity-0 group/label w-full flex justify-center">
+              <div className="relative inline-flex items-center gap-2 sm:gap-4 px-6 sm:px-10 py-3 sm:py-4 bg-matrix-red/10 border-2 border-matrix-red/50 backdrop-blur-2xl overflow-hidden group-hover/label:border-matrix-red transition-all scale-100 sm:scale-110 shadow-[0_0_30px_rgba(255,0,0,0.2)] max-w-[95vw]">
+                {/* Background pulse */}
+                <div className="absolute inset-0 bg-matrix-red/5 animate-pulse" />
+
+                {/* Corner accents */}
+                <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-matrix-red" />
+                <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-matrix-red" />
+
+                <span className="text-matrix-red animate-pulse text-xs sm:text-sm">▶</span>
+                <span className="text-[10px] sm:text-base md:text-lg text-white font-poster tracking-[0.1em] sm:tracking-[0.8em] uppercase drop-shadow-[0_0_10px_rgba(0,0,0,0.8)] whitespace-nowrap">
+                  National Level Symposium
+                </span>
+              </div>
             </div>
+
           </div>
         </div>
 
