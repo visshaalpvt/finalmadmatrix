@@ -33,12 +33,9 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
 
     /**
      * ✅ HIDDEN FORM SUBMIT METHOD — bypasses CORS completely
-     * Browser allows cross-origin form POST. Script executes. Data saved.
-     * The form submits into a hidden iframe so the page doesn't navigate away.
      */
     const sendToSheet = (data: typeof formData) => {
         try {
-            // Create a hidden iframe to absorb the form navigation
             const iframeName = 'hidden_sheet_iframe';
             let iframe = document.getElementById(iframeName) as HTMLIFrameElement;
             if (!iframe) {
@@ -49,13 +46,11 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                 document.body.appendChild(iframe);
             }
 
-            // Create a hidden form that POSTs to Apps Script
             const form = document.createElement('form');
             form.method = 'POST';
             form.action = APPS_SCRIPT_URL;
-            form.target = iframeName; // Submit into the hidden iframe
+            form.target = iframeName;
 
-            // Add all fields
             const fields: Record<string, string> = {
                 name: data.name,
                 college: data.college,
@@ -74,18 +69,19 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
             });
 
             document.body.appendChild(form);
-            form.submit(); // Submit in background — no CORS, no redirect issues!
+            form.submit();
 
-            // Clean up the form element
             setTimeout(() => {
                 document.body.removeChild(form);
             }, 1000);
 
-            console.log('✅ Data sent to Google Sheet via hidden form:', { ...data, protocol: pendingProtocol });
+            console.log('✅ Data sent to GAS via hidden form');
         } catch (err) {
             console.error('Sheet submit error:', err);
         }
     };
+
+
 
 
     const handleSubmit = async (e: React.FormEvent) => {
