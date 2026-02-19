@@ -133,8 +133,8 @@ const TimelineSection = () => {
             icon: "🎭"
         },
         {
-            title: "Off-Stage Experiences",
-            desc: "Workshops, gaming zones, fun activities, and interactive events across multiple venues.",
+            title: "Off-Stage Tech Events",
+            desc: "Tech Events, gaming zones, fun activities, and interactive events across multiple venues.",
             icon: "🕹️"
         },
         {
@@ -176,46 +176,51 @@ const TimelineSection = () => {
                 </div>
 
                 <div className="relative">
-                    <div className="absolute left-1/2 transform -translate-x-1/2 w-[2px] h-full bg-zinc-800">
+                    {/* Timeline Line */}
+                    <div className="absolute left-4 sm:left-1/2 transform sm:-translate-x-1/2 w-[2px] h-full bg-zinc-800">
                         <motion.div
                             style={{ scaleY, transformOrigin: "top" }}
                             className="w-full h-full bg-matrix-red shadow-[0_0_15px_#ff0000]"
                         />
                     </div>
 
-                    <div className="space-y-24">
+                    <div className="space-y-12 sm:space-y-24">
                         {schedule.map((item, index) => (
                             <motion.div
                                 key={index}
-                                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
                                 whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true, margin: "-100px" }}
+                                viewport={{ once: true, margin: "-50px" }}
                                 transition={{ duration: 0.6, ease: "easeOut" }}
-                                className={`flex items-center justify-between ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
+                                className={`flex items-center justify-between flex-row sm:${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
                             >
-                                <div className={`w-[45%] ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
-                                    <div className="group relative p-8 bg-zinc-900/80 border border-matrix-red/20 rounded-none backdrop-blur-md hover:border-matrix-red/50 transition-all duration-300 shadow-[0_0_20px_rgba(255,0,0,0.05)] overflow-hidden">
+                                {/* Content Card */}
+                                <div className={`w-full ml-12 sm:ml-0 sm:w-[45%] ${index % 2 === 0 ? 'sm:text-right' : 'sm:text-left'}`}>
+                                    <div className="group relative p-6 sm:p-8 bg-zinc-900/80 border border-matrix-red/20 rounded-none backdrop-blur-md hover:border-matrix-red/50 transition-all duration-300 shadow-[0_0_20px_rgba(255,0,0,0.05)] overflow-hidden">
                                         <div className="absolute inset-0 bg-gradient-to-br from-matrix-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                                        <div className="flex items-center gap-4 mb-3 justify-end flex-row-reverse">
-                                            <span className="text-2xl">{item.icon}</span>
-                                            <h3 className="text-xl font-poster text-white tracking-wider uppercase">{item.title}</h3>
+                                        <div className={`flex items-center gap-4 mb-3 ${index % 2 === 0 ? 'sm:flex-row-reverse sm:justify-start' : 'sm:flex-row sm:justify-start'} justify-start`}>
+                                            <span className="text-xl sm:text-2xl">{item.icon}</span>
+                                            <h3 className="text-lg sm:text-xl font-poster text-white tracking-wider uppercase">{item.title}</h3>
                                         </div>
-                                        <p className="text-zinc-400 text-sm leading-relaxed font-light">
+                                        <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed font-light">
                                             {item.desc}
                                         </p>
                                         <div className="absolute top-0 left-0 w-full h-[2px] bg-matrix-red/30 -translate-y-full group-hover:translate-y-[200px] transition-transform duration-[1.5s] ease-linear" />
                                     </div>
                                 </div>
 
-                                <div className="relative z-10 w-5 h-5 bg-black border-2 border-matrix-red rounded-none shadow-[0_0_10px_#ff0000]">
+                                {/* Timeline Dot */}
+                                <div className="absolute left-4 sm:left-1/2 transform -translate-x-1/2 z-10 w-4 h-4 sm:w-5 sm:h-5 bg-black border-2 border-matrix-red rounded-none shadow-[0_0_10px_#ff0000]">
                                     <div className="absolute inset-0 bg-matrix-red/50 rounded-none animate-ping" />
                                 </div>
 
-                                <div className="w-[45%]" />
+                                {/* Placeholder for spacing on desktop */}
+                                <div className="hidden sm:block sm:w-[45%]" />
                             </motion.div>
                         ))}
                     </div>
                 </div>
+
             </div>
         </section>
     );

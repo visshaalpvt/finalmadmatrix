@@ -14,7 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogOut, User, Shield, Menu, X, LogIn } from "lucide-react";
 
 const Navbar = () => {
-    const { user, logout } = useAuth();
+    const { user, logout, setPendingLink } = useAuth();
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -63,45 +63,36 @@ const Navbar = () => {
                 {/* Auth Area */}
                 <div className="flex items-center gap-3 md:gap-4">
                     {user ? (
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" className="relative h-10 w-10 md:h-12 md:w-12 rounded-full p-0 border-2 border-matrix-red/30 hover:border-matrix-red transition-all bg-black/40">
-                                    <Avatar className="h-8 w-8 md:h-10 md:w-10 border border-matrix-red/20">
-                                        <AvatarImage src={user.photoURL || ''} alt={user.displayName || 'User'} />
-                                        <AvatarFallback className="bg-matrix-red/10 text-matrix-red font-matrix font-bold text-base md:text-lg">
-                                            {user.displayName?.charAt(0) || user.email?.charAt(0) || 'U'}
-                                        </AvatarFallback>
-                                    </Avatar>
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className="w-56 bg-black/95 backdrop-blur-2xl border-matrix-red/30 rounded-xl mt-4 shadow-[0_0_30px_rgba(255,0,0,0.2)]" align="end">
-                                <DropdownMenuLabel className="font-normal p-4">
-                                    <div className="flex flex-col space-y-2">
-                                        <p className="text-sm font-bold text-white uppercase tracking-tight">{user.displayName || 'Matrix User'}</p>
-                                        <p className="text-[9px] font-matrix text-matrix-red font-bold uppercase truncate tracking-widest">{user.email}</p>
-                                    </div>
-                                </DropdownMenuLabel>
-                                <DropdownMenuSeparator className="bg-matrix-red/20 mx-2" />
-                                <DropdownMenuItem className="focus:bg-matrix-red focus:text-black cursor-pointer py-4 px-4 rounded-lg flex items-center gap-3 m-1 transition-all">
-                                    <Shield className="w-4 h-4" />
-                                    <span className="text-[10px] font-matrix font-bold uppercase tracking-[0.2em]">Dashboard</span>
-                                </DropdownMenuItem>
-                                <DropdownMenuItem
-                                    onClick={logout}
-                                    className="focus:bg-[#cc0000] focus:text-white text-matrix-red/80 cursor-pointer py-4 px-4 rounded-lg flex items-center gap-3 m-1 transition-all"
-                                >
-                                    <LogOut className="w-4 h-4" />
-                                    <span className="text-[10px] font-matrix font-bold uppercase tracking-[0.2em]">Disconnect</span>
-                                </DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                        <div className="flex items-center gap-3 bg-matrix-red/10 border border-matrix-red/30 px-4 py-2 rounded-full backdrop-blur-md">
+                            <div className="flex flex-col items-end hidden sm:flex">
+                                <span className="text-[10px] font-matrix text-white font-bold uppercase tracking-widest">{user.name}</span>
+                                <span className="text-[8px] font-matrix text-matrix-red uppercase tracking-widest">Registered</span>
+                            </div>
+                            <Avatar className="h-8 w-8 border border-matrix-red/20">
+                                <AvatarFallback className="bg-matrix-red/20 text-matrix-red font-matrix font-bold text-sm">
+                                    {user.name.charAt(0)}
+                                </AvatarFallback>
+                            </Avatar>
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={logout}
+                                className="text-matrix-red hover:text-white hover:bg-matrix-red/20 ml-2"
+                                title="Logout"
+                            >
+                                <LogOut className="w-4 h-4" />
+                            </Button>
+                        </div>
                     ) : (
                         <Button
-                            onClick={() => window.dispatchEvent(new Event('open-login-modal'))}
+                            onClick={() => {
+                                setPendingLink("https://docs.google.com/forms/d/e/1FAIpQLSfSbTjg48TX8vmotgzKKtcDmHC52ptb6h2SQFS8NmHo4_Z_1w/viewform?usp=header");
+                                window.dispatchEvent(new Event('open-login-modal'));
+                            }}
                             className="bg-matrix-red text-black hover:bg-white hover:text-black transition-all duration-500 font-matrix font-black text-[9px] md:text-[10px] tracking-[0.1em] md:tracking-[0.2em] px-4 md:px-8 h-10 md:h-12 rounded-none shadow-[0_0_20px_rgba(255,0,0,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
                         >
                             <LogIn className="w-3.5 h-3.5 md:w-4 md:h-4 mr-1.5 md:mr-2" />
-                            ACCESS
+                            REGISTER
                         </Button>
                     )}
 

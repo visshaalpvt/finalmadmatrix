@@ -25,8 +25,8 @@ const IconRenderer = ({ iconName, className }: { iconName: string, className?: s
 const EventDetail = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
-    const { user } = useAuth();
-    const [pendingLink, setPendingLink] = useState<string | null>(null);
+    const { user, setPendingLink, setPendingProtocol } = useAuth();
+
     const eventId = parseInt(id || "0");
     const event = events.find((e) => e.id === eventId);
 
@@ -48,13 +48,6 @@ const EventDetail = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [id]);
-
-    useEffect(() => {
-        if (user && pendingLink) {
-            window.open(pendingLink, "_blank", "noopener,noreferrer");
-            setPendingLink(null);
-        }
-    }, [user, pendingLink]);
 
     return (
         <div className="min-h-screen bg-background relative pb-32">
@@ -139,13 +132,15 @@ const EventDetail = () => {
                                                 window.open(link, "_blank", "noopener,noreferrer");
                                             } else {
                                                 setPendingLink(link);
-                                                toast.error("Authentication Required", {
-                                                    description: "Please login to register for this event Protocol."
+                                                setPendingProtocol(event.title);
+                                                toast.info("Identification Required", {
+                                                    description: "Please provide your details to access the registration protocol."
                                                 });
                                                 window.dispatchEvent(new Event('open-login-modal'));
                                             }
                                         }
                                     }}
+
                                     className="w-full py-6 rounded-2xl bg-gradient-to-r from-matrix-red to-matrix-maroon text-primary-foreground font-black shadow-xl shadow-matrix-red/20 hover:matrix-glow transition-all uppercase tracking-[0.2em] text-sm animate-pulse-glow cursor-pointer"
                                 >
                                     Register Now

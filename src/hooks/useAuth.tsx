@@ -1,37 +1,60 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { auth } from '../firebase';
-import { onAuthStateChanged, User, signOut } from 'firebase/auth';
+
+interface UserData {
+    name: string;
+    college: string;
+    phone: string;
+    email: string;
+}
 
 interface AuthContextType {
-    user: User | null;
+    user: UserData | null;
     loading: boolean;
-    logout: () => Promise<void>;
+    login: (data: UserData) => void;
+    logout: () => void;
+    pendingLink: string | null;
+    setPendingLink: (link: string | null) => void;
+    pendingProtocol: string | null;
+    setPendingProtocol: (protocol: string | null) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<UserData | null>(null);
     const [loading, setLoading] = useState(true);
+    const [pendingLink, setPendingLink] = useState<string | null>(null);
+    const [pendingProtocol, setPendingProtocol] = useState<string | null>(null);
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-            setLoading(false);
-        });
-        return () => unsubscribe();
+        const savedUser = localStorage.getItem('madmatrix_user');
+        if (savedUser) {
+            setUser(JSON.parse(savedUser));
+        }
+        setLoading(false);
     }, []);
 
-    const logout = async () => {
-        try {
-            await signOut(auth);
-        } catch (error) {
-            console.error("Logout error", error);
-        }
+    const login = (data: UserData) => {
+        setUser(data);
+        localStorage.setItem('madmatrix_user', JSON.stringify(data));
+    };
+
+    const logout = () => {
+        setUser(null);
+        localStorage.removeItem('madmatrix_user');
     };
 
     return (
-        <AuthContext.Provider value={{ user, loading, logout }}>
+        <AuthContext.Provider value={{
+            user,
+            loading,
+            login,
+            logout,
+            pendingLink,
+            setPendingLink,
+            pendingProtocol,
+            setPendingProtocol
+        }}>
             {children}
         </AuthContext.Provider>
     );
@@ -44,3 +67,4 @@ export const useAuth = () => {
     }
     return context;
 };
+

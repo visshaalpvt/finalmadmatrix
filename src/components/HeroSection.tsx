@@ -1,16 +1,38 @@
 import { ArrowRight, Zap } from "lucide-react";
 import CountdownTimer from "./CountdownTimer";
 import { useState, useEffect, useRef } from "react";
+import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 const HeroSection = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { user, setPendingLink } = useAuth();
 
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.5;
     }
   }, []);
+
+  const handleRegisterClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (user) {
+      // If already identified, scroll to events
+      const eventsSection = document.getElementById('events');
+      if (eventsSection) {
+        eventsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If not identified, open the identification modal
+      setPendingLink("SCROLL_TO_EVENTS");
+      toast.info("Identification Required", {
+        description: "Please provide your details to access the Matrix protocols."
+      });
+      window.dispatchEvent(new Event('open-login-modal'));
+    }
+  };
+
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -115,26 +137,27 @@ const HeroSection = () => {
               }
             `}</style>
 
-            <h1 className="text-3xl sm:text-7xl md:text-8xl font-poster font-black tracking-[1px] sm:tracking-[8px] md:tracking-[15px] uppercase flex flex-col sm:flex-row items-center justify-center glitch-flicker light-sweep-container relative">
-              <div className="flex items-center">
+            <h1 className="flex flex-col items-center justify-center gap-1 sm:gap-6 animate-fade-in-up mt-8">
+              <div className="text-[2.2rem] sm:text-7xl md:text-9xl font-poster font-black tracking-[4px] sm:tracking-[15px] md:tracking-[25px] uppercase flex items-center justify-center glitch-flicker light-sweep-container relative">
                 <span className="special-letter">M</span>
-                <span className="text-foreground relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">ADMATRI</span>
+                <span className="text-foreground relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">ADMATRI</span>
                 <span className="special-letter">X</span>
               </div>
-              <span className="text-matrix-red sm:ml-4 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]">2026</span>
+              <div className="flex flex-col items-center">
+                <span className="text-6xl sm:text-8xl md:text-[10rem] special-letter font-black tracking-[10px] sm:tracking-[30px] leading-none">
+                  2026
+                </span>
+                <div className="w-3/4 h-[2px] bg-matrix-red/40 mt-3 sm:mt-6 blur-[1px] shadow-[0_0_10px_red]" />
+              </div>
             </h1>
 
-            <div className="mt-6 animate-[fade-in_1s_forwards_1.2s] opacity-0 group/label w-full flex justify-center">
-              <div className="relative inline-flex items-center gap-2 sm:gap-4 px-6 sm:px-10 py-3 sm:py-4 bg-matrix-red/10 border-2 border-matrix-red/50 backdrop-blur-2xl overflow-hidden group-hover/label:border-matrix-red transition-all scale-100 sm:scale-110 shadow-[0_0_30px_rgba(255,0,0,0.2)] max-w-[95vw]">
+
+            <div className="mt-8 animate-[fade-in_1s_forwards_1.2s] opacity-0 group/label w-full flex justify-center">
+              <div className="relative inline-flex items-center gap-2 sm:gap-4 px-6 sm:px-10 py-3 sm:py-4 bg-matrix-red/5 border-2 border-matrix-red/40 backdrop-blur-3xl overflow-hidden group-hover/label:border-matrix-red transition-all scale-100 sm:scale-110 shadow-[0_0_40px_rgba(255,0,0,0.15)] max-w-[95vw]">
                 {/* Background pulse */}
                 <div className="absolute inset-0 bg-matrix-red/5 animate-pulse" />
-
-                {/* Corner accents */}
-                <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-matrix-red" />
-                <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-matrix-red" />
-
-                <span className="text-matrix-red animate-pulse text-xs sm:text-sm">▶</span>
-                <span className="text-[10px] sm:text-base md:text-lg text-white font-poster tracking-[0.1em] sm:tracking-[0.8em] uppercase drop-shadow-[0_0_10px_rgba(0,0,0,0.8)] whitespace-nowrap">
+                <span className="text-matrix-red text-sm sm:text-xl font-bold animate-pulse">▶</span>
+                <span className="text-sm sm:text-xl md:text-2xl font-poster font-black tracking-[3px] sm:tracking-[8px] md:tracking-[12px] text-white uppercase drop-shadow-md">
                   National Level Symposium
                 </span>
               </div>
@@ -160,9 +183,9 @@ const HeroSection = () => {
 
         {/* 5. Cyber Red Outline CTA Button */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
-          <a
-            href="#events"
-            className="group relative px-10 sm:px-16 py-4 sm:py-5 rounded-none font-matrix font-bold text-matrix-red border-2 border-matrix-red hover:bg-[#ff1a1a] hover:text-black transition-all overflow-hidden bg-black/40 backdrop-blur-sm"
+          <button
+            onClick={handleRegisterClick}
+            className="group relative px-10 sm:px-16 py-4 sm:py-5 rounded-none font-matrix font-bold text-matrix-red border-2 border-matrix-red hover:bg-[#ff1a1a] hover:text-black transition-all overflow-hidden bg-black/40 backdrop-blur-sm cursor-pointer"
           >
             {/* Glow Expand Effect */}
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-matrix-red blur-xl transition-all duration-500 -z-10 scale-50 group-hover:scale-150" />
@@ -174,7 +197,7 @@ const HeroSection = () => {
             {/* Corner Accents */}
             <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-black opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-black opacity-0 group-hover:opacity-100 transition-opacity" />
-          </a>
+          </button>
         </div>
       </div>
     </section>

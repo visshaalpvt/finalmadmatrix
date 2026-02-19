@@ -167,13 +167,13 @@ const TeamSection = () => {
                 </div>
 
                 {/* Registration Team Section */}
-                <div className="mb-24 space-y-4">
-                    <h2 className="text-[32px] font-bold text-matrix-red uppercase tracking-tighter font-poster drop-shadow-[0_0_10px_rgba(255,0,0,0.3)]">
+                <div className="mb-12 space-y-4">
+                    <h2 className="text-[28px] sm:text-[32px] font-bold text-matrix-red uppercase tracking-tighter font-poster drop-shadow-[0_0_10px_rgba(255,0,0,0.3)]">
                         Registration Team
                     </h2>
                     <div className="w-20 h-1 bg-matrix-red mx-auto shadow-[0_0_15px_rgba(255,0,0,0.6)]"></div>
 
-                    <div className="flex flex-wrap justify-center gap-8 pt-12">
+                    <div className="flex flex-wrap justify-center gap-4 sm:gap-8 pt-8">
                         {[
                             { name: "Purusoth", phone: "7397520061" },
                             { name: "Swathika", phone: "8870700760" },
@@ -181,12 +181,39 @@ const TeamSection = () => {
                             { name: "Nivetha", phone: "9177583915" },
                             { name: "Melosa", phone: "8830324704" }
                         ].map((member, i) => (
-                            <div key={i} className="px-8 py-4 rounded-none border-2 border-matrix-red/30 bg-black/60 hover:bg-matrix-red hover:border-matrix-red transition-all duration-500 group shadow-[0_0_15px_rgba(255,0,0,0.1)] flex flex-col items-center gap-1">
-                                <span className="text-matrix-red font-matrix font-black tracking-[0.3em] uppercase group-hover:text-black transition-colors">{member.name}</span>
-                                <span className="text-zinc-500 text-xs font-mono group-hover:text-black/70 transition-colors tracking-widest">{member.phone}</span>
+                            <div key={i} className="px-6 py-3 sm:px-8 sm:py-4 rounded-none border-2 border-matrix-red/30 bg-black/60 hover:bg-matrix-red hover:border-matrix-red transition-all duration-500 group shadow-[0_0_15px_rgba(255,0,0,0.1)] flex flex-col items-center gap-1 min-w-[140px]">
+                                <span className="text-matrix-red font-matrix font-black tracking-[0.3em] uppercase group-hover:text-black transition-colors text-xs sm:text-sm">{member.name}</span>
+                                <span className="text-zinc-500 text-[10px] sm:text-xs font-mono group-hover:text-black/70 transition-colors tracking-widest">{member.phone}</span>
                             </div>
                         ))}
                     </div>
+                </div>
+
+                {/* Social Connect Shortcuts */}
+                <div className="pt-8 border-t border-white/5 max-w-2xl mx-auto space-y-8">
+                    <div className="flex flex-wrap justify-center gap-4 sm:gap-12">
+                        <a href="https://instagram.com/madmatrix_2026" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-white/40 hover:text-matrix-red transition-all group">
+                            <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-matrix-red group-hover:bg-matrix-red/10">
+                                <span className="text-xl">📸</span>
+                            </div>
+                            <div className="text-left hidden sm:block">
+                                <div className="text-[10px] font-matrix uppercase tracking-widest opacity-60">Follow Us</div>
+                                <div className="text-sm font-poster uppercase">Instagram</div>
+                            </div>
+                        </a>
+                        <a href="mailto:madmatrix2026@gmail.com" className="flex items-center gap-3 text-white/40 hover:text-matrix-red transition-all group">
+                            <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-matrix-red group-hover:bg-matrix-red/10">
+                                <span className="text-xl">✉️</span>
+                            </div>
+                            <div className="text-left hidden sm:block">
+                                <div className="text-[10px] font-matrix uppercase tracking-widest opacity-60">Email Us</div>
+                                <div className="text-sm font-poster uppercase">Queries</div>
+                            </div>
+                        </a>
+                    </div>
+                    <p className="text-[9px] font-matrix uppercase tracking-[0.5em] text-white/20">
+                        MADMATRIX // SECURE_LINK_ESTABLISHED
+                    </p>
                 </div>
 
             </div>
@@ -194,5 +221,5 @@ const TeamSection = () => {
     );
 };
 
-
 export default TeamSection;
+

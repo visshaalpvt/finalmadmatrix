@@ -177,8 +177,9 @@ export const events: EventData[] = [
       "Judges' and organizers' decisions are final."
     ],
     fee: "₹99",
-    imageUrl: "/assets/events/project-presentation.jpg"
+    imageUrl: "/assets/events/escape-the-matrix.jpg"
   },
+
   {
     id: 8, title: "Paper Presentation", category: "off-stage", iconName: "FileText",
     description: "Platform for presenting innovative ideas, focusing on originality and effective communication.",

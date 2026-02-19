@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import HeroSection from "@/components/HeroSection";
-import EventsSection from "@/components/EventsSection";
-import CircularCarousel from "@/components/CircularCarousel";
+// Unused imports removed
+import VerticalEventsReel from "@/components/VerticalEventsReel";
 import LocationSection from "@/components/LocationSection";
 import TeamSection from "@/components/TeamSection";
 import FooterSection from "@/components/FooterSection";
@@ -16,71 +16,67 @@ import { InfoStrip, WhyMadmatrix, TimelineSection, OrganizedBySection, ScrollPro
 const Index = () => {
   const [introComplete, setIntroComplete] = useState(false);
   const [scrollOpacity, setScrollOpacity] = useState(0.7);
-  const { user } = useAuth();
-  const [pendingLink, setPendingLink] = useState<string | null>(null);
+  const { user, setPendingLink, setPendingProtocol } = useAuth();
 
   const handleIntroComplete = useCallback(() => {
     setIntroComplete(true);
   }, []);
 
-  const handleRegister = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleRegister = (e: React.MouseEvent) => {
     e.preventDefault();
+    const regUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfSbTjg48TX8vmotgzKKtcDmHC52ptb6h2SQFS8NmHo4_Z_1w/viewform?usp=header";
     if (user) {
-      window.open("https://docs.google.com/forms/d/e/1FAIpQLSfSbTjg48TX8vmotgzKKtcDmHC52ptb6h2SQFS8NmHo4_Z_1w/viewform?usp=header", "_blank");
+      window.open(regUrl, "_blank");
     } else {
-      setPendingLink("https://docs.google.com/forms/d/e/1FAIpQLSfSbTjg48TX8vmotgzKKtcDmHC52ptb6h2SQFS8NmHo4_Z_1w/viewform?usp=header");
-      toast.error("Authentication Required", {
-        description: "Please login to register."
+      setPendingLink(regUrl);
+      setPendingProtocol("General Registration");
+      toast.info("Registration Required", {
+        description: "Please provide your details to proceed."
       });
       window.dispatchEvent(new Event('open-login-modal'));
     }
   };
 
+
+  useEffect(() => {
+    // Trigger login modal automatically if user is not logged in after intro
+    if (introComplete && !user) {
+      const timer = setTimeout(() => {
+        window.dispatchEvent(new Event('open-login-modal'));
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [introComplete, user]);
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollPos = window.scrollY;
-      // Fade in MatrixRain: 0 at top, 0.7 after scrolling 600px
-      const newOpacity = Math.min(0.7, (scrollPos / 600) * 0.7);
-      setScrollOpacity(newOpacity);
+      const opacity = Math.max(0, 1 - scrollPos / 400);
+      setScrollOpacity(opacity);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    if (user && pendingLink) {
-      window.open(pendingLink, "_blank", "noopener,noreferrer");
-      setPendingLink(null);
-    }
-  }, [user, pendingLink]);
+    // Redirection handled globally in App.tsx
+  }, [user]);
 
   return (
-    <div className="min-h-screen bg-background relative">
-      {!introComplete && <MatrixIntro onComplete={handleIntroComplete} />}
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
       <MatrixRain opacity={scrollOpacity} />
-
+      {!introComplete && <MatrixIntro onComplete={handleIntroComplete} />}
       <Navbar />
       <HeroSection />
-      <InfoStrip />
+
       <WhyMadmatrix />
-      <CircularCarousel />
+      <VerticalEventsReel />
       <TimelineSection />
       <LocationSection />
       <TeamSection />
-      <OrganizedBySection />
+
       <FooterSection />
       <ScrollProgress />
-
-      {/* Sticky mobile register button */}
-      <div className="fixed bottom-4 left-4 right-4 z-50 sm:hidden">
-        <a
-          href="#events"
-          className="block w-full py-3 text-center font-semibold text-primary-foreground rounded-full bg-gradient-to-r from-matrix-red to-matrix-maroon matrix-glow text-sm"
-        >
-          Register Now
-        </a>
-      </div>
 
       {/* Back to top */}
       <a

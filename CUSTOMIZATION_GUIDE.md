@@ -146,6 +146,35 @@ if (trailRef.current && Math.random() > 0.8) {
 }
 ```
 
+### 8. Registration Sheet Automation Setup 📊
+
+**File**: `src/lib/google-apps-script.js` & `src/components/LoginModal.tsx`
+
+To connect the registration form to your own Google Sheet:
+
+1. **Create a Google Sheet**:
+   - Go to [sheets.new](https://sheets.new)
+   - Copy the Spreadsheet ID from the URL: `docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit`
+
+2. **Deploy the Apps Script**:
+   - Open `src/lib/google-apps-script.js` and copy the entire code.
+   - In your Google Sheet, go to **Extensions** → **Apps Script**.
+   - Delete any existing code and paste the copied code.
+   - Replace `SPREADSHEET_ID` with your actual ID.
+   - Click **Deploy** → **New Deployment**.
+   - Select **Web App**.
+   - Set **Execute as** to "Me" and **Who has access** to "Anyone".
+   - Copy the **Web App URL**.
+
+3. **Update the Frontend**:
+   - Open `src/components/LoginModal.tsx`.
+   - Update `APPS_SCRIPT_URL` with your new Web App URL.
+
+**To add more fields:**
+1. Update `formData` and the UI in `LoginModal.tsx`.
+2. Update the `fields` object in the `sendToSheet` function.
+3. Update the `appendToSheet` function in `google-apps-script.js` to handle the new columns.
+
 ## Advanced Customizations
 
 ### Custom Gradient for Logo

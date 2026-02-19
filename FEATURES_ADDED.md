@@ -51,6 +51,19 @@
 - Hover effects with enhanced glow
 - Direct "Open in Google Maps" button with the exact location link
 
+### 4. **Registration Sheet Automation** 📊
+- **Script**: `src/lib/google-apps-script.js`
+- **Integration**: `src/components/LoginModal.tsx`
+- **Mechanism**: Google Apps Script + Hidden Iframe POST
+- Automated data collection of participant details into a centralized Google Sheet.
+- Bypasses CORS restrictions using background form submission.
+
+**Features:**
+- captures: Full Name, College, Phone, Email, and Timestamp.
+- Automated Header formatting in Google Sheets.
+- Responsive integration with the "Register Now" flow.
+- "Protocol: Secure" data transfer indicator.
+
 ## 📁 Files Created
 
 ```
@@ -59,6 +72,9 @@ src/
 │   ├── GlowingLogo.tsx           (NEW)
 │   ├── ShiningCursor.tsx          (NEW)
 │   └── LocationSection.tsx        (NEW)
+│
+├── lib/
+│   └── google-apps-script.js      (NEW)
 │
 └── styles/
     ├── glowing-logo.css           (NEW)
@@ -78,7 +94,12 @@ src/
    - Inserted glowing logo display above the main title
    - Premium positioning for maximum visibility
 
-3. **src/index.css**
+3. **src/components/LoginModal.tsx**
+   - Implemented `sendToSheet` function using hidden iframe method
+   - Connected form submission to Google Apps Script Web App
+   - Added logic to save participation data locally and remotely
+
+4. **src/index.css**
    - Added imports for glowing-logo.css and shining-cursor.css
    - Ensures global CSS availability
 

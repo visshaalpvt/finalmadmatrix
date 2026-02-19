@@ -5,6 +5,7 @@
 - [x] **GlowingLogo.tsx** - Large glowing M and X letters with theme detection
 - [x] **ShiningCursor.tsx** - Custom animated cursor with trail effect
 - [x] **LocationSection.tsx** - Google Maps embed with SIMATS Engineering College location
+- [x] **google-apps-script.js** - Backend logic for Google Sheets integration
 
 ## CSS Styles Created ✓
 
