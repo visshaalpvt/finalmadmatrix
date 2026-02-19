@@ -84,7 +84,8 @@ const TeamSection = () => {
         handle: "SIMATS Engineering, Chennai",
         status: "Faculty Coordinator",
         avatarUrl: "/team/faculty.jpg",
-        email: "sudarmozhik@gmail.com"
+        email: "sudarmozhik@gmail.com",
+        instagram: "https://www.instagram.com/sudar_mozhi_?igsh=MXFieHFmcmR1NTZrcA=="
     };
 
     const sectionRef = useRef<HTMLElement>(null);

@@ -150,12 +150,12 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 
                     {/* Social Icons Row */}
                     <div className="w-full border-t border-white/5 pt-6 mt-2 flex justify-center items-center gap-5">
-                        {instagram && (
+                        {instagram && instagram !== "#" && (
                             <a href={instagram} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-matrix-red transition-all duration-300 hover:scale-125">
                                 <Instagram className="w-6 h-6" />
                             </a>
                         )}
-                        {linkedin && (
+                        {linkedin && linkedin !== "#" && (
                             <a href={linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-matrix-red transition-all duration-300 hover:scale-125">
                                 <Linkedin className="w-6 h-6" />
                             </a>
