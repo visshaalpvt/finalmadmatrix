@@ -15,28 +15,11 @@ import { InfoStrip, WhyMadmatrix, TimelineSection, OrganizedBySection, ScrollPro
 
 const Index = () => {
   const [introComplete, setIntroComplete] = useState(false);
-  const [scrollOpacity, setScrollOpacity] = useState(0.7);
-  const { user, setPendingLink, setPendingProtocol } = useAuth();
+  const { user } = useAuth();
 
   const handleIntroComplete = useCallback(() => {
     setIntroComplete(true);
   }, []);
-
-  const handleRegister = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const regUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfSbTjg48TX8vmotgzKKtcDmHC52ptb6h2SQFS8NmHo4_Z_1w/viewform?usp=header";
-    if (user) {
-      window.open(regUrl, "_blank");
-    } else {
-      setPendingLink(regUrl);
-      setPendingProtocol("General Registration");
-      toast.info("Registration Required", {
-        description: "Please provide your details to proceed."
-      });
-      window.dispatchEvent(new Event('open-login-modal'));
-    }
-  };
-
 
   useEffect(() => {
     // Trigger login modal automatically if user is not logged in after intro
@@ -48,23 +31,9 @@ const Index = () => {
     }
   }, [introComplete, user]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPos = window.scrollY;
-      const opacity = Math.max(0, 1 - scrollPos / 400);
-      setScrollOpacity(opacity);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    // Redirection handled globally in App.tsx
-  }, [user]);
-
   return (
-    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
-      <MatrixRain opacity={scrollOpacity} />
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-300 overflow-x-hidden">
+      <MatrixRain opacity={0.6} />
       {!introComplete && <MatrixIntro onComplete={handleIntroComplete} />}
       <Navbar />
       <HeroSection />
@@ -81,7 +50,7 @@ const Index = () => {
       {/* Back to top */}
       <a
         href="#"
-        className="fixed bottom-4 right-4 z-50 hidden sm:flex glass rounded-full p-3 hover:matrix-glow-soft transition-all text-muted-foreground hover:text-primary"
+        className="fixed bottom-4 right-4 z-50 hidden sm:flex glass rounded-full p-3 hover:matrix-glow-soft transition-all text-muted-foreground hover:text-primary shadow-lg shadow-black"
       >
         <ArrowUp className="w-5 h-5" />
       </a>

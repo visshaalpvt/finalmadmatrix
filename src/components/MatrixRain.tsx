@@ -1,7 +1,18 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const MatrixRain = ({ opacity = 0.7 }: { opacity?: number }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [scrollOpacity, setScrollOpacity] = useState(opacity);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY;
+      const newOpacity = Math.max(0.3, opacity - scrollPos / 800);
+      setScrollOpacity(newOpacity);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [opacity]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -9,48 +20,69 @@ const MatrixRain = ({ opacity = 0.7 }: { opacity?: number }) => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    const dpr = window.devicePixelRatio || 1;
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      ctx.scale(dpr, dpr);
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
     };
     resize();
     window.addEventListener("resize", resize);
 
-    const chars = "𑀫𑁆𑀆𑀝𑁆𑀫𑁆𑀆𑀝𑁆𑀭𑀼𑀈𑀂𑀝𑁆𑀂𑀆𑀡𑀽𑀱𑁆𑀂𑀝𑀸𑀫𑁆𑀈𑀴𑀸𑀡𑁆𑀝𑀸𑀬𑀸𑀢𑀼𑀫𑁆𑀊𑀭𑁂𑀬𑀸𑀯𑀭𑀼𑀫𑁆𑀓𑁂𑀴𑀺𑀭𑁆𑀉𑀝\u032a𑀮𑁆𑀫𑀡\u032a\u102a𑁆𑀡\u032a\u102a𑀼𑀓\u032a\u102a𑁆𑀓\u032a\u102a𑀼𑀉𑀬\u032a\u102a𑀺\u032a\u102a𑀭\u032a\u102a𑁆𑀢\u032a\u102a\u032a\u102a𑀫\u032a\u102a\u032a\u102a\u032a\u102a\u032a\u102a𑀺𑀵\u032a\u102a𑀼𑀓\u032a\u102a𑁆𑀓\u032a\u102a𑀼";
-    const fontSize = 14;
-    const columns = Math.floor(canvas.width / fontSize);
+    // ONLY CHINESE WORDS + MATRIX GLYPHS FOR MAXIMUM IMPACT
+    const chars = "电脑网络编程代码算法智能虚拟现实宇宙空间时间逻辑模拟数字电子芯片机器人发展创新探索创造矩阵系统狂热科技未来幻觉中枢神经数据流动人工智慧二进制源代码MADMATRIXSANKALP20268H5MC:I€JLPIAVZ01X█▓▒░▖▗▘▙▚▛▜▝▞▟";
+    const fontSize = window.innerWidth < 768 ? 20 : 18;
+    const columns = Math.ceil(window.innerWidth / fontSize);
     const drops: number[] = Array(columns).fill(1).map(() => Math.random() * -100);
 
-    const draw = () => {
-      ctx.fillStyle = "rgba(10, 2, 2, 0.04)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    let animationId: number;
+    let lastTime = 0;
+    const fps = 45;
+    const interval = 1000 / fps;
 
-      ctx.font = `${fontSize}px 'Share Tech Mono', monospace`;
+    const draw = (timestamp: number) => {
+      animationId = requestAnimationFrame(draw);
+
+      const delta = timestamp - lastTime;
+      if (delta < interval) return;
+      lastTime = timestamp - (delta % interval);
+
+      ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
+      ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+
+      ctx.font = `900 ${fontSize}px 'Share Tech Mono', sans-serif`;
 
       for (let i = 0; i < drops.length; i++) {
         const char = chars[Math.floor(Math.random() * chars.length)];
         const brightness = Math.random();
 
-        if (brightness > 0.7) {
-          ctx.fillStyle = `rgba(220, 50, 50, ${0.8 + brightness * 0.2})`;
-        } else if (brightness > 0.4) {
-          ctx.fillStyle = `rgba(180, 35, 35, ${0.5 + brightness * 0.3})`;
+        if (brightness > 0.92) {
+          ctx.fillStyle = "#ffffff";
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = "#ff0000";
+        } else if (brightness > 0.6) {
+          ctx.fillStyle = "#ff1a1a";
+          ctx.shadowBlur = 4;
+          ctx.shadowColor = "#cc0000";
         } else {
-          ctx.fillStyle = `rgba(130, 25, 25, ${0.3 + brightness * 0.4})`;
+          ctx.fillStyle = "rgba(100, 10, 10, 0.6)";
+          ctx.shadowBlur = 0;
         }
 
         ctx.fillText(char, i * fontSize, drops[i] * fontSize);
 
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        if (drops[i] * fontSize > window.innerHeight && Math.random() > 0.98) {
           drops[i] = 0;
         }
-        drops[i] += 0.5 + Math.random() * 0.5;
+        drops[i] += 0.45;
       }
     };
 
-    const interval = setInterval(draw, 50);
+    animationId = requestAnimationFrame(draw);
     return () => {
-      clearInterval(interval);
+      cancelAnimationFrame(animationId);
       window.removeEventListener("resize", resize);
     };
   }, []);
@@ -58,8 +90,8 @@ const MatrixRain = ({ opacity = 0.7 }: { opacity?: number }) => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-0 pointer-events-none transition-opacity duration-1000"
-      style={{ opacity }}
+      className="fixed inset-0 z-0 pointer-events-none transition-opacity duration-1000 will-change-transform"
+      style={{ opacity: scrollOpacity, imageRendering: 'auto' }}
     />
   );
 };

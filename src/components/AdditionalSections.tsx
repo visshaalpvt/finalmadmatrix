@@ -74,7 +74,7 @@ const WhyMadmatrix = () => {
     ];
 
     return (
-        <section className="py-24 bg-black relative">
+        <section className="py-24 bg-transparent relative">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="mb-16 text-center">
                     <h2 className="text-3xl md:text-5xl font-poster text-white uppercase tracking-tighter">
@@ -165,7 +165,7 @@ const TimelineSection = () => {
     ];
 
     return (
-        <section ref={sectionRef} className="py-24 bg-black relative overflow-hidden">
+        <section ref={sectionRef} className="py-24 bg-transparent relative overflow-hidden">
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,0,0,0.05)_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none opacity-20" />
 
             <div className="max-w-5xl mx-auto px-6 relative z-10">
@@ -228,7 +228,7 @@ const TimelineSection = () => {
 
 const OrganizedBySection = () => {
     return (
-        <section className="py-24 bg-black border-t border-zinc-900 relative overflow-hidden">
+        <section className="py-24 bg-transparent border-t border-zinc-900 relative overflow-hidden">
             {/* Ambient Red Glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-matrix-red to-transparent opacity-50" />
 

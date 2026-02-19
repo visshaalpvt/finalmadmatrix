@@ -46,7 +46,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-20 bg-black">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-20 bg-transparent">
       {/* 0. Cinematic Background Video & Image */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-black">
         <video
@@ -81,15 +81,15 @@ const HeroSection = () => {
             <style>{`
               @keyframes scan-line {
                 from {transform: translateY(-100%); }
-              to {transform: translateY(1000%); }
+                to {transform: translateY(1000%); }
               }
               @keyframes fade-in {
                 from {opacity: 0; }
-              to {opacity: 1; }
+                to {opacity: 1; }
               }
               @keyframes fade-in-up {
                 from {opacity: 0; transform: translateY(20px); }
-              to {opacity: 1; transform: translateY(0); }
+                to {opacity: 1; transform: translateY(0); }
               }
               @keyframes glitch-text {
                 0% { transform: translate(0); }
@@ -108,48 +108,62 @@ const HeroSection = () => {
                 20%, 100% { transform: translateX(200%) skewX(-20deg); }
               }
               @keyframes cyber-pulse {
-                0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8)); transform: scale(1.4); }
-                50% { filter: drop-shadow(0 0 25px rgba(255, 0, 0, 1)); transform: scale(1.45); }
+                0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8)); transform: scale(1.1); }
+                50% { filter: drop-shadow(0 0 25px rgba(255, 0, 0, 1)); transform: scale(1.15); }
               }
               .animate-fade-in-up {
                 animation: fade-in-up 1s forwards;
+                will-change: transform, opacity;
               }
               .glitch-flicker {
                 animation: flicker 4s infinite step-end;
+                will-change: opacity;
               }
               .light-sweep-container {
                 position: relative;
-              overflow: hidden;
+                overflow: hidden;
               }
               .light-sweep-container::after {
                 content: '';
-              position: absolute;
-              top: 0; left: 0; width: 30%; height: 100%;
-              background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
-              animation: light-sweep 1.5s infinite ease-in-out;
-              pointer-events: none;
+                position: absolute;
+                top: 0; left: 0; width: 30%; height: 100%;
+                background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+                animation: light-sweep 1.5s infinite ease-in-out;
+                pointer-events: none;
+                will-change: transform;
               }
               .special-letter {
                 color: #ff1a1a;
-              display: inline-block;
-              animation: cyber-pulse 2s ease-in-out infinite;
-              margin: 0 4px;
+                display: inline-block;
+                animation: cyber-pulse 2s ease-in-out infinite;
+                margin: 0 4px;
+                will-change: transform, filter;
+                transform: translateZ(0); /* Force GPU */
+              }
+              .gpu-animate {
+                transform: translateZ(0);
+                backface-visibility: hidden;
+                perspective: 1000;
+                will-change: transform;
               }
             `}</style>
 
-            <h1 className="flex flex-col items-center justify-center gap-1 sm:gap-6 animate-fade-in-up mt-8">
-              <div className="text-[2.2rem] sm:text-7xl md:text-9xl font-poster font-black tracking-[4px] sm:tracking-[15px] md:tracking-[25px] uppercase flex items-center justify-center glitch-flicker light-sweep-container relative">
-                <span className="special-letter">M</span>
-                <span className="text-foreground relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">ADMATRI</span>
-                <span className="special-letter">X</span>
+            <h1 className="flex flex-col items-center justify-center gap-4 sm:gap-6 animate-fade-in-up mt-8 gpu-animate">
+              <div className="text-[2rem] sm:text-7xl md:text-9xl font-poster font-black tracking-[4px] sm:tracking-[15px] md:tracking-[25px] uppercase flex flex-col sm:flex-row items-center justify-center glitch-flicker light-sweep-container relative">
+                <div className="flex items-center">
+                  <span className="special-letter">M</span>
+                  <span className="text-foreground relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">ADMATRI</span>
+                  <span className="special-letter">X</span>
+                </div>
               </div>
               <div className="flex flex-col items-center">
-                <span className="text-6xl sm:text-8xl md:text-[10rem] special-letter font-black tracking-[10px] sm:tracking-[30px] leading-none">
+                <span className="text-5xl sm:text-8xl md:text-[10rem] special-letter font-black tracking-[8px] sm:tracking-[30px] leading-none">
                   2026
                 </span>
-                <div className="w-3/4 h-[2px] bg-matrix-red/40 mt-3 sm:mt-6 blur-[1px] shadow-[0_0_10px_red]" />
+                <div className="w-full sm:w-3/4 h-[2px] bg-matrix-red/40 mt-3 sm:mt-6 blur-[1px] shadow-[0_0_10px_red]" />
               </div>
             </h1>
+
 
 
             <div className="mt-8 animate-[fade-in_1s_forwards_1.2s] opacity-0 group/label w-full flex justify-center">
