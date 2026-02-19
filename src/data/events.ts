@@ -342,7 +342,7 @@ export const events: EventData[] = [
       "The umpire's decision is final and binding."
     ],
     fee: "₹75",
-    imageUrl: "/assets/events/box-cricket.jpg"
+    imageUrl: "/assets/events/cricket.jpg"
   },
   {
     id: 17, title: "Hand Cricket – Inverse", category: "games", iconName: "Hand",
