@@ -111,10 +111,22 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                 {/* Content */}
                 <div className="p-6 flex flex-col items-center justify-between h-full space-y-4">
 
-                    <div className="w-full flex justify-between items-start">
-                        <div className={`px-4 py-1.5 min-w-[140px] flex items-center justify-center rounded-none border border-matrix-red/50 bg-black/60 text-[9px] font-matrix tracking-[0.2em] transition-all duration-500 font-bold ${isHovered ? 'text-matrix-red border-matrix-red shadow-[0_0_15px_rgba(255,0,0,0.4)]' : 'text-matrix-red/80'}`}>
-                            SSE_ID: {handle.toUpperCase()}
-                        </div>
+                    <div className="w-full flex justify-between items-start z-20 relative">
+                        {instagram && instagram !== "#" ? (
+                            <a
+                                href={instagram}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`px-4 py-1.5 min-w-[140px] flex items-center justify-center rounded-none border transition-all duration-500 font-bold bg-black/60 text-[9px] font-matrix tracking-[0.2em] group/id ${isHovered ? 'text-matrix-red border-matrix-red shadow-[0_0_15px_rgba(255,0,0,0.4)]' : 'text-matrix-red/80 border-matrix-red/50'}`}
+                            >
+                                SSE_ID: {handle.toUpperCase()}
+                                <ExternalLink className="w-2 h-2 ml-2 opacity-0 group-hover/id:opacity-100 transition-opacity" />
+                            </a>
+                        ) : (
+                            <div className={`px-4 py-1.5 min-w-[140px] flex items-center justify-center rounded-none border border-matrix-red/50 bg-black/60 text-[9px] font-matrix tracking-[0.2em] transition-all duration-500 font-bold ${isHovered ? 'text-matrix-red border-matrix-red shadow-[0_0_15px_rgba(255,0,0,0.4)]' : 'text-matrix-red/80'}`}>
+                                SSE_ID: {handle.toUpperCase()}
+                            </div>
+                        )}
                         <div className="flex items-center gap-1.5 bg-black/40 px-3 py-1.5 rounded-full border border-matrix-red/20 shadow-inner">
                             <div className="w-1.5 h-1.5 rounded-full bg-matrix-red animate-pulse shadow-[0_0_8px_rgba(255,0,0,1)]"></div>
                             <span className="text-[10px] font-matrix text-white font-bold uppercase tracking-widest">{status}</span>
@@ -149,24 +161,24 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                     )}
 
                     {/* Social Icons Row */}
-                    <div className="w-full border-t border-white/5 pt-6 mt-2 flex justify-center items-center gap-5">
+                    <div className="w-full border-t border-white/5 pt-6 mt-2 flex justify-center items-center gap-5 relative z-30">
                         {instagram && instagram !== "#" && (
-                            <a href={instagram} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-matrix-red transition-all duration-300 hover:scale-125">
+                            <a href={instagram} target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-matrix-red transition-all duration-300 hover:scale-125 hover:drop-shadow-[0_0_8px_rgba(255,0,0,0.5)]">
                                 <Instagram className="w-6 h-6" />
                             </a>
                         )}
                         {linkedin && linkedin !== "#" && (
-                            <a href={linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-matrix-red transition-all duration-300 hover:scale-125">
+                            <a href={linkedin} target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-matrix-red transition-all duration-300 hover:scale-125 hover:drop-shadow-[0_0_8px_rgba(252,252,252,0.5)]">
                                 <Linkedin className="w-6 h-6" />
                             </a>
                         )}
                         {email && (
-                            <a href={`mailto:${email}`} className="text-muted-foreground hover:text-matrix-red transition-all duration-300 hover:scale-125">
+                            <a href={`mailto:${email}`} className="text-white/60 hover:text-matrix-red transition-all duration-300 hover:scale-125 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">
                                 <Mail className="w-6 h-6" />
                             </a>
                         )}
                         {phone && (
-                            <a href={`tel:${phone}`} className="text-muted-foreground hover:text-matrix-red transition-all duration-300 hover:scale-125">
+                            <a href={`tel:${phone}`} className="text-white/60 hover:text-matrix-red transition-all duration-300 hover:scale-125 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">
                                 <Phone className="w-6 h-6" />
                             </a>
                         )}
