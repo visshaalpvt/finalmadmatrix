@@ -43,8 +43,8 @@ const MatrixRain = ({ opacity = 0.7 }: { opacity?: number }) => {
     resize();
     window.addEventListener("resize", resize);
 
-    // Binary characters - the characters to display
-    const binaryChars = "01";
+    // Katakana characters - the characters for the classic Matrix look
+    const katakanaChars = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ";
 
     const isMobile = w < 768;
     const fontSize = isMobile ? 26 : 22;
@@ -52,7 +52,7 @@ const MatrixRain = ({ opacity = 0.7 }: { opacity?: number }) => {
     const colSpacing = fontSize + 2;
     const numCols = Math.ceil(w / colSpacing) + 1;
 
-    const getRandomChar = () => binaryChars[Math.floor(Math.random() * binaryChars.length)];
+    const getRandomChar = () => katakanaChars[Math.floor(Math.random() * katakanaChars.length)];
 
     // Create streams - each column has one stream
     const createStream = (col: number, startY?: number): Stream => {
