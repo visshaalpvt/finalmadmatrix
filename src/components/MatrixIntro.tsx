@@ -91,15 +91,15 @@ const MatrixIntro = ({ onComplete }: { onComplete: () => void }) => {
         </div>
 
         {/* Loading Indicator & Company Name */}
-        <div className="absolute -bottom-24 left-1/2 -translate-x-1/2 flex flex-col items-center gap-6 w-full">
-          <div className="flex items-center gap-3">
-            <div className="w-2 h-2 rounded-full bg-matrix-red animate-bounce" style={{ animationDelay: '0s' }} />
-            <div className="w-2 h-2 rounded-full bg-matrix-red animate-bounce" style={{ animationDelay: '0.2s' }} />
-            <div className="w-2 h-2 rounded-full bg-matrix-red animate-bounce" style={{ animationDelay: '0.4s' }} />
+        <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 w-full">
+          <div className="flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-matrix-red animate-bounce" style={{ animationDelay: '0s' }} />
+            <div className="w-1.5 h-1.5 rounded-full bg-matrix-red animate-bounce" style={{ animationDelay: '0.2s' }} />
+            <div className="w-1.5 h-1.5 rounded-full bg-matrix-red animate-bounce" style={{ animationDelay: '0.4s' }} />
           </div>
-          <div className="text-center group/dex space-y-1">
-            <span className="text-[11px] font-matrix text-matrix-red/60 uppercase tracking-[0.6em] block transition-all group-hover/dex:tracking-[0.8em]">Developed By</span>
-            <h2 className="text-4xl sm:text-6xl font-poster text-white uppercase tracking-[0.4em] group-hover/dex:text-matrix-red transition-all duration-700 drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] group-hover/dex:drop-shadow-[0_0_30px_rgba(255,0,0,0.6)]">
+          <div className="text-center group/dex space-y-0.5">
+            <span className="text-[9px] font-matrix text-matrix-red/60 uppercase tracking-[0.5em] block transition-all group-hover/dex:tracking-[0.8em]">Developed By</span>
+            <h2 className="text-3xl sm:text-5xl font-poster text-white uppercase tracking-[0.4em] group-hover/dex:text-matrix-red transition-all duration-700 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] group-hover/dex:drop-shadow-[0_0_25px_rgba(255,0,0,0.5)]">
               DEX<span className="text-matrix-red">LORA</span>
             </h2>
           </div>
