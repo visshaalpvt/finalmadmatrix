@@ -1,30 +1,32 @@
 import { useEffect, useRef, useState } from "react";
 
 interface Stream {
-  chars: string[];    // fixed characters at each position in the trail
-  headY: number;      // current head position (in grid units)
+  chars: string[];    // characters in the trail
+  headY: number;      // current head position
   speed: number;      // fall speed
   col: number;        // column index
+  opacity: number;    // depth/base opacity
+  charShimmer: number[]; // indices of chars that should change
 }
 
-const MatrixRain = ({ opacity = 0.7 }: { opacity?: number }) => {
+const MatrixRain = ({ opacity: baseOpacity = 0.5 }: { opacity?: number }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [scrollOpacity, setScrollOpacity] = useState(opacity);
+  const [scrollOpacity, setScrollOpacity] = useState(baseOpacity);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPos = window.scrollY;
-      const newOpacity = Math.max(0.3, opacity - scrollPos / 800);
+      const newOpacity = Math.max(0.2, baseOpacity - scrollPos / 1000);
       setScrollOpacity(newOpacity);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [opacity]);
+  }, [baseOpacity]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: false }); // performance optimization
     if (!ctx) return;
 
     const dpr = window.devicePixelRatio || 1;
@@ -43,125 +45,103 @@ const MatrixRain = ({ opacity = 0.7 }: { opacity?: number }) => {
     resize();
     window.addEventListener("resize", resize);
 
-    // Katakana characters - the characters for the classic Matrix look
-    const katakanaChars = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ";
+    // Classic Matrix Set: Katakana + Numbers
+    const characters = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789";
+    const getRandomChar = () => characters[Math.floor(Math.random() * characters.length)];
 
-    const isMobile = w < 768;
-    const fontSize = isMobile ? 16 : 14;
-    const trailLength = Math.floor(h / fontSize) + 5; // enough to fill the screen
-    const colSpacing = fontSize + 2;
-    const numCols = Math.ceil(w / colSpacing) + 1;
+    const fontSize = w < 768 ? 12 : 14;
+    const colSpacing = fontSize * 0.95; // Tighter spacing for texture
+    const numCols = Math.ceil(w / colSpacing);
+    const trailLength = Math.floor(h / fontSize) + 10;
 
-    const getRandomChar = () => katakanaChars[Math.floor(Math.random() * katakanaChars.length)];
-
-    // Create streams - each column has one stream
-    const createStream = (col: number, startY?: number): Stream => {
+    const createStream = (col: number): Stream => {
       const chars: string[] = [];
+      const charShimmer: number[] = [];
       for (let i = 0; i < trailLength; i++) {
         chars.push(getRandomChar());
+        if (Math.random() > 0.95) charShimmer.push(i);
       }
       return {
         chars,
-        headY: startY ?? -(Math.random() * trailLength),
-        speed: 0.08 + Math.random() * 0.06, // very slow readable speed
+        headY: -(Math.random() * h / fontSize),
+        speed: 0.15 + Math.random() * 0.35, // Faster, more dynamic movement
         col,
+        opacity: 0.1 + Math.random() * 0.9, // Depth: some are in back, some front
+        charShimmer
       };
     };
 
+    // Create 1.5x more streams than columns for overlapping texture
     const streams: Stream[] = [];
-    for (let i = 0; i < numCols; i++) {
-      streams.push(createStream(i));
+    for (let i = 0; i < numCols * 1.5; i++) {
+      streams.push(createStream(Math.random() * numCols));
     }
 
     let animationId: number;
-    let lastTime = 0;
-    const fps = 24;
-    const interval = 1000 / fps;
 
-    const draw = (timestamp: number) => {
-      animationId = requestAnimationFrame(draw);
-
-      const delta = timestamp - lastTime;
-      if (delta < interval) return;
-      lastTime = timestamp - (delta % interval);
-
-      // CLEAR the entire canvas each frame - no smearing!
-      ctx.clearRect(0, 0, w, h);
-      // Dark background
-      ctx.fillStyle = "rgba(0, 0, 0, 0.85)";
+    const draw = () => {
+      // Background with slight alpha for trail "memory"
+      ctx.fillStyle = "#000000";
       ctx.fillRect(0, 0, w, h);
 
-      ctx.font = `bold ${fontSize}px 'Noto Sans Tamil', sans-serif`;
+      ctx.font = `bold ${fontSize}px monospace`;
       ctx.textBaseline = "top";
 
-      for (let s = 0; s < streams.length; s++) {
-        const stream = streams[s];
+      for (let i = 0; i < streams.length; i++) {
+        const stream = streams[i];
         const x = stream.col * colSpacing;
-        const headRow = Math.floor(stream.headY);
 
-        // Draw each character in the trail
-        for (let t = 0; t < trailLength; t++) {
-          const row = headRow - t;
-          const y = row * fontSize;
+        // Randomly update shimmering characters
+        if (Math.random() > 0.9) {
+          const idx = Math.floor(Math.random() * trailLength);
+          stream.chars[idx] = getRandomChar();
+        }
 
-          // Skip if off screen
+        for (let j = 0; j < trailLength; j++) {
+          const y = (Math.floor(stream.headY) - j) * fontSize;
+
           if (y < -fontSize || y > h) continue;
 
-          const charIndex = t % stream.chars.length;
-          const char = stream.chars[charIndex];
+          // Calculate color and opacity
+          let alpha = 0;
+          let color = "";
 
-          // Brightness based on distance from head
-          if (t === 0) {
-            // HEAD - bright red with red glow
-            ctx.fillStyle = "#ff0000";
-            ctx.shadowBlur = 14;
-            ctx.shadowColor = "#ff2200";
-          } else if (t <= 3) {
-            // Near head - very bright red
-            ctx.fillStyle = "#ff3333";
+          if (j === 0) {
+            // Head - Brightest Red
+            alpha = stream.opacity;
+            color = "#ff3333";
             ctx.shadowBlur = 8;
             ctx.shadowColor = "#ff0000";
-          } else if (t <= 8) {
-            // Mid trail - solid red, clearly readable
-            const alpha = 1.0 - (t - 3) * 0.08;
-            ctx.fillStyle = `rgba(220, 30, 30, ${alpha})`;
-            ctx.shadowBlur = 3;
-            ctx.shadowColor = "#cc0000";
-          } else if (t <= 16) {
-            // Fading trail - darker red
-            const alpha = 0.6 - (t - 8) * 0.05;
-            ctx.fillStyle = `rgba(150, 15, 15, ${Math.max(0.1, alpha)})`;
-            ctx.shadowBlur = 0;
           } else {
-            // Far trail - very dim
-            const alpha = 0.2 - (t - 16) * 0.01;
-            if (alpha <= 0.02) continue; // skip nearly invisible
-            ctx.fillStyle = `rgba(100, 10, 10, ${Math.max(0.02, alpha)})`;
+            // Trail - Fading out
+            alpha = (1 - j / trailLength) * stream.opacity;
+            const intensity = Math.floor(255 * (1 - j / trailLength));
+            color = `rgba(${intensity}, 0, 0, ${alpha})`;
             ctx.shadowBlur = 0;
           }
 
-          ctx.fillText(char, x, y);
+          ctx.fillStyle = color;
+          ctx.fillText(stream.chars[j % stream.chars.length], x, y);
         }
 
-        // Reset shadow between streams
+        // Reset shadow for next stream
         ctx.shadowBlur = 0;
 
-        // Move the stream down
+        // Move head
         stream.headY += stream.speed;
 
-        // Reset stream when entire trail has gone off screen
+        // Respawn when off screen
         if ((stream.headY - trailLength) * fontSize > h) {
-          stream.headY = -(Math.random() * 15);
-          stream.speed = 0.08 + Math.random() * 0.06;
-          // Assign new fixed characters for next pass
-          for (let i = 0; i < stream.chars.length; i++) {
-            stream.chars[i] = getRandomChar();
-          }
+          const newStream = createStream(Math.random() * numCols);
+          streams[i] = newStream;
         }
       }
+
+      animationId = requestAnimationFrame(draw);
     };
 
     animationId = requestAnimationFrame(draw);
+
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener("resize", resize);
@@ -171,8 +151,8 @@ const MatrixRain = ({ opacity = 0.7 }: { opacity?: number }) => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-0 pointer-events-none transition-opacity duration-1000 will-change-transform"
-      style={{ opacity: scrollOpacity, imageRendering: 'auto' }}
+      className="fixed inset-0 z-0 pointer-events-none transition-opacity duration-1000"
+      style={{ opacity: scrollOpacity }}
     />
   );
 };
