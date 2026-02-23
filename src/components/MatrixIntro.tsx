@@ -64,11 +64,6 @@ const MatrixIntro = ({ onComplete }: { onComplete: () => void }) => {
           }
         `}</style>
 
-        {/* The Sticker - Placed ABOVE the main box */}
-        <div className="mb-4 flex justify-center w-full animate-[fade-in-up_1s_ease-out]">
-          <MatrixSticker />
-        </div>
-
         {/* The Animated Box */}
         <div className="logo-box border border-matrix-red/20 rounded-[12px] px-8 py-5 sm:px-12 sm:py-6 relative overflow-hidden flex flex-col items-center gap-2 backdrop-blur-md">
           {/* Light Sweep Line */}
@@ -90,19 +85,12 @@ const MatrixIntro = ({ onComplete }: { onComplete: () => void }) => {
           </div>
         </div>
 
-        {/* Loading Indicator & Company Name */}
-        <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 w-full">
-          <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-matrix-red animate-bounce" style={{ animationDelay: '0s' }} />
-            <div className="w-1.5 h-1.5 rounded-full bg-matrix-red animate-bounce" style={{ animationDelay: '0.2s' }} />
-            <div className="w-1.5 h-1.5 rounded-full bg-matrix-red animate-bounce" style={{ animationDelay: '0.4s' }} />
-          </div>
-          <div className="text-center group/dex space-y-0.5">
-            <span className="text-[9px] font-matrix text-matrix-red/60 uppercase tracking-[0.5em] block transition-all group-hover/dex:tracking-[0.8em]">Developed By</span>
-            <h2 className="text-3xl sm:text-5xl font-poster text-white uppercase tracking-[0.4em] group-hover/dex:text-matrix-red transition-all duration-700 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] group-hover/dex:drop-shadow-[0_0_25px_rgba(255,0,0,0.5)]">
-              DEX<span className="text-matrix-red">LORA</span>
-            </h2>
-          </div>
+        {/* Loading Indicator */}
+        <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-2">
+          <div className="w-1 h-1 rounded-full bg-matrix-red animate-bounce" style={{ animationDelay: '0s' }} />
+          <div className="w-1 h-1 rounded-full bg-matrix-red animate-bounce" style={{ animationDelay: '0.2s' }} />
+          <div className="w-1 h-1 rounded-full bg-matrix-red animate-bounce" style={{ animationDelay: '0.4s' }} />
+          <span className="text-[8px] font-matrix text-matrix-red/50 uppercase tracking-widest ml-2">developed by DexLora</span>
         </div>
       </div>
     </div>
