@@ -47,7 +47,7 @@ const MatrixRain = ({ opacity = 0.7 }: { opacity?: number }) => {
     const katakanaChars = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ";
 
     const isMobile = w < 768;
-    const fontSize = isMobile ? 26 : 22;
+    const fontSize = isMobile ? 16 : 14;
     const trailLength = Math.floor(h / fontSize) + 5; // enough to fill the screen
     const colSpacing = fontSize + 2;
     const numCols = Math.ceil(w / colSpacing) + 1;
