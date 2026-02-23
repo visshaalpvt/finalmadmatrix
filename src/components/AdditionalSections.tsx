@@ -27,7 +27,7 @@ const InfoStrip = () => {
                             <span className="w-1.5 h-1.5 bg-matrix-red rounded-full" />
                             <span>ORGANIZED BY THE DEPARTMENT OF PURE AND APPLIED MATHEMATICS</span>
                             <span className="w-1.5 h-1.5 bg-matrix-red rounded-full" />
-                            <span>SIMATS ENGINEERING</span>
+                            <span>SAVEETHA UNIVERSITY</span>
                             <span className="w-1.5 h-1.5 bg-matrix-red rounded-full" />
                             <span>APPROVED BY AICTE</span>
                             <span className="w-1.5 h-1.5 bg-matrix-red rounded-full" />
@@ -247,7 +247,7 @@ const OrganizedBySection = () => {
                             Department of <span className="text-matrix-red">Pure and Applied</span> Mathematics
                         </h3>
                         <h4 className="text-2xl md:text-3xl text-zinc-300 font-bold tracking-wide mt-4 uppercase">
-                            SIMATS Engineering
+                            SAVEETHA UNIVERSITY
                         </h4>
                     </div>
 

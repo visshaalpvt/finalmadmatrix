@@ -21,7 +21,7 @@ const FooterSection = () => (
 
 
       <p className="text-[10px] text-white/40 font-matrix uppercase tracking-[0.3em] pt-8 font-medium">
-        © 2026 <span className="text-matrix-red">MADMATRIX</span> — SIMATS Engineering. All Rights Reserved.
+        © 2026 <span className="text-matrix-red">MADMATRIX</span> — SAVEETHA UNIVERSITY. All Rights Reserved.
       </p>
     </div>
   </footer>

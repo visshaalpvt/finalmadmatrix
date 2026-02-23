@@ -327,6 +327,23 @@ export const events: EventData[] = [
 
   // GAMES
   {
+    id: 21, title: "BGMI – Battle Royale", category: "games", iconName: "Target",
+    description: "Competitive BGMI match on Livik map. Placement decides winners.",
+    duration: "Custom Room", teamSize: "Squad of 4",
+    organizers: ["Rajesh (8608290740)", "Divagar (7810013479)", "Murali Dharan (9361039623)", "Vinaykailash (9500202034)", "Rohankumar (9363904347)", "Harihara Prasath (8248223809)"],
+    rules: [
+      "Custom rooms on the Livik map (Squad format).",
+      "Emulators, hacks, glitches, or exploits forbidden.",
+      "Only registered players; no teaming with enemies.",
+      "Abusive voice or text chat not allowed.",
+      "Map events and special items are prohibited.",
+      "Any violation leads to disqualification.",
+      "The organizer's decision is final."
+    ],
+    fee: "₹75",
+    imageUrl: "/assets/events/bgmi.jpg"
+  },
+  {
     id: 16, title: "Box Cricket", category: "games", iconName: "Target",
     description: "Fast-paced indoor cricket game with modified rules.",
     duration: "4 Overs", teamSize: "Max 5 members",
@@ -412,23 +429,6 @@ export const events: EventData[] = [
     ],
     fee: "₹75",
     imageUrl: "/assets/events/free-fire.jpg"
-  },
-  {
-    id: 21, title: "BGMI – Battle Royale", category: "games", iconName: "Target",
-    description: "Competitive BGMI match on Livik map. Placement decides winners.",
-    duration: "Custom Room", teamSize: "Squad of 4",
-    organizers: ["Rajesh (8608290740)", "Divagar (7810013479)", "Murali Dharan (9361039623)", "Vinaykailash (9500202034)", "Rohankumar (9363904347)", "Harihara Prasath (8248223809)"],
-    rules: [
-      "Custom rooms on the Livik map (Squad format).",
-      "Emulators, hacks, glitches, or exploits forbidden.",
-      "Only registered players; no teaming with enemies.",
-      "Abusive voice or text chat not allowed.",
-      "Map events and special items are prohibited.",
-      "Any violation leads to disqualification.",
-      "The organizer's decision is final."
-    ],
-    fee: "₹75",
-    imageUrl: "/assets/events/bgmi.jpg"
   },
   {
     id: 22, title: "Call Of Duty – Tdm", category: "games", iconName: "Sword",

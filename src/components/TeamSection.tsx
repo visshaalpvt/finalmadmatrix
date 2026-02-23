@@ -1,5 +1,6 @@
 import ProfileCard from "./ProfileCard";
 import { useEffect, useRef } from "react";
+import { Instagram } from "lucide-react";
 
 const TeamSection = () => {
     const teamMembers = [
@@ -81,7 +82,7 @@ const TeamSection = () => {
     const facultyMember = {
         name: "Dr K Sudar Mozhi",
         title: "Assistant Professor SG",
-        handle: "SIMATS Engineering, Chennai",
+        handle: "Saveetha University, Chennai",
         status: "Faculty Coordinator",
         avatarUrl: "/team/faculty.jpg",
         email: "sudarmozhik@gmail.com",
@@ -177,10 +178,10 @@ const TeamSection = () => {
                     <div className="flex flex-wrap justify-center gap-4 sm:gap-8 pt-8">
                         {[
                             { name: "Purusoth", phone: "7397520061" },
-                            { name: "Swathika", phone: "8870700760" },
-                            { name: "Dharmika", phone: "9486289264" },
-                            { name: "Nivetha", phone: "9177583915" },
-                            { name: "Melosa", phone: "8830324704" }
+                            { name: "KL Dinesh Eswar", phone: "7200295986" },
+                            { name: "Nithishwaran", phone: "8754330333" },
+                            { name: "Kevin Mathew", phone: "8610871590" },
+                            { name: "Prasithi Kumaran", phone: "8248372122" }
                         ].map((member, i) => (
                             <div key={i} className="px-6 py-3 sm:px-8 sm:py-4 rounded-none border-2 border-matrix-red/30 bg-black/60 hover:bg-matrix-red hover:border-matrix-red transition-all duration-500 group shadow-[0_0_15px_rgba(255,0,0,0.1)] flex flex-col items-center gap-1 min-w-[140px]">
                                 <span className="text-matrix-red font-matrix font-black tracking-[0.3em] uppercase group-hover:text-black transition-colors text-xs sm:text-sm">{member.name}</span>
@@ -193,9 +194,9 @@ const TeamSection = () => {
                 {/* Social Connect Shortcuts */}
                 <div className="pt-8 border-t border-white/5 max-w-2xl mx-auto space-y-8">
                     <div className="flex flex-wrap justify-center gap-4 sm:gap-12">
-                        <a href="https://instagram.com/madmatrix_2026" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-white/40 hover:text-matrix-red transition-all group">
+                        <a href="https://www.instagram.com/madmatrix2026?igsh=MWppYTJ3ZGo3a3oz" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-white/40 hover:text-matrix-red transition-all group">
                             <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-matrix-red group-hover:bg-matrix-red/10">
-                                <span className="text-xl">📸</span>
+                                <Instagram className="w-5 h-5" />
                             </div>
                             <div className="text-left hidden sm:block">
                                 <div className="text-[10px] font-matrix uppercase tracking-widest opacity-60">Follow Us</div>
@@ -213,7 +214,7 @@ const TeamSection = () => {
                         </a>
                     </div>
                     <p className="text-[9px] font-matrix uppercase tracking-[0.5em] text-white/20">
-                        MADMATRIX // SECURE_LINK_ESTABLISHED
+                        MADMATRIX // SSE_LINK_ESTABLISHED
                     </p>
                 </div>
 

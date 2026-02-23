@@ -113,7 +113,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 
                     <div className="w-full flex justify-between items-start">
                         <div className={`px-4 py-1.5 min-w-[140px] flex items-center justify-center rounded-none border border-matrix-red/50 bg-black/60 text-[9px] font-matrix tracking-[0.2em] transition-all duration-500 font-bold ${isHovered ? 'text-matrix-red border-matrix-red shadow-[0_0_15px_rgba(255,0,0,0.4)]' : 'text-matrix-red/80'}`}>
-                            SEC_ID: {handle.toUpperCase()}
+                            SSE_ID: {handle.toUpperCase()}
                         </div>
                         <div className="flex items-center gap-1.5 bg-black/40 px-3 py-1.5 rounded-full border border-matrix-red/20 shadow-inner">
                             <div className="w-1.5 h-1.5 rounded-full bg-matrix-red animate-pulse shadow-[0_0_8px_rgba(255,0,0,1)]"></div>

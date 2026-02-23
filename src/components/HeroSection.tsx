@@ -187,7 +187,7 @@ const HeroSection = () => {
 
           <div className="flex flex-wrap justify-center gap-8 text-sm sm:text-lg font-matrix uppercase tracking-[0.2em] text-matrix-red font-bold">
             <span className="flex items-center gap-2 hover:text-white transition-colors cursor-default bg-black/30 px-4 py-2 rounded-sm border border-matrix-red/20 shadow-[0_0_10px_rgba(255,0,0,0.2)]">📅 MAR 13 & 14</span>
-            <span className="flex items-center gap-2 hover:text-white transition-colors cursor-default bg-black/30 px-4 py-2 rounded-sm border border-matrix-red/20 shadow-[0_0_10px_rgba(255,0,0,0.2)]">📍 SIMATS CAMPUS</span>
+            <span className="flex items-center gap-2 hover:text-white transition-colors cursor-default bg-black/30 px-4 py-2 rounded-sm border border-matrix-red/20 shadow-[0_0_10px_rgba(255,0,0,0.2)]">📍 SAVEETHA UNIVERSITY</span>
           </div>
         </div>
 

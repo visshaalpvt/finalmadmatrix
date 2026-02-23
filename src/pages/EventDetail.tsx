@@ -116,8 +116,8 @@ const EventDetail = () => {
                             <div className="lg:col-span-4 space-y-6">
                                 <div className="glass-strong p-8 rounded-3xl border-matrix-red/30 text-center space-y-4">
                                     <div className="text-sm font-matrix uppercase tracking-widest text-muted-foreground">Registration Access</div>
-                                    <div className="text-6xl font-poster text-matrix-red drop-shadow-lg">
-                                        {event.fee || "₹99"}
+                                    <div className="text-6xl font-poster text-matrix-red drop-shadow-lg px-4 flex items-center justify-center">
+                                        <span className="mr-2">{event.fee || "₹99"}</span>
                                     </div>
                                     <div className="h-1 w-12 bg-matrix-red/30 mx-auto rounded-full" />
                                     <p className="text-xs text-muted-foreground leading-relaxed italic">

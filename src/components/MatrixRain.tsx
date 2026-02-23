@@ -1,5 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 
+interface Stream {
+  chars: string[];    // fixed characters at each position in the trail
+  headY: number;      // current head position (in grid units)
+  speed: number;      // fall speed
+  col: number;        // column index
+}
+
 const MatrixRain = ({ opacity = 0.7 }: { opacity?: number }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [scrollOpacity, setScrollOpacity] = useState(opacity);
@@ -21,25 +28,54 @@ const MatrixRain = ({ opacity = 0.7 }: { opacity?: number }) => {
     if (!ctx) return;
 
     const dpr = window.devicePixelRatio || 1;
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+
     const resize = () => {
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      ctx.scale(dpr, dpr);
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
     };
     resize();
     window.addEventListener("resize", resize);
 
-    // ONLY CHINESE WORDS + MATRIX GLYPHS FOR MAXIMUM IMPACT
-    const chars = "电脑网络编程代码算法智能虚拟现实宇宙空间时间逻辑模拟数字电子芯片机器人发展创新探索创造矩阵系统狂热科技未来幻觉中枢神经数据流动人工智慧二进制源代码MADMATRIXSANKALP20268H5MC:I€JLPIAVZ01X█▓▒░▖▗▘▙▚▛▜▝▞▟";
-    const fontSize = window.innerWidth < 768 ? 20 : 18;
-    const columns = Math.ceil(window.innerWidth / fontSize);
-    const drops: number[] = Array(columns).fill(1).map(() => Math.random() * -100);
+    // Tamil numerals - the characters to display
+    const tamilChars = "௧௨௩௪௫௬௭௯";
+
+    const isMobile = w < 768;
+    const fontSize = isMobile ? 26 : 22;
+    const trailLength = Math.floor(h / fontSize) + 5; // enough to fill the screen
+    const colSpacing = fontSize + 2;
+    const numCols = Math.ceil(w / colSpacing) + 1;
+
+    const getRandomChar = () => tamilChars[Math.floor(Math.random() * tamilChars.length)];
+
+    // Create streams - each column has one stream
+    const createStream = (col: number, startY?: number): Stream => {
+      const chars: string[] = [];
+      for (let i = 0; i < trailLength; i++) {
+        chars.push(getRandomChar());
+      }
+      return {
+        chars,
+        headY: startY ?? -(Math.random() * trailLength),
+        speed: 0.08 + Math.random() * 0.06, // very slow readable speed
+        col,
+      };
+    };
+
+    const streams: Stream[] = [];
+    for (let i = 0; i < numCols; i++) {
+      streams.push(createStream(i));
+    }
 
     let animationId: number;
     let lastTime = 0;
-    const fps = 45;
+    const fps = 24;
     const interval = 1000 / fps;
 
     const draw = (timestamp: number) => {
@@ -49,34 +85,79 @@ const MatrixRain = ({ opacity = 0.7 }: { opacity?: number }) => {
       if (delta < interval) return;
       lastTime = timestamp - (delta % interval);
 
-      ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
-      ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+      // CLEAR the entire canvas each frame - no smearing!
+      ctx.clearRect(0, 0, w, h);
+      // Dark background
+      ctx.fillStyle = "rgba(0, 0, 0, 0.85)";
+      ctx.fillRect(0, 0, w, h);
 
-      ctx.font = `900 ${fontSize}px 'Share Tech Mono', sans-serif`;
+      ctx.font = `bold ${fontSize}px 'Noto Sans Tamil', sans-serif`;
+      ctx.textBaseline = "top";
 
-      for (let i = 0; i < drops.length; i++) {
-        const char = chars[Math.floor(Math.random() * chars.length)];
-        const brightness = Math.random();
+      for (let s = 0; s < streams.length; s++) {
+        const stream = streams[s];
+        const x = stream.col * colSpacing;
+        const headRow = Math.floor(stream.headY);
 
-        if (brightness > 0.92) {
-          ctx.fillStyle = "#ffffff";
-          ctx.shadowBlur = 10;
-          ctx.shadowColor = "#ff0000";
-        } else if (brightness > 0.6) {
-          ctx.fillStyle = "#ff1a1a";
-          ctx.shadowBlur = 4;
-          ctx.shadowColor = "#cc0000";
-        } else {
-          ctx.fillStyle = "rgba(100, 10, 10, 0.6)";
-          ctx.shadowBlur = 0;
+        // Draw each character in the trail
+        for (let t = 0; t < trailLength; t++) {
+          const row = headRow - t;
+          const y = row * fontSize;
+
+          // Skip if off screen
+          if (y < -fontSize || y > h) continue;
+
+          const charIndex = t % stream.chars.length;
+          const char = stream.chars[charIndex];
+
+          // Brightness based on distance from head
+          if (t === 0) {
+            // HEAD - bright white with red glow
+            ctx.fillStyle = "#ffffff";
+            ctx.shadowBlur = 14;
+            ctx.shadowColor = "#ff2200";
+          } else if (t <= 3) {
+            // Near head - very bright red
+            ctx.fillStyle = "#ff3333";
+            ctx.shadowBlur = 8;
+            ctx.shadowColor = "#ff0000";
+          } else if (t <= 8) {
+            // Mid trail - solid red, clearly readable
+            const alpha = 1.0 - (t - 3) * 0.08;
+            ctx.fillStyle = `rgba(220, 30, 30, ${alpha})`;
+            ctx.shadowBlur = 3;
+            ctx.shadowColor = "#cc0000";
+          } else if (t <= 16) {
+            // Fading trail - darker red
+            const alpha = 0.6 - (t - 8) * 0.05;
+            ctx.fillStyle = `rgba(150, 15, 15, ${Math.max(0.1, alpha)})`;
+            ctx.shadowBlur = 0;
+          } else {
+            // Far trail - very dim
+            const alpha = 0.2 - (t - 16) * 0.01;
+            if (alpha <= 0.02) continue; // skip nearly invisible
+            ctx.fillStyle = `rgba(100, 10, 10, ${Math.max(0.02, alpha)})`;
+            ctx.shadowBlur = 0;
+          }
+
+          ctx.fillText(char, x, y);
         }
 
-        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+        // Reset shadow between streams
+        ctx.shadowBlur = 0;
 
-        if (drops[i] * fontSize > window.innerHeight && Math.random() > 0.98) {
-          drops[i] = 0;
+        // Move the stream down
+        stream.headY += stream.speed;
+
+        // Reset stream when entire trail has gone off screen
+        if ((stream.headY - trailLength) * fontSize > h) {
+          stream.headY = -(Math.random() * 15);
+          stream.speed = 0.08 + Math.random() * 0.06;
+          // Assign new fixed characters for next pass
+          for (let i = 0; i < stream.chars.length; i++) {
+            stream.chars[i] = getRandomChar();
+          }
         }
-        drops[i] += 0.45;
       }
     };
 

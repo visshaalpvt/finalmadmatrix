@@ -31,7 +31,7 @@ const EventCard = ({ event }: { event: EventData }) => {
         </div>
         {event.fee && (
           <div className="bg-matrix-red text-black px-4 py-1.5 font-matrix font-black text-[10px] tracking-widest shadow-[0_0_15px_rgba(255,0,0,0.3)]">
-            {event.fee}
+            {" "}{event.fee}
           </div>
         )}
       </div>
@@ -63,7 +63,7 @@ const EventCard = ({ event }: { event: EventData }) => {
 
             <div className="absolute bottom-3 right-4 text-[9px] font-matrix text-matrix-red/40 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-matrix-red animate-ping" />
-              SEC_ID_{event.id.toString().padStart(4, '0')}
+              SSE_ID_{event.id.toString().padStart(4, '0')}
             </div>
           </div>
         )}

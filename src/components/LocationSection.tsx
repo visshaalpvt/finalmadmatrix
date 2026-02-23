@@ -36,7 +36,7 @@ const LocationSection = () => {
                   <MapPin className="w-8 h-8 text-matrix-red animate-pulse" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-2 font-poster uppercase tracking-tight text-matrix-red">SIMATS ENGINEERING</h3>
+                  <h3 className="text-2xl font-bold text-white mb-2 font-poster uppercase tracking-tight text-matrix-red">SAVEETHA UNIVERSITY</h3>
                   <p className="text-matrix-red font-matrix text-sm leading-relaxed tracking-widest uppercase">
                     22G8+9HP, Kuthambakkam, Tamil Nadu 602105, India
                   </p>
@@ -47,7 +47,7 @@ const LocationSection = () => {
             <div className="space-y-4 pt-8 border-t border-matrix-red/20 font-matrix w-full">
               <div className="flex flex-col sm:flex-row justify-between items-center sm:items-center gap-2 sm:gap-0 text-sm">
                 <span className="text-white/60 uppercase tracking-widest text-[10px] sm:text-sm">Venue Protocol</span>
-                <span className="text-matrix-red font-bold uppercase tracking-widest text-xs sm:text-sm">SIMATS CAMPUS</span>
+                <span className="text-matrix-red font-bold uppercase tracking-widest text-xs sm:text-sm">SAVEETHA UNIVERSITY</span>
               </div>
               <div className="flex flex-col sm:flex-row justify-between items-center sm:items-center gap-2 sm:gap-0 text-sm">
                 <span className="text-white/60 uppercase tracking-widest text-[10px] sm:text-sm">Event Timeline</span>
