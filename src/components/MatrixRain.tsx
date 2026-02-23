@@ -43,8 +43,8 @@ const MatrixRain = ({ opacity = 0.7 }: { opacity?: number }) => {
     resize();
     window.addEventListener("resize", resize);
 
-    // Tamil numerals - the characters to display
-    const tamilChars = "௧௨௩௪௫௬௭௯";
+    // Binary characters - the characters to display
+    const binaryChars = "01";
 
     const isMobile = w < 768;
     const fontSize = isMobile ? 26 : 22;
@@ -52,7 +52,7 @@ const MatrixRain = ({ opacity = 0.7 }: { opacity?: number }) => {
     const colSpacing = fontSize + 2;
     const numCols = Math.ceil(w / colSpacing) + 1;
 
-    const getRandomChar = () => tamilChars[Math.floor(Math.random() * tamilChars.length)];
+    const getRandomChar = () => binaryChars[Math.floor(Math.random() * binaryChars.length)];
 
     // Create streams - each column has one stream
     const createStream = (col: number, startY?: number): Stream => {
