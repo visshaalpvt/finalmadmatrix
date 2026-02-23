@@ -138,21 +138,38 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                         <div className={`absolute inset-0 rounded-full bg-matrix-red/30 blur-3xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`}></div>
 
                         <div className={`relative w-32 h-32 rounded-full border-2 transition-all duration-500 p-1.5 bg-black/80 ${isHovered ? 'border-matrix-red shadow-[0_0_35px_rgba(255,0,0,0.6)] scale-110' : 'border-matrix-red/40'}`}>
-                            <img
-                                src={avatarUrl}
-                                alt={name}
-                                className="w-full h-full object-cover rounded-full filter grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700 brightness-110"
-                                onError={(e) => {
-                                    (e.target as HTMLImageElement).src = `https://api.dicebear.com/7.x/bottts/svg?seed=${name}&backgroundColor=000000`;
-                                }}
-                            />
+                            {instagram && instagram !== "#" ? (
+                                <a href={instagram} target="_blank" rel="noopener noreferrer">
+                                    <img
+                                        src={avatarUrl}
+                                        alt={name}
+                                        className="w-full h-full object-cover rounded-full filter grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700 brightness-110"
+                                        onError={(e) => {
+                                            (e.target as HTMLImageElement).src = `https://api.dicebear.com/7.x/bottts/svg?seed=${name}&backgroundColor=000000`;
+                                        }}
+                                    />
+                                </a>
+                            ) : (
+                                <img
+                                    src={avatarUrl}
+                                    alt={name}
+                                    className="w-full h-full object-cover rounded-full filter grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700 brightness-110"
+                                    onError={(e) => {
+                                        (e.target as HTMLImageElement).src = `https://api.dicebear.com/7.x/bottts/svg?seed=${name}&backgroundColor=000000`;
+                                    }}
+                                />
+                            )}
                         </div>
                     </div>
 
                     {showUserInfo && (
                         <div className="text-center space-y-3 z-10 p-2 rounded-xl backdrop-blur-sm bg-black/20">
                             <h3 className="text-2xl font-poster text-white tracking-tight group-hover:text-matrix-red transition-all duration-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] decoration-matrix-red/30 underline-offset-4 decoration-2 min-h-[3.5rem] flex items-center justify-center">
-                                {name}
+                                {instagram && instagram !== "#" ? (
+                                    <a href={instagram} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                                        {name}
+                                    </a>
+                                ) : name}
                             </h3>
                             <p className="text-[11px] text-white/80 font-matrix font-black uppercase tracking-[0.25em] bg-matrix-red/10 px-4 py-1 border-x border-matrix-red/30">
                                 {title}

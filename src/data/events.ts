@@ -126,11 +126,11 @@ export const events: EventData[] = [
   {
     id: 5, title: "Mime", category: "on-stage", iconName: "Masks",
     description: "Team-based stage performance expressing a theme using only body language and expressions.",
-    duration: "5–8 mins", teamSize: "5–10 members",
+    duration: "3–5 mins", teamSize: "5–10 members",
     organizers: ["T. Viswa Gnan Deep (6302877873)", "Pavithra R (9342614326)"],
     rules: [
       "Each team must consist of 5 to 10 members.",
-      "Performance time limit: 5–8 minutes.",
+      "Performance time limit: 3–5 minutes.",
       "Theme must be decent and suitable for a college audience.",
       "Talking, singing, or lip-syncing is strictly prohibited.",
       "Only background music/sound effects without human voices.",
@@ -188,7 +188,7 @@ export const events: EventData[] = [
     rules: [
       "Individual or team participation (up to 4 members).",
       "Papers must be original; plagiarism leads to disqualification.",
-      "Abstract submission is mandatory for shortlisting.",
+      "Abstract and PPT submission mandatory before the event.",
       "Presentation time strictly limited (including Q&A).",
       "Must bring presentation in PPT/PDF format.",
       "Evaluation based on innovation and technical depth.",
@@ -211,6 +211,7 @@ export const events: EventData[] = [
       "Round 3: Debugging round (10 programming questions).",
       "Final Round: 3 minutes per debugging question.",
       "Best overall performance across all rounds wins.",
+      "Participants must bring their laptop.",
       "Organizers' decision is final."
     ],
     fee: "₹99",
@@ -223,6 +224,7 @@ export const events: EventData[] = [
     organizers: ["Sugantharaj (9342614326)", "Angel Mary Varghese (8606685304)", "Monish (8610730654)"],
     rules: [
       "Any video editing software (mobile/laptop/desktop).",
+      "Participant should bring required device.",
       "Total event duration: 2 hours.",
       "Submit final edited video before the deadline.",
       "Focus on storytelling, hooks, transitions, B-roll, and SFX.",
@@ -291,10 +293,10 @@ export const events: EventData[] = [
   {
     id: 14, title: "Push Up Challenge", category: "off-stage", iconName: "Activity",
     description: "Fitness event counting standard push-ups within a fixed time limit.",
-    duration: "1 minute", teamSize: "Individual",
+    duration: "3 minutes", teamSize: "Individual",
     organizers: ["Pangaj (9345837731)", "Sharan Sadithya (6374422057)"],
     rules: [
-      "Individual event with 1-minute time limit.",
+      "Individual event with 3-minute time limit.",
       "Only standard push-ups with proper form allowed.",
       "Maintain a straight plank position throughout.",
       "Chest close to ground and arms fully extended.",

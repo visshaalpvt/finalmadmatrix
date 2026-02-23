@@ -3,8 +3,7 @@ import { Button } from "@/components/ui/button";
 import "../styles/location.css";
 
 const LocationSection = () => {
-  const googleMapsUrl =
-    "https://www.google.com/maps?s=web&lqi=ChJzaW1hdHMgZW5naW5lZXJpbmdI7K_lyt6tgIAIWiQQABABGAAYASISc2ltYXRzIGVuZ2luZWVyaW5nKgYIAhAAEAGSAQdjb2xsZWdl&vet=12ahUKEwjrgISrgNaSAxUFX2wGHVbxAQYQ1YkKegQIVRAB..i&cs=1&um=1&ie=UTF-8&fb=1&gl=in&sa=X&geocode=Kbuj5Rqsi1I6Ma9tnoNOe2rh&daddr=22G8%2B9HP,+Kuthambakkam,+Tamil+Nadu+602105";
+  const googleMapsUrl = "https://www.google.com/maps/dir//Saveetha+School+of+Engineering,+Saveetha+University,+Saveetha+Nagar,+Thandalam,+Chennai,+Tamil+Nadu+602105/@13.0270685,80.0163351,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3a528e5743475d65:0x7d06634b3588960b!2m2!1d80.0163351!2d13.0270685?entry=ttu";
 
   return (
     <section id="location" className="relative z-10 py-16 px-4 border-t border-matrix-red/20 bg-black/40 backdrop-blur-sm">
@@ -17,7 +16,7 @@ const LocationSection = () => {
           {/* Map Embed */}
           <div className="location-map-container glass rounded-2xl overflow-hidden border border-matrix-red/30 h-96 shadow-[0_0_30px_rgba(255,0,0,0.1)] w-full max-w-[500px] lg:max-w-none mx-auto">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.9752893916327!2d80.20261807455654!3d12.94058358682893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52f9c0e7a2d5cd%3A0x1f9a5e8c6c7c8e9f!2sSimats%20Engineering%20College!5e0!3m2!1sen!2sin!4v1234567890"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.3712347905!2d80.01414647455845!3d13.027073613298687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a528e5743475d65%3A0x7d06634b3588960b!2sSaveetha%20School%20of%20Engineering!5e0!3m2!1sen!2sin!4v1708680000000"
               width="100%"
               height="100%"
               style={{ border: 0 }}

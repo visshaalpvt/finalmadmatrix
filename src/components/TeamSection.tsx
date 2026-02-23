@@ -177,16 +177,22 @@ const TeamSection = () => {
 
                     <div className="flex flex-wrap justify-center gap-4 sm:gap-8 pt-8">
                         {[
-                            { name: "Purusoth", phone: "7397520061" },
-                            { name: "KL Dinesh Eswar", phone: "7200295986" },
-                            { name: "Nithishwaran", phone: "8754330333" },
-                            { name: "Kevin Mathew", phone: "8610871590" },
-                            { name: "Prasithi Kumaran", phone: "8248372122" }
+                            { name: "Purusoth", phone: "7397520061", instagram: "https://www.instagram.com/purusothaman_?igsh=MTZnd3hyZWoyMjVjYQ==" },
+                            { name: "KL Dinesh Eswar", phone: "7200295986", instagram: "https://www.instagram.com/kl_dinesh_eshwar?igsh=d3Jya2hpaTltczcy" },
+                            { name: "Nithishwaran", phone: "8754330333", instagram: "https://www.instagram.com/nithxs.__?igsh=MTc2NjNqdHhsMm1mdg==" },
+                            { name: "Kevin Mathew", phone: "8610871590", instagram: "https://www.instagram.com/kevin_mathew____?igsh=MTZnd3hyZWoyMjVjYQ==" },
+                            { name: "Prasithi Kumaran", phone: "8248372122", instagram: "https://www.instagram.com/prasithi_kumaran?igsh=MWJpeTBjM28wbTI1bg==" }
                         ].map((member, i) => (
-                            <div key={i} className="px-6 py-3 sm:px-8 sm:py-4 rounded-none border-2 border-matrix-red/30 bg-black/60 hover:bg-matrix-red hover:border-matrix-red transition-all duration-500 group shadow-[0_0_15px_rgba(255,0,0,0.1)] flex flex-col items-center gap-1 min-w-[140px]">
+                            <a
+                                key={i}
+                                href={member.instagram}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-6 py-3 sm:px-8 sm:py-4 rounded-none border-2 border-matrix-red/30 bg-black/60 hover:bg-matrix-red hover:border-matrix-red transition-all duration-500 group shadow-[0_0_15px_rgba(255,0,0,0.1)] flex flex-col items-center gap-1 min-w-[140px]"
+                            >
                                 <span className="text-matrix-red font-matrix font-black tracking-[0.3em] uppercase group-hover:text-black transition-colors text-xs sm:text-sm">{member.name}</span>
                                 <span className="text-zinc-500 text-[10px] sm:text-xs font-mono group-hover:text-black/70 transition-colors tracking-widest">{member.phone}</span>
-                            </div>
+                            </a>
                         ))}
                     </div>
                 </div>
