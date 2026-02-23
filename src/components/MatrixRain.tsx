@@ -112,8 +112,8 @@ const MatrixRain = ({ opacity = 0.7 }: { opacity?: number }) => {
 
           // Brightness based on distance from head
           if (t === 0) {
-            // HEAD - bright white with red glow
-            ctx.fillStyle = "#ffffff";
+            // HEAD - bright red with red glow
+            ctx.fillStyle = "#ff0000";
             ctx.shadowBlur = 14;
             ctx.shadowColor = "#ff2200";
           } else if (t <= 3) {
