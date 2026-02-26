@@ -619,9 +619,9 @@ export const categoryLabels: Record<EventData["category"], string> = {
 export const categoryOrder: EventData["category"][] = ["on-stage", "off-stage", "games", "sports", "track"];
 
 export const registrationLinks: Record<EventData["category"], string> = {
-  "on-stage": "https://docs.google.com/forms/d/e/1FAIpQLSeia0D_pMurDqxg38DLnF_0vndIejZ_Q23vSuJEQXB80tcBUQ/viewform?usp=header",
-  "off-stage": "https://docs.google.com/forms/d/e/1FAIpQLSfXqJgl7r92_ePSOEobe9u2otbF082JFMNkVxoDz6Xi8CiSPw/viewform?usp=header",
+  "on-stage": "https://forms.gle/WQy6nqbUAimfRXq39",
+  "off-stage": "https://forms.gle/kg6xhxiHx2ewysGr5",
   "games": "https://docs.google.com/forms/d/e/1FAIpQLSfoNwaX4p2oJX4t-AkYDTX8E4fzdG_tqVu0lkF6vQit67Yl9A/viewform?usp=header",
-  "sports": "https://docs.google.com/forms/d/1DyKjkvSyLFhsCHccNJejrq3EeWunqIKt62RefVYgMI0/viewform?usp=header",
-  "track": "https://docs.google.com/forms/d/e/1FAIpQLSfSbTjg48TX8vmotgzKKtcDmHC52ptb6h2SQFS8NmHo4_Z_1w/viewform?usp=header",
+  "sports": "https://forms.gle/Mjd9Tp94RduELJfFA",
+  "track": "https://forms.gle/hkRscAhEAS3w65Xh7",
 };
