@@ -621,7 +621,7 @@ export const categoryOrder: EventData["category"][] = ["on-stage", "off-stage", 
 export const registrationLinks: Record<EventData["category"], string> = {
   "on-stage": "https://forms.gle/WQy6nqbUAimfRXq39",
   "off-stage": "https://forms.gle/kg6xhxiHx2ewysGr5",
-  "games": "https://docs.google.com/forms/d/e/1FAIpQLSfoNwaX4p2oJX4t-AkYDTX8E4fzdG_tqVu0lkF6vQit67Yl9A/viewform?usp=header",
+  "games": "https://forms.gle/JrMjEHNufb7vdvtT7",
   "sports": "https://forms.gle/Mjd9Tp94RduELJfFA",
   "track": "https://forms.gle/hkRscAhEAS3w65Xh7",
 };
