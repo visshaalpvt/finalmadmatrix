@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
 
-const TARGET_DATE = new Date("2026-03-15T09:00:00");
+const TARGET_DATE = new Date("March 13, 2026 08:00:00 GMT+0530").getTime();
 
 const CountdownTimer = () => {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft());
 
   function getTimeLeft() {
-    const diff = TARGET_DATE.getTime() - Date.now();
-    if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    const now = new Date().getTime();
+    const diff = TARGET_DATE - now;
+
+    if (diff <= 0) {
+      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    }
+
     return {
       days: Math.floor(diff / (1000 * 60 * 60 * 24)),
       hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
@@ -17,7 +22,16 @@ const CountdownTimer = () => {
   }
 
   useEffect(() => {
-    const timer = setInterval(() => setTimeLeft(getTimeLeft()), 1000);
+    const timer = setInterval(() => {
+      const remaining = getTimeLeft();
+      setTimeLeft(remaining);
+
+      // If countdown reaches zero, clear the interval as per requirements
+      if (remaining.days === 0 && remaining.hours === 0 && remaining.minutes === 0 && remaining.seconds === 0) {
+        clearInterval(timer);
+      }
+    }, 1000);
+
     return () => clearInterval(timer);
   }, []);
 
